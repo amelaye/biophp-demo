@@ -2,6 +2,9 @@
     "amelaye/biophp": {
         "version": "v0.1.8"
     },
+    "amelaye/biotools": {
+        "version": "v1.0.0"
+    },
     "csa/guzzle-bundle": {
         "version": "3.0",
         "recipe": {

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title %}Useful formulas{% endblock %}
+{% block body %}
+   <h1>Useful formulas</h1>
+   <p>Molecular weight, quantity and unit conversions for DNA, RNA and proteins.</p>
+
+   {% if result is not null %}
+      <div class="card border-info mb-3" style="font-size:0.9em" id="results">
+         <div class="card-header">Results of your request</div>
+         <div class="card-body">
+            <pre>{{ result|number_format(4, '.', '') }}</pre>
+         </div>
+      </div>
+   {% endif %}
+
+   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+         {{ form_errors(form) }}
+         <div class="row">
+            <div class="col-md-12">
+               {{ form_row(form.formula) }}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               {{ form_row(form.sequence) }}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6">{{ form_label(form.quantity) }}</div>
+            <div class="col-md-3">{{ form_widget(form.quantity) }}</div>
+         </div>
+         <div class="row">
+            <div class="col-md-6">{{ form_label(form.value) }}</div>
+            <div class="col-md-3">{{ form_widget(form.value) }}</div>
+         </div>
+         <div class="row">
+            <div class="col-md-6">{{ form_label(form.molecularWeight) }}</div>
+            <div class="col-md-3">{{ form_widget(form.molecularWeight) }}</div>
+         </div>
+
+         <p>&nbsp;</p>
+         <div class="row">
+            <div class="col-md-12">{{ form_row(form.submit) }}</div>
+         </div>
+
+      </div>
+   </div>
+   {{ form_end(form) }}
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
 {% block body %}
     <div class="container">
         <h1>Play with sequencies</h1>
@@ -8,70 +9,109 @@
         {{ code | raw }}
         <br>
         <h4>Result :</h4>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>DNA Complement :</p>
-                {{ dump(complement) }}</div>
+                {{ macros.render_value(complement) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns the expansion of a nucleic acid sequence ("GATTAGSW")</p>
-                {{ dump(expandNa) }}</div>
+                {{ macros.render_value(expandNa) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Shows halfstring for pattern "GATTAG"</p>
-                {{ dump(halfStr) }}</div>
+                {{ macros.render_value(halfStr) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Computes the molecular weight of a particular sequence.</p>
-                {{ dump(molWt) }}</div>
+                {{ macros.render_value(molWt) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Creates a new sequence object with a sequence that is a substring of another</p>
-                {{ dump(coupe) }}</div>
+                {{ macros.render_value(coupe) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Array where each key is a substring matching a given pattern ("TTT")</p>
-                {{ dump(patpos) }}</div>
+                {{ macros.render_value(patpos) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Similar to patPos() except that this allows for overlapping patterns. ("TTT")</p>
-                {{ dump(patposo) }}</div>
+                {{ macros.render_value(patposo) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns the frequency of a given symbol in the sequence property string ("A")</p>
-                {{ dump(symfreq) }}</div>
+                {{ macros.render_value(symfreq) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns the 3rd codon in a sequence, with numbering starting at 0</p>
-                {{ dump(codon) }}</div>
+                {{ macros.render_value(codon) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Translates a particular DNA sequence into its protein product sequence</p>
-                {{ dump(translate) }}</div>
+                {{ macros.render_value(translate) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Translates an amino acid sequence ("GAVLIFYWKRH") into its equivalent "charge sequence"</p>
-                {{ dump(charge) }}</div>
+                {{ macros.render_value(charge) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns a string of symbols from an 8-letter alphabet: A, L, M, R, C, H, I, S</p>
-                {{ dump(chemicalGroup) }}</div>
+                {{ macros.render_value(chemicalGroup) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns a two-dimensional array containing palindromic substrings found in a sequence</p>
-                {{ dump(testPalindrome1) }}</div>
+                {{ macros.render_value(testPalindrome1) }}
+            </div>
         </div>
     </div>
 {% endblock %}

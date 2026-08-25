@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
 {% block body %}
     <div class="container">
         <h1>Restriction Enzyme</h1>
@@ -8,47 +9,77 @@
         {{ code | raw }}
         <br>
         <h4>Result :</h4>
-        <div class="row">
-            <div class="col-md-10">
-            <p>Gets the enzyme "AatI" properties</p>
-            {{ dump(enzymeParsed) }}</div>
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>Gets the enzyme "AatI" properties</p>
+                <table class="table table-sm">
+                    <tr><th>Name</th><td>{{ enzymeParsed.getName() }}</td></tr>
+                    <tr><th>Pattern</th><td>{{ enzymeParsed.getPattern() }}</td></tr>
+                    <tr><th>Cut position</th><td>{{ enzymeParsed.getCutpos() }}</td></tr>
+                    <tr><th>Length</th><td>{{ enzymeParsed.getLength() }}</td></tr>
+                </table>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Cuts a DNA sequence into fragments using the restriction enzyme object (patpos group)</p>
-                {{ dump(cutseq) }}</div>
+                {{ macros.render_value(cutseq) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Cuts a DNA sequence into fragments using the restriction enzyme object (patposo group)</p>
-                {{ dump(cutseq2) }}</div>
+                {{ macros.render_value(cutseq2) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
-                <p>Searching our database of endonucleases for a particular restriction enzyme <br>
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>
+                    Searching our database of endonucleases for a particular restriction enzyme <br>
                     Fetch pattern "AGGCCT" only
                 </p>
-                {{ dump(list) }}</div>
+                {{ macros.render_value(list) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Fetch pattern "AGGCCT" & cutpos 3 </p>
-                {{ dump(list2) }}</div>
+                {{ macros.render_value(list2) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Fetch cutpos 3 only</p>
-                {{ dump(list3) }}</div>
+                {{ macros.render_value(list3) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Fetch length 6 only</p>
-                {{ dump(list4) }}</div>
+                {{ macros.render_value(list4) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Fetch length 6 and cutpos 3 (no results)</p>
-                {{ dump(list5) }}</div>
+                {{ macros.render_value(list5) }}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
 {% block body %}
     <div class="container">
         <h1>Play with sequencies</h1>
@@ -8,15 +9,21 @@
         {{ code | raw }}
         <br>
         <h4>Result :</h4>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns the length of a protein :</p>
-                {{ dump(length) }}</div>
+                {{ macros.render_value(length) }}
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
                 <p>Returns the molweight of a protein :</p>
-                {{ dump(molwt) }}</div>
+                {{ macros.render_value(molwt) }}
+            </div>
         </div>
     </div>
 {% endblock %}

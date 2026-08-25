@@ -1,0 +1,65 @@
+{% macro render_value(value) %}
+    {%- if value is iterable -%}
+        <ul class="mb-0">
+        {%- for key, item in value -%}
+            <li><strong>{{ key }}</strong> : {{ _self.render_value(item) }}</li>
+        {%- endfor -%}
+        </ul>
+    {%- elseif value is same as(true) -%}
+        Yes
+    {%- elseif value is same as(false) -%}
+        No
+    {%- elseif value is null or value == '' -%}
+        <em class="text-muted">(none)</em>
+    {%- else -%}
+        {{ value }}
+    {%- endif -%}
+{% endmacro %}
+
+{% macro sequence_row(seq) %}
+    <tr>
+        <td>{{ seq.getPrimAcc() }}</td>
+        <td>{{ seq.getEntryName() }}</td>
+        <td>{{ seq.getSeqLength() }}</td>
+        <td>{{ seq.getMolType() }}</td>
+        <td><pre class="mb-0" style="white-space: pre-wrap; word-break: break-all;">{{ seq.getSequence() }}</pre></td>
+    </tr>
+{% endmacro %}
+
+{% macro sequence_set_table(seqSet) %}
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr>
+                <th>Primary accession</th>
+                <th>Entry name</th>
+                <th>Length</th>
+                <th>Mol type</th>
+                <th>Sequence</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for seq in seqSet %}
+            {{ _self.sequence_row(seq) }}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro sequence_details(seq) %}
+    <table class="table table-sm">
+        <tr><th>Primary accession</th><td>{{ seq.getPrimAcc() }}</td></tr>
+        <tr><th>Entry name</th><td>{{ seq.getEntryName() }}</td></tr>
+        <tr><th>Length</th><td>{{ seq.getSeqLength() }}</td></tr>
+        <tr><th>Start / End</th><td>{{ seq.getStart() }} / {{ seq.getEnd() }}</td></tr>
+        <tr><th>Molecule type</th><td>{{ seq.getMolType() }}</td></tr>
+        <tr><th>Date</th><td>{{ seq.getDate() }}</td></tr>
+        <tr><th>Source</th><td>{{ seq.getSource() }}</td></tr>
+        <tr><th>Description</th><td>{{ seq.getDescription() }}</td></tr>
+        <tr><th>Organism</th><td>{{ _self.render_value(seq.getOrganism()) }}</td></tr>
+        <tr><th>Fragment</th><td>{{ seq.getFragment() }}</td></tr>
+        <tr>
+            <th>Sequence</th>
+            <td><pre class="mb-0" style="white-space: pre-wrap; word-break: break-all;">{{ seq.getSequence() }}</pre></td>
+        </tr>
+    </table>
+{% endmacro %}
