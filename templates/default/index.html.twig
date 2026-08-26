@@ -1,71 +1,101 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Amelaye's BioPHP demo{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/biophp-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/biophp.css') }}">
+{% endblock %}
+
+{% macro icon(name, class) %}
+    <svg class="{{ class|default('') }}" aria-hidden="true" focusable="false"><use href="#bp-i-{{ name }}"></use></svg>
+{% endmacro %}
+
+{% macro row(item) %}
+    {% import _self as ui %}
+    <a class="bp-row" href="{{ url(item.route, item.params|default({})) }}">
+        <span class="bp-tile bp-tile--sm">{{ ui.icon(item.icon) }}</span>
+        <span class="bp-row__text">
+            <span class="bp-row__title">{{ item.title }}</span>
+            {% if item.desc is defined and item.desc %}
+                <span class="bp-row__desc">{{ item.desc }}</span>
+            {% endif %}
+        </span>
+        {% if item.badge is defined and item.badge %}
+            <span class="bp-badge">{{ item.badge }}</span>
+        {% else %}
+            <span></span>
+        {% endif %}
+        {{ ui.icon('chevron', 'bp-row__chevron') }}
+    </a>
+{% endmacro %}
+
 {% block body %}
-    <div class="container">
-        <h1>Amelaye's BioPHP demo</h1>
-        <p>&nbsp;</p>
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card">
-                    <h5 class="card-header">Code Samples</h5>
-                    <div class="card-body">
-                        <h6>Sequencing</h6>
-                        <ul>
-                            <li><a href="{{ url('sequence_analysis') }}">Simple sequence analysis</a></li>
-                            <li><a href="{{ url('sequence_alignment_fasta') }}">FASTA alignement</a></li>
-                            <li><a href="{{ url('sequence_alignment_clustal') }}">Clustal parsing (demo all the functions)</a></li>
-                            <li><a href="{{ url('play_with_sequencies') }}">Play with sequencies</a></li>
-                            <li><a href="{{ url('play_with_proteins') }}">Play with proteins</a></li>
-                            <li><a href="{{ url('sequence_match') }}">Sequence match</a></li>
-                            <li><a href="{{ url('restriction_enzyme') }}">Restriction enzyme</a></li>
-                        </ul>
+{% import _self as ui %}
 
-                        <h6>Database parsers</h6>
-                        <ul>
-                            <li><a href="{{ url('read_sequence_genbank') }}">Puts GENBANK into database and loads a array of objects</a></li>
-                            <li><a href="{{ url('read_sequence_swissprot') }}">Puts SWISSPROT into database and loads a array of objects</a></li>
-                            <li><a href="{{ url('read_sequence_prf') }}">PRF: Protein Research Foundation record</a></li>
-                            <li><a href="{{ url('read_sequence_pir') }}">PIR: Protein Information Resource record</a></li>
-                            <li><a href="{{ url('read_sequence_unigene') }}">UniGene: EST cluster record</a></li>
-                            <li><a href="{{ url('read_sequence_genome') }}">GENOME: whole-genome record</a></li>
-                            <li><a href="{{ url('read_sequence_hgbase') }}">HGBASE: human genome variation record</a></li>
-                            <li><a href="{{ url('read_sequence_prints') }}">PRINTS: protein fingerprint record</a></li>
-                            <li><a href="{{ url('read_sequence_prodom') }}">ProDom: protein domain family record</a></li>
-                            <li><a href="{{ url('read_sequence_aaindex') }}">AAindex: amino acid index record</a></li>
-                            <li><a href="{{ url('read_sequence_epd') }}">EPD: Eukaryotic Promoter Database record</a></li>
-                        </ul>
+<div class="bp-page">
+    <div class="bp-page__bg"></div>
+
+    <div class="bp-shell">
+
+        {# ------------------------------------------------------------ hero #}
+        <header class="bp-hero">
+            <img class="bp-hero__logo" src="{{ asset('img/biophp-logo-hero.png') }}" alt="BioPHP" width="880" height="631">
+            <h1 class="bp-hero__title">Amelaye's BioPHP demo</h1>
+            <p class="bp-hero__tagline">
+                Une bibliothèque PHP moderne pour la bioinformatique<br>
+                simple, puissante et extensible.
+            </p>
+        </header>
+
+        {# ----------------------------------------------------------- cards #}
+        <div class="bp-grid">
+
+            <section class="bp-card" id="code-samples">
+                <div class="bp-card__head">
+                    <span class="bp-tile bp-tile--lg">{{ ui.icon('code') }}</span>
+                    <div>
+                        <h2 class="bp-card__title">Code Samples</h2>
+                        <p class="bp-card__lead">Découvrez BioPHP à travers des exemples concrets et prêts à l'emploi.</p>
                     </div>
                 </div>
-            </div>
+                <div class="bp-card__body">
+                    {% for group in bp_samples %}
+                        <h3 class="bp-group">{{ group.group }}</h3>
+                        {% for item in group.items %}{{ ui.row(item) }}{% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="bp-card__foot">
+                    <a class="bp-btn" href="#code-samples">Voir tous les exemples {{ ui.icon('chevron') }}</a>
+                </div>
+            </section>
 
-            <div class="col-md-5">
-                <div class="card">
-                    <h5 class="card-header">BioTools</h5>
-                    <div class="card-body">
-                        <ul>
-                            <li><a href="{{ url('chaos_game_representation', { schema: 'FCGR' }) }}">Chaos Game Representation of DNA FCGR</a></li>
-                            <li><a href="{{ url('chaos_game_representation', { schema: 'CGR' }) }}">Chaos Game Representation of DNA CGR</a></li>
-                            <li><a href="{{ url('distance_among_sequences') }}">Oligonucleotide frequency based distance among sequences</a></li>
-                            <li><a href="{{ url('dna_to_protein') }}">DNA to protein translation</a></li>
-                            <li><a href="{{ url('find_palindromes') }}">Palindromic sequences finder</a></li>
-                            <li><a href="{{ url('gc_content_finder') }}">GC Contenf Finder</a></li>
-                            <li><a href="{{ url('melting_temperature') }}">Melting Temperature (Tm) Calculation</a></li>
-                            <li><a href="{{ url('micro_array_analysis_adaptive_quantification') }}">Microarray Data Analysis (adaptive quantification method)</a></li>
-                            <li><a href="{{ url('microsatellite_repeats_finder') }}">Microsatellite repeats finder</a></li>
-                            <li><a href="{{ url('oligonucleotide_frequency') }}">Frequency of nucleotides and oligonucleotides</a></li>
-                            <li><a href="{{ url('pcr_amplification') }}">PCR amplification</a></li>
-                            <li><a href="{{ url('protein_properties') }}">Protein sequence properties</a></li>
-                            <li><a href="{{ url('protein_to_dna') }}">Protein to DNA reverse translation</a></li>
-                            <li><a href="{{ url('random_seqs') }}">Random sequences</a></li>
-                            <li><a href="{{ url('reduce_protein_alphabet') }}">Reduced alphabets for proteins</a></li>
-                            <li><a href="{{ url('restriction_digest') }}">Restriction enzyme digest of DNA</a></li>
-                            <li><a href="{{ url('seq_alignment') }}">Alignment of two DNA, RNA or protein sequences</a></li>
-                            <li><a href="{{ url('sequences_manipulation_and_data') }}">DNA sequence manipulation/properties</a></li>
-                            <li><a href="{{ url('skews') }}">GC-, AT-, KETO- and oligo-skews generator</a></li>
-                            <li><a href="{{ url('useful_formulas') }}">Formula functions</a></li>
-                        </ul>
+            <section class="bp-card bp-card--blue" id="biotools">
+                <div class="bp-card__head">
+                    <span class="bp-tile bp-tile--lg">{{ ui.icon('briefcase') }}</span>
+                    <div>
+                        <h2 class="bp-card__title">BioTools</h2>
+                        <p class="bp-card__lead">Accédez à une collection d'outils bioinformatiques intégrés et prêts à l'emploi.</p>
                     </div>
                 </div>
-            </div>
+                <div class="bp-card__body">
+                    {% for item in bp_tools %}{{ ui.row(item) }}{% endfor %}
+                </div>
+                <div class="bp-card__foot">
+                    <a class="bp-btn" href="#biotools">Voir tous les tools {{ ui.icon('chevron') }}</a>
+                </div>
+            </section>
+
         </div>
+
+        {# ---------------------------------------------------------- footer #}
+        <footer class="bp-footer">
+            <img class="bp-footer__mark" src="{{ asset('img/biophp-mark.png') }}" alt="" width="256" height="179">
+            <span><span class="bp-footer__name">BioPHP</span> &ndash; La puissance de PHP au service de la bioinformatique.</span>
+        </footer>
+
     </div>
+</div>
+
+{{ include('partials/icons.html.twig') }}
 {% endblock %}

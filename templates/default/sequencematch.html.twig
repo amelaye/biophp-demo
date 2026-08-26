@@ -1,89 +1,83 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>Sequence match</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Submatrix :</p>
-                {{ macros.render_value(submatrix.getRules()) }}
-            </div>
+{% set page_icon  = 'target' %}
+{% set page_title = 'Sequence match' %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Submatrix :</p>
+            {{ macros.render_value(submatrix.getRules()) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Sequence 1 :</p>
-                {{ macros.render_value(sequence1) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Sequence 1 :</p>
+            {{ macros.render_value(sequence1) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Sequence 2 :</p>
-                {{ macros.render_value(sequence2) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Sequence 2 :</p>
+            {{ macros.render_value(sequence2) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Computes the Hamming Distance between two sequences</p>
-                {{ macros.render_value(distance) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Computes the Hamming Distance between two sequences</p>
+            {{ macros.render_value(distance) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>
-                    Compares two letters $let1 and $let2 and returns another letter
-                    indicating if the two were exact matches, partial matches, or non-matches.<br>
-                    Not matching (A & T) :
-                </p>
-                {{ macros.render_value(compare1) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>
+                Compares two letters $let1 and $let2 and returns another letter
+                indicating if the two were exact matches, partial matches, or non-matches.<br>
+                Not matching (A & T) :
+            </p>
+            {{ macros.render_value(compare1) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Matching (A & A) : </p>
-                {{ macros.render_value(compare2) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Matching (A & A) : </p>
+            {{ macros.render_value(compare2) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Computes the Levenshtein Distance between two sequences with equal/unequal lengths : </p>
-                {{ macros.render_value(levdist) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Computes the Levenshtein Distance between two sequences with equal/unequal lengths : </p>
+            {{ macros.render_value(levdist) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Extended version of levdist() which accepts strings with length greater than 255 but not to exceed 1024 : </p>
-                {{ macros.render_value(xlevdist) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Extended version of levdist() which accepts strings with length greater than 255 but not to exceed 1024 : </p>
+            {{ macros.render_value(xlevdist) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Matching results : </p>
-                {{ macros.render_value(match) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Matching results : </p>
+            {{ macros.render_value(match) }}
         </div>
     </div>
 {% endblock %}

@@ -1,27 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>EPD: Eukaryotic Promoter Database record</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <table class="table table-sm">
-                    <tr><th>Entry name</th><td>{{ entryName }}</td></tr>
-                    <tr><th>Data class</th><td>{{ dataClass }}</td></tr>
-                    <tr><th>Taxonomic division</th><td>{{ taxDiv }}</td></tr>
-                    <tr><th>Accessions</th><td>{{ macros.render_value(accessions) }}</td></tr>
-                    <tr><th>Create date</th><td>{{ createDate }}</td></tr>
-                    <tr><th>Description</th><td>{{ description }}</td></tr>
-                    <tr><th>Comments</th><td>{{ comments }}</td></tr>
-                </table>
-            </div>
+
+{% set page_icon  = 'file' %}
+{% set page_title = 'EPD: Eukaryotic Promoter Database record' %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <tr><th>Entry name</th><td>{{ entryName }}</td></tr>
+                <tr><th>Data class</th><td>{{ dataClass }}</td></tr>
+                <tr><th>Taxonomic division</th><td>{{ taxDiv }}</td></tr>
+                <tr><th>Accessions</th><td>{{ macros.render_value(accessions) }}</td></tr>
+                <tr><th>Create date</th><td>{{ createDate }}</td></tr>
+                <tr><th>Description</th><td>{{ description }}</td></tr>
+                <tr><th>Comments</th><td>{{ comments }}</td></tr>
+            </table>
         </div>
     </div>
 {% endblock %}

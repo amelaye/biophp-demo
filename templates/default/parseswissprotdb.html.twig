@@ -1,27 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>Insert a sequence into a database, and loads a array of objects</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                {{ macros.sequence_details(sequence) }}
-            </div>
-        </div>
 
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>New in biophp 1.1: does it hold an unknown residue, computed by wrapping the record into an AminoAcidSequence value object ?</p>
-                {{ macros.render_value(hasUnknownResidue) }}
-            </div>
+{% set page_icon  = 'database' %}
+{% set page_title = 'Insert a sequence into a database, and loads a array of objects' %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            {{ macros.sequence_details(sequence) }}
+        </div>
+    </div>
+
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>New in biophp 1.1: does it hold an unknown residue, computed by wrapping the record into an AminoAcidSequence value object ?</p>
+            {{ macros.render_value(hasUnknownResidue) }}
         </div>
     </div>
 {% endblock %}

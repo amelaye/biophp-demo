@@ -12,7 +12,7 @@ use Amelaye\BioPHP\Domain\Database\Factory\DatabaseParserFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use GeSHi;
+use App\Service\CodeHighlighter;
 
 /**
  * Class DatabaseFormatsController
@@ -51,7 +51,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parsePrfRecord.html.twig',
             [
@@ -65,7 +64,7 @@ class DatabaseFormatsController extends AbstractController
                 'recordTitle' => $parser->getTitle(),
                 'keywords'    => $parser->getKeywords(),
                 'sequence'    => $parser->getSequence(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -102,7 +101,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parsePirRecord.html.twig',
             [
@@ -117,7 +115,7 @@ class DatabaseFormatsController extends AbstractController
                 'molwt'       => $parser->getMolwt(),
                 'checksum'    => $parser->getChecksum(),
                 'keywords'    => $parser->getKeywords(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -148,7 +146,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseUnigeneRecord.html.twig',
             [
@@ -157,7 +154,7 @@ class DatabaseFormatsController extends AbstractController
                 'expression'  => $parser->getExpression(),
                 'protSims'    => $parser->getProtSims(),
                 'seqCount'    => $parser->getSeqCount(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -191,7 +188,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseGenomeRecord.html.twig',
             [
@@ -203,7 +199,7 @@ class DatabaseFormatsController extends AbstractController
                 'gbEntries'   => $parser->getGbEntries(),
                 'gbBasepairs' => $parser->getGbBasepairs(),
                 'size'        => $parser->getSize(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -237,7 +233,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseHgbaseRecord.html.twig',
             [
@@ -249,7 +244,7 @@ class DatabaseFormatsController extends AbstractController
                 'freqIndiv'     => $parser->getFreqIndiv(),
                 'citation'      => $parser->getCitation(),
                 'submitterName' => $parser->getSubmitterName(),
-                'code'          => $oGeshi->parse_code()
+                'code'          => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -280,7 +275,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parsePrintsRecord.html.twig',
             [
@@ -289,7 +283,7 @@ class DatabaseFormatsController extends AbstractController
                 'createDate'  => $parser->getCreateDate(),
                 'updDate'     => $parser->getUpdDate(),
                 'description' => $parser->getDescription(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -321,7 +315,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseProdomRecord.html.twig',
             [
@@ -331,7 +324,7 @@ class DatabaseFormatsController extends AbstractController
                 'domainCount' => $parser->getDomainCount(),
                 'freqNames'   => $parser->getFreqNames(),
                 'keywords'    => $parser->getKeywords(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -363,7 +356,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseAaindexRecord.html.twig',
             [
@@ -373,7 +365,7 @@ class DatabaseFormatsController extends AbstractController
                 'recordTitle' => $parser->getTitle(),
                 'journal'     => $parser->getJournal(),
                 'litRefs'     => $parser->getLitRefs(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -406,7 +398,6 @@ class DatabaseFormatsController extends AbstractController
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/parseEpdRecord.html.twig',
             [
@@ -417,7 +408,7 @@ class DatabaseFormatsController extends AbstractController
                 'createDate'  => $parser->getCreateDate(),
                 'description' => $parser->getDescription(),
                 'comments'    => $parser->getComments(),
-                'code'        => $oGeshi->parse_code()
+                'code'        => CodeHighlighter::php($sCode)
             ]
         );
     }

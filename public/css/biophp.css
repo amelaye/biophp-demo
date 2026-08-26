@@ -1,0 +1,244 @@
+/* ==========================================================================
+   BioPHP - page d'index (hero + les deux cartes)
+   Nécessite biophp-theme.css, chargé avant.
+   ========================================================================== */
+
+/* --- en-tête ------------------------------------------------------------- */
+
+.bp-hero {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.bp-hero__logo {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto 6px;
+    filter: drop-shadow(0 12px 42px rgba(124, 58, 237, 0.45));
+}
+
+.bp-hero__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 0 18px;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #f3f0ff;
+    text-shadow: 0 2px 18px rgba(139, 92, 246, 0.5);
+}
+
+.bp-hero__title::before,
+.bp-hero__title::after {
+    content: "";
+    width: 34px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.9));
+}
+
+.bp-hero__title::after {
+    background: linear-gradient(90deg, rgba(167, 139, 250, 0.9), transparent);
+}
+
+.bp-hero__tagline {
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: var(--bp-muted);
+}
+
+/* --- grille des deux cartes ---------------------------------------------- */
+
+.bp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+/* --- carte --------------------------------------------------------------- */
+
+.bp-card {
+    --bp-accent:      var(--bp-violet);
+    --bp-accent-dark: var(--bp-violet-dark);
+    --bp-accent-soft: var(--bp-violet-soft);
+    --bp-accent-line: var(--bp-violet-line);
+
+    display: flex;
+    flex-direction: column;
+    padding: 30px 28px 28px;
+    border: 1px solid var(--bp-accent-line);
+    border-radius: var(--bp-radius);
+    background: var(--bp-card-bg);
+    box-shadow:
+        0 24px 60px rgba(4, 2, 16, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.bp-card--blue {
+    --bp-accent:      var(--bp-blue);
+    --bp-accent-dark: var(--bp-blue-dark);
+    --bp-accent-soft: var(--bp-blue-soft);
+    --bp-accent-line: var(--bp-blue-line);
+}
+
+.bp-card__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--bp-accent-line);
+}
+
+.bp-card__title {
+    margin: 4px 0 8px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.bp-card__lead {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--bp-muted);
+}
+
+/* --- corps de carte ------------------------------------------------------ */
+
+.bp-card__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px 0 6px;
+}
+
+.bp-group {
+    margin: 14px 0 4px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--bp-muted-soft);
+}
+
+.bp-group:first-child {
+    margin-top: 0;
+}
+
+/* --- ligne --------------------------------------------------------------- */
+
+.bp-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.bp-row:hover,
+.bp-row:focus-visible {
+    background: var(--bp-accent-soft);
+    border-color: var(--bp-accent-line);
+    color: inherit;
+    text-decoration: none;
+    transform: translateX(3px);
+}
+
+.bp-row:focus-visible {
+    outline: 2px solid var(--bp-accent);
+    outline-offset: 2px;
+}
+
+.bp-row__text {
+    min-width: 0;
+}
+
+.bp-row__title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f4f1ff;
+}
+
+.bp-row__desc {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: var(--bp-muted);
+}
+
+.bp-row__chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--bp-muted-soft);
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.bp-row:hover .bp-row__chevron {
+    color: #fff;
+    transform: translateX(3px);
+}
+
+/* --- pied de page -------------------------------------------------------- */
+
+.bp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 42px;
+    font-size: 0.95rem;
+    color: var(--bp-muted);
+}
+
+.bp-footer__mark {
+    width: 46px;
+    height: auto;
+    filter: drop-shadow(0 4px 14px rgba(139, 92, 246, 0.5));
+}
+
+.bp-footer__name {
+    font-weight: 700;
+    color: #f0ecff;
+}
+
+/* --- responsive ---------------------------------------------------------- */
+
+@media (max-width: 991px) {
+    .bp-grid { grid-template-columns: minmax(0, 1fr); }
+    .bp-page { padding: 40px 18px 32px; }
+}
+
+@media (max-width: 575px) {
+    .bp-card { padding: 24px 18px 22px; }
+    .bp-row { gap: 12px; padding: 11px 12px; }
+    .bp-row__desc { display: none; }
+    .bp-badge { display: none; }
+    .bp-hero__title { font-size: 1.25rem; }
+    .bp-hero__tagline br { display: none; }
+    .bp-btn { min-width: 0; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bp-row,
+    .bp-row__chevron,
+    .bp-btn { transition: none; }
+    .bp-row:hover { transform: none; }
+}

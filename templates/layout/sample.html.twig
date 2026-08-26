@@ -1,0 +1,173 @@
+{#
+    Gabarit des pages « Code Samples ».
+    Une page fille définit :
+      {% set page_icon  = 'dna' %}          symbole du sprite (templates/partials/icons.html.twig)
+      {% set page_title = '...' %}          titre H1, repris dans le fil d'Ariane et l'onglet
+      {% block intro %}                     paragraphe d'introduction (facultatif)
+      {% block code_lead %}                 phrase sous « Code de départ » (facultatif)
+      {% block result_lead %}               phrase sous « Résultat » (facultatif)
+      {% block result %}                    contenu du résultat (obligatoire)
+      {% block extra %}                     étape supplémentaire (facultatif)
+      {% block note %}                      encart d'information de bas de page (facultatif)
+    La variable `code` vient du contrôleur (App\Service\CodeHighlighter).
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title|default('Code sample') }} – BioPHP Demo{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/biophp-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/biophp-doc.css') }}">
+{% endblock %}
+
+{% block body %}
+{% set bp_route = app.request.attributes.get('_route') %}
+
+<div class="bp-page bp-page--doc">
+    <div class="bp-page__bg"></div>
+
+    {# ------------------------------------------------------ barre de nav #}
+    <nav class="bp-nav">
+        <a class="bp-brand" href="{{ url('index') }}">
+            <img class="bp-brand__mark" src="{{ asset('img/biophp-mark.png') }}" alt="" width="256" height="179">
+            <span>
+                <span class="bp-brand__name">Bio<em>PHP</em></span>
+                <span class="bp-brand__sub">Demo</span>
+            </span>
+        </a>
+
+        <div class="bp-nav__links">
+            <a class="bp-nav__link" href="{{ url('index') }}">
+                <svg aria-hidden="true"><use href="#bp-i-home"></use></svg> Accueil
+            </a>
+            <a class="bp-nav__link is-active" href="{{ url('index') }}#code-samples">
+                <svg aria-hidden="true"><use href="#bp-i-code"></use></svg> Code Samples
+            </a>
+            <a class="bp-nav__link" href="{{ url('index') }}#biotools">
+                <svg aria-hidden="true"><use href="#bp-i-briefcase"></use></svg> BioTools
+            </a>
+            <a class="bp-nav__icon-link" href="{{ bp_repo_url }}" target="_blank" rel="noopener" title="Dépôt GitHub">
+                <svg aria-hidden="true"><use href="#bp-i-github"></use></svg>
+                <span class="sr-only">GitHub</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="bp-doc">
+
+        {# -------------------------------------------------- barre latérale #}
+        <aside class="bp-aside">
+            <h2 class="bp-aside__title">Code Samples</h2>
+            {% for group in bp_samples %}
+                <p class="bp-aside__group">{{ group.group }}</p>
+                {% for item in group.items %}
+                    <a class="bp-aside__link{{ item.route == bp_route ? ' is-active' : '' }}"
+                       href="{{ url(item.route) }}"
+                       {{ item.route == bp_route ? 'aria-current="page"' : '' }}>
+                        <svg aria-hidden="true"><use href="#bp-i-{{ item.icon }}"></use></svg>
+                        <span>
+                            <span class="bp-aside__name">{{ item.title }}</span>
+                            <span class="bp-aside__desc">{{ item.desc }}</span>
+                        </span>
+                    </a>
+                {% endfor %}
+            {% endfor %}
+        </aside>
+
+        {# -------------------------------------------------------- contenu #}
+        <main class="bp-main">
+
+            <nav class="bp-crumb" aria-label="Fil d'Ariane">
+                <a href="{{ url('index') }}#code-samples">Code Samples</a>
+                <svg aria-hidden="true"><use href="#bp-i-chevron"></use></svg>
+                <span>{{ page_title|default('Code sample') }}</span>
+            </nav>
+
+            <div class="bp-doc__head">
+                <svg aria-hidden="true"><use href="#bp-i-{{ page_icon|default('code') }}"></use></svg>
+                <h1 class="bp-doc__title">{{ page_title|default('Code sample') }}</h1>
+            </div>
+
+            <div class="bp-doc__intro">{% block intro %}{% endblock %}</div>
+
+            <section class="bp-step">
+                <div class="bp-step__head">
+                    <span class="bp-step__num">1</span>
+                    <div>
+                        <h2 class="bp-step__title">Code de départ</h2>
+                        <p class="bp-step__lead">{% block code_lead %}Voici le code PHP utilisé par cet exemple.{% endblock %}</p>
+                    </div>
+                    <button type="button" class="bp-ghost" data-copy="#bp-code">
+                        <svg aria-hidden="true"><use href="#bp-i-copy"></use></svg>
+                        <span>Copier le code</span>
+                    </button>
+                </div>
+                <div class="bp-codewrap" id="bp-code">{{ code|raw }}</div>
+            </section>
+
+            <section class="bp-step">
+                <div class="bp-step__head">
+                    <span class="bp-step__num">2</span>
+                    <div>
+                        <h2 class="bp-step__title">Résultat</h2>
+                        <p class="bp-step__lead">{% block result_lead %}Résultat renvoyé par BioPHP pour les données de démonstration.{% endblock %}</p>
+                    </div>
+                    <span></span>
+                </div>
+                <div class="bp-result">{% block result %}{% endblock %}</div>
+            </section>
+
+            {% block extra %}{% endblock %}
+
+            {% block note %}
+                <p class="bp-note">
+                    <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
+                    <span>Le code ci-dessus est celui réellement exécuté par cette page. Retrouvez les autres exemples dans la colonne de gauche, ou les outils dans <a href="{{ url('index') }}#biotools">BioTools</a>.</span>
+                </p>
+            {% endblock %}
+
+        </main>
+    </div>
+</div>
+
+{{ include('partials/icons.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    (function () {
+        function copyText(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            }
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } finally { document.body.removeChild(ta); }
+            return Promise.resolve();
+        }
+
+        document.querySelectorAll('[data-copy]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var box = document.querySelector(btn.getAttribute('data-copy'));
+                if (!box) { return; }
+                var cell = box.querySelector('td.de1 pre, td.de2 pre') || box;
+                var label = btn.querySelector('span');
+                var initial = label.textContent;
+                copyText(cell.innerText).then(function () {
+                    label.textContent = 'Copié !';
+                    btn.classList.add('is-done');
+                    setTimeout(function () {
+                        label.textContent = initial;
+                        btn.classList.remove('is-done');
+                    }, 1800);
+                });
+            });
+        });
+    })();
+</script>
+{% endblock %}

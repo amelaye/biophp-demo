@@ -1,64 +1,70 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>Play with sequencies</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the length of a protein :</p>
-                {{ macros.render_value(length) }}
-            </div>
-        </div>
+{% set page_icon  = 'protein' %}
+{% set page_title = 'Play with proteins' %}
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the molweight of a protein :</p>
-                {{ macros.render_value(molwt) }}
-            </div>
-        </div>
-
-        <h4>New in biophp 1.1: the protein as a value object</h4>
-        <br>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Length, computed by the AminoAcidSequence value object</p>
-                {{ macros.render_value(voLength) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Does the chain hold a stop codon ("*") ?</p>
-                {{ macros.render_value(voHasStop) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Does the chain hold an unknown residue ("X") ?</p>
-                {{ macros.render_value(voHasUnknownResidue) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Number of "X" residues in the chain</p>
-                {{ macros.render_value(voCountX) }}
-            </div>
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the length of a protein :</p>
+            {{ macros.render_value(length) }}
         </div>
     </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the molweight of a protein :</p>
+            {{ macros.render_value(molwt) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra %}
+    <section class="bp-step">
+        <div class="bp-step__head">
+            <span class="bp-step__num">3</span>
+            <div>
+                <h2 class="bp-step__title">New in biophp 1.1: the protein as a value object</h2>
+            </div>
+            <span></span>
+        </div>
+        <div class="bp-result">
+            <br>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Length, computed by the AminoAcidSequence value object</p>
+                    {{ macros.render_value(voLength) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Does the chain hold a stop codon ("*") ?</p>
+                    {{ macros.render_value(voHasStop) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Does the chain hold an unknown residue ("X") ?</p>
+                    {{ macros.render_value(voHasUnknownResidue) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Number of "X" residues in the chain</p>
+                    {{ macros.render_value(voCountX) }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

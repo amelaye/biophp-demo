@@ -3,3 +3,57 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     exception_controller: null
+
+    # ------------------------------------------------------------------
+    # Navigation BioPHP : source unique pour la page d'index, la barre de
+    # navigation et la barre latérale des pages d'exemples.
+    # 'icon' renvoie à un symbole de templates/partials/icons.html.twig
+    # ------------------------------------------------------------------
+    globals:
+        bp_repo_url: 'https://github.com/amelaye/biophp-demo'
+
+        bp_samples:
+            -   group: 'Sequencing'
+                items:
+                    -   { route: 'sequence_analysis',          icon: 'dna',      title: 'Simple sequence analysis', desc: 'Sample code and result for a basic sequence analysis.' }
+                    -   { route: 'sequence_alignment_fasta',   icon: 'align',    title: 'FASTA alignement',         desc: 'Read and parse a FASTA alignment.' }
+                    -   { route: 'sequence_alignment_clustal', icon: 'align',    title: 'Clustal parsing',          desc: 'CLUSTAL alignment: several examples, demo of all the functions.' }
+                    -   { route: 'play_with_sequencies',       icon: 'shuffle',  title: 'Play with sequencies',     desc: 'The sequence as a value object (new in BioPHP 1.1).' }
+                    -   { route: 'play_with_proteins',         icon: 'protein',  title: 'Play with proteins',       desc: 'The protein as a value object (new in BioPHP 1.1).' }
+                    -   { route: 'sequence_match',             icon: 'target',   title: 'Sequence match',           desc: 'Find matches inside a sequence.' }
+                    -   { route: 'restriction_enzyme',         icon: 'scissors', title: 'Restriction enzyme',       desc: 'Name, pattern, cut position and length of restriction enzymes.' }
+            -   group: 'Database parsers'
+                items:
+                    -   { route: 'read_sequence_genbank',   icon: 'database', title: 'GENBANK',   desc: 'Puts GENBANK into database and loads a array of objects.' }
+                    -   { route: 'read_sequence_swissprot', icon: 'database', title: 'SWISSPROT', desc: 'Puts SWISSPROT into database and loads a array of objects.' }
+                    -   { route: 'read_sequence_prf',       icon: 'file',     title: 'PRF',       desc: 'Protein Research Foundation record.' }
+                    -   { route: 'read_sequence_pir',       icon: 'file',     title: 'PIR',       desc: 'Protein Information Resource record.' }
+                    -   { route: 'read_sequence_unigene',   icon: 'file',     title: 'UniGene',   desc: 'EST cluster record.' }
+                    -   { route: 'read_sequence_genome',    icon: 'file',     title: 'GENOME',    desc: 'Whole-genome record.' }
+                    -   { route: 'read_sequence_hgbase',    icon: 'file',     title: 'HGBASE',    desc: 'Human genome variation record.' }
+                    -   { route: 'read_sequence_prints',    icon: 'file',     title: 'PRINTS',    desc: 'Protein fingerprint record.' }
+                    -   { route: 'read_sequence_prodom',    icon: 'file',     title: 'ProDom',    desc: 'Protein domain family record.' }
+                    -   { route: 'read_sequence_aaindex',   icon: 'file',     title: 'AAindex',   desc: 'Amino acid index record.' }
+                    -   { route: 'read_sequence_epd',       icon: 'file',     title: 'EPD',       desc: 'Eukaryotic Promoter Database record.' }
+
+        bp_tools:
+            -   { route: 'chaos_game_representation', params: { schema: 'FCGR' }, icon: 'grid', title: 'Chaos Game Representation of DNA', desc: 'Graphical representation of genomes and oligonucleotide frequencies.', badge: 'FCGR' }
+            -   { route: 'chaos_game_representation', params: { schema: 'CGR' },  icon: 'grid', title: 'Chaos Game Representation of DNA', desc: 'Graphical representation of genomes and oligonucleotide frequencies.', badge: 'CGR' }
+            -   { route: 'distance_among_sequences',  icon: 'ruler',    title: 'Distance among sequences',             desc: 'Oligonucleotide frequency based comparison of composition.', badge: 'Stats' }
+            -   { route: 'dna_to_protein',            icon: 'atgc',     title: 'DNA to protein translation',           desc: 'Translate a DNA sequence into its protein sequence.', badge: 'DNA' }
+            -   { route: 'find_palindromes',          icon: 'search',   title: 'Palindromic sequences finder',         desc: 'Locate palindromic motifs in a DNA sequence.', badge: 'DNA' }
+            -   { route: 'gc_content_finder',         icon: 'percent',  title: 'GC Content Finder',                    desc: 'Compute the GC content of an uploaded FASTA file.', badge: 'DNA' }
+            -   { route: 'melting_temperature',       icon: 'thermo',   title: 'Melting Temperature (Tm) Calculation', desc: 'Estimate the melting temperature of a DNA duplex.', badge: 'DNA' }
+            -   { route: 'micro_array_analysis_adaptive_quantification', icon: 'chart', title: 'Microarray Data Analysis', desc: 'Adaptive quantification method.', badge: 'Stats' }
+            -   { route: 'microsatellite_repeats_finder', icon: 'search', title: 'Microsatellite repeats finder',      desc: 'Detect short tandem repeats in a sequence.', badge: 'DNA' }
+            -   { route: 'oligonucleotide_frequency', icon: 'chart',    title: 'Frequency of nucleotides',             desc: 'Nucleotide and oligonucleotide frequencies in a sequence.', badge: 'Stats' }
+            -   { route: 'pcr_amplification',         icon: 'dna',      title: 'PCR amplification',                    desc: 'In silico PCR amplification.', badge: 'DNA' }
+            -   { route: 'protein_properties',        icon: 'flask',    title: 'Protein sequence properties',          desc: 'Protein sequence information and derived properties.', badge: 'Protein' }
+            -   { route: 'protein_to_dna',            icon: 'protein',  title: 'Protein to DNA reverse translation',   desc: 'Reverse-translate a protein into a DNA sequence.', badge: 'Protein' }
+            -   { route: 'random_seqs',               icon: 'shuffle',  title: 'Random sequences',                     desc: 'Generate random DNA, RNA or protein sequences.', badge: 'Tools' }
+            -   { route: 'reduce_protein_alphabet',   icon: 'protein',  title: 'Reduced alphabets for proteins',       desc: 'Redundant or simplified alphabets for proteins.', badge: 'Protein' }
+            -   { route: 'restriction_digest',        icon: 'scissors', title: 'Restriction enzyme digest of DNA',     desc: 'With commercially available restriction enzymes.', badge: 'DNA' }
+            -   { route: 'seq_alignment',             icon: 'align',    title: 'Sequence alignment',                   desc: 'Alignment of two DNA, RNA or protein sequences.', badge: 'Aligner' }
+            -   { route: 'sequences_manipulation_and_data', icon: 'atgc', title: 'DNA sequence manipulation',          desc: 'Manipulate a DNA sequence and read its properties.', badge: 'DNA' }
+            -   { route: 'skews',                     icon: 'wave',     title: 'Skews generator',                      desc: 'GC-, AT-, KETO- and oligo-skews from custom sequences.', badge: 'Stats' }
+            -   { route: 'useful_formulas',           icon: 'calc',     title: 'Formula functions',                    desc: 'Useful formulas for sequence and protein calculations.', badge: 'Tools' }

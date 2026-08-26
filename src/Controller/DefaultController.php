@@ -14,7 +14,7 @@ use Amelaye\BioPHP\Domain\Sequence\ValueObject\AminoAcidSequence;
 use Amelaye\BioPHP\Domain\Sequence\ValueObject\MolecularSequenceFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use GeSHi;
+use App\Service\CodeHighlighter;
 use Amelaye\BioPHP\Domain\Sequence\Entity\Sequence;
 
 
@@ -51,9 +51,8 @@ class DefaultController extends AbstractController
     );
 }';
 
-        $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/sequenceanalysis.html.twig',
-            array('mirrors' => $aMirrors, 'code' => $oGeshi->parse_code())
+            array('mirrors' => $aMirrors, 'code' => CodeHighlighter::php($sCode))
         );
     }
 
@@ -88,9 +87,8 @@ class DefaultController extends AbstractController
         ["sequence" => $oSequence, "gcContent" => $fGcContent]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/parseseqdb.html.twig',
-            ["sequence" => $oSequence, "gcContent" => $fGcContent, 'code' => $oGeshi->parse_code()]
+            ["sequence" => $oSequence, "gcContent" => $fGcContent, 'code' => CodeHighlighter::php($sCode)]
         );
     }
 
@@ -125,9 +123,8 @@ class DefaultController extends AbstractController
         ["sequence" => $oSequence, "hasUnknownResidue" => $bHasUnknownResidue]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/parseswissprotdb.html.twig',
-            ["sequence" => $oSequence, "hasUnknownResidue" => $bHasUnknownResidue, 'code' => $oGeshi->parse_code()]
+            ["sequence" => $oSequence, "hasUnknownResidue" => $bHasUnknownResidue, 'code' => CodeHighlighter::php($sCode)]
         );
     }
 
@@ -157,9 +154,8 @@ public function fastaseqalignment(SequenceAlignmentInterface $sequenceAlignmentM
     );
 }';
 
-        $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/parseseqalignment.html.twig',
-            ['sequences' => $sequenceAlignmentManager->getSeqSet(), 'code' => $oGeshi->parse_code()]
+            ['sequences' => $sequenceAlignmentManager->getSeqSet(), 'code' => CodeHighlighter::php($sCode)]
         );
     }
 
@@ -292,7 +288,6 @@ public function clustalseqalignment(SequenceAlignmentInterface $sequenceAlignmen
     );
 }';
 
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/clustalseqalignment.html.twig',
             [
@@ -311,7 +306,7 @@ public function clustalseqalignment(SequenceAlignmentInterface $sequenceAlignmen
                 'consensus'                   => $aConsensus,
                 'sequenceAlignmentManagerAdd' => $sequenceAlignmentManagerAdd,
                 'sequenceAlignmentManagerDel' => $sequenceAlignmentManagerDel,
-                'code' => $oGeshi->parse_code()
+                'code' => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -486,7 +481,6 @@ public function playwithsequencies(
      );
 }';
 
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/playwithsequencies.html.twig',
             [
@@ -509,7 +503,7 @@ public function playwithsequencies(
                 'voToRna'               => $sVoToRna,
                 'voSubSequence'         => $sVoSubSequence,
                 'voEquals'              => $bVoEquals,
-                'code'              => $oGeshi->parse_code()
+                'code'              => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -580,7 +574,6 @@ public function playwithproteins(ProteinInterface $proteinManager)
        ]
    );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/playwithproteins.html.twig',
             [
@@ -590,7 +583,7 @@ public function playwithproteins(ProteinInterface $proteinManager)
                 'voHasStop'           => $bVoHasStop,
                 'voHasUnknownResidue' => $bVoHasUnknownResidue,
                 'voCountX'            => $iVoCountX,
-                'code'   => $oGeshi->parse_code()
+                'code'   => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -708,7 +701,6 @@ public function sequencematch(
     );
 }';
 
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/sequencematch.html.twig',
             [
@@ -721,7 +713,7 @@ public function sequencematch(
                 'levdist'       => $iLevdist,
                 'xlevdist'      => $iXLevdist,
                 'match'         => $sMatch,
-                'code'          => $oGeshi->parse_code()
+                'code'          => CodeHighlighter::php($sCode)
             ]
         );
     }
@@ -814,7 +806,6 @@ public function restrictionenzyme(
         ]
     );
 }';
-        $oGeshi = new GeSHi($sCode, 'php');
 
         return $this->render('default/restrictionenzyme.html.twig',
             [
@@ -826,7 +817,7 @@ public function restrictionenzyme(
                 "list3"         => $aList3,
                 "list4"         => $aList4,
                 "list5"         => $aList5,
-                'code'          => $oGeshi->parse_code()
+                'code'          => CodeHighlighter::php($sCode)
             ]
         );
     }

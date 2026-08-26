@@ -1,168 +1,174 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>Play with sequencies</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>DNA Complement :</p>
-                {{ macros.render_value(complement) }}
-            </div>
-        </div>
+{% set page_icon  = 'shuffle' %}
+{% set page_title = 'Play with sequencies' %}
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the expansion of a nucleic acid sequence ("GATTAGSW")</p>
-                {{ macros.render_value(expandNa) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Shows halfstring for pattern "GATTAG"</p>
-                {{ macros.render_value(halfStr) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Computes the molecular weight of a particular sequence.</p>
-                {{ macros.render_value(molWt) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Creates a new sequence object with a sequence that is a substring of another</p>
-                {{ macros.render_value(coupe) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Array where each key is a substring matching a given pattern ("TTT")</p>
-                {{ macros.render_value(patpos) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Similar to patPos() except that this allows for overlapping patterns. ("TTT")</p>
-                {{ macros.render_value(patposo) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the frequency of a given symbol in the sequence property string ("A")</p>
-                {{ macros.render_value(symfreq) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the 3rd codon in a sequence, with numbering starting at 0</p>
-                {{ macros.render_value(codon) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Translates a particular DNA sequence into its protein product sequence</p>
-                {{ macros.render_value(translate) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Translates an amino acid sequence ("GAVLIFYWKRH") into its equivalent "charge sequence"</p>
-                {{ macros.render_value(charge) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns a string of symbols from an 8-letter alphabet: A, L, M, R, C, H, I, S</p>
-                {{ macros.render_value(chemicalGroup) }}
-            </div>
-        </div>
-
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns a two-dimensional array containing palindromic substrings found in a sequence</p>
-                {{ macros.render_value(testPalindrome1) }}
-            </div>
-        </div>
-
-        <h4>New in biophp 1.1: the sequence as a value object</h4>
-        <br>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>DNA Complement, computed by the DnaSequence value object</p>
-                {{ macros.render_value(voComplement) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Reverse complement (the strand facing this one)</p>
-                {{ macros.render_value(voReverseComplement) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>GC content (%)</p>
-                {{ macros.render_value(voGcContent) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Transcribed to RNA (thymine becomes uracil)</p>
-                {{ macros.render_value(voToRna) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Substring of the sequence, still a validated DnaSequence</p>
-                {{ macros.render_value(voSubSequence) }}
-            </div>
-        </div>
-
-        <div class="card border-success mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Two value objects built from the same symbols are equal</p>
-                {{ macros.render_value(voEquals) }}
-            </div>
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>DNA Complement :</p>
+            {{ macros.render_value(complement) }}
         </div>
     </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the expansion of a nucleic acid sequence ("GATTAGSW")</p>
+            {{ macros.render_value(expandNa) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Shows halfstring for pattern "GATTAG"</p>
+            {{ macros.render_value(halfStr) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Computes the molecular weight of a particular sequence.</p>
+            {{ macros.render_value(molWt) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Creates a new sequence object with a sequence that is a substring of another</p>
+            {{ macros.render_value(coupe) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Array where each key is a substring matching a given pattern ("TTT")</p>
+            {{ macros.render_value(patpos) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Similar to patPos() except that this allows for overlapping patterns. ("TTT")</p>
+            {{ macros.render_value(patposo) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the frequency of a given symbol in the sequence property string ("A")</p>
+            {{ macros.render_value(symfreq) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the 3rd codon in a sequence, with numbering starting at 0</p>
+            {{ macros.render_value(codon) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Translates a particular DNA sequence into its protein product sequence</p>
+            {{ macros.render_value(translate) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Translates an amino acid sequence ("GAVLIFYWKRH") into its equivalent "charge sequence"</p>
+            {{ macros.render_value(charge) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns a string of symbols from an 8-letter alphabet: A, L, M, R, C, H, I, S</p>
+            {{ macros.render_value(chemicalGroup) }}
+        </div>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns a two-dimensional array containing palindromic substrings found in a sequence</p>
+            {{ macros.render_value(testPalindrome1) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra %}
+    <section class="bp-step">
+        <div class="bp-step__head">
+            <span class="bp-step__num">3</span>
+            <div>
+                <h2 class="bp-step__title">New in biophp 1.1: the sequence as a value object</h2>
+            </div>
+            <span></span>
+        </div>
+        <div class="bp-result">
+            <br>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>DNA Complement, computed by the DnaSequence value object</p>
+                    {{ macros.render_value(voComplement) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Reverse complement (the strand facing this one)</p>
+                    {{ macros.render_value(voReverseComplement) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>GC content (%)</p>
+                    {{ macros.render_value(voGcContent) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Transcribed to RNA (thymine becomes uracil)</p>
+                    {{ macros.render_value(voToRna) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Substring of the sequence, still a validated DnaSequence</p>
+                    {{ macros.render_value(voSubSequence) }}
+                </div>
+            </div>
+
+            <div class="card border-success mb-3" style="font-size:0.9em">
+                <div class="card-header">Results of your request</div>
+                <div class="card-body">
+                    <p>Two value objects built from the same symbols are equal</p>
+                    {{ macros.render_value(voEquals) }}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

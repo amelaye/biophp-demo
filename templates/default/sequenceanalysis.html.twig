@@ -1,20 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>Simple sequence analysis</h1>
-        <p>This code finds mirrors into a sequence string. It takes as parameter one start and one end.</p>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                {{ macros.render_value(mirrors) }}
-            </div>
+
+{% set page_icon  = 'dna' %}
+{% set page_title = 'Simple sequence analysis' %}
+
+{% block intro %}
+    <p>This code finds mirrors into a sequence string. It takes as parameter one start and one end.</p>
+{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            {{ macros.render_value(mirrors) }}
         </div>
     </div>
 {% endblock %}

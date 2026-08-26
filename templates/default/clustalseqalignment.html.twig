@@ -1,136 +1,130 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>CLUSTAL Alignment (several examples)</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Sort sequences :</p>
-                {{ macros.sequence_set_table(sequenceAlSort) }}
-            </div>
+{% set page_icon  = 'align' %}
+{% set page_title = 'CLUSTAL Alignment (several examples)' %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Sort sequences :</p>
+            {{ macros.sequence_set_table(sequenceAlSort) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>13th sequence</p>
-                {{ macros.sequence_details(offset13) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>13th sequence</p>
+            {{ macros.sequence_details(offset13) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Length of the longuest sequence</p>
-                {{ macros.render_value(maxLength) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Length of the longuest sequence</p>
+            {{ macros.render_value(maxLength) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Number of gaps</p>
-                {{ macros.render_value(numberGaps) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Number of gaps</p>
+            {{ macros.render_value(numberGaps) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Do the sequences have the same length ?</p>
-                {{ macros.render_value(isFlush) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Do the sequences have the same length ?</p>
+            {{ macros.render_value(isFlush) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Char at res 10 (10th sequence)</p>
-                {{ macros.render_value(sCharAtRes) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Char at res 10 (10th sequence)</p>
+            {{ macros.render_value(sCharAtRes) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Substring between two residues in a sequence</p>
-                {{ macros.render_value(sSubstrBwRes) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Substring between two residues in a sequence</p>
+            {{ macros.render_value(sSubstrBwRes) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Converts a column number to a residue number in a sequence</p>
-                {{ macros.render_value(colToRes) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Converts a column number to a residue number in a sequence</p>
+            {{ macros.render_value(colToRes) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Converts a residue number to a column number in a sequence</p>
-                {{ macros.render_value(resToCol) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Converts a residue number to a column number in a sequence</p>
+            {{ macros.render_value(resToCol) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Creates a new alignment set from index 5 to 10</p>
-                {{ macros.sequence_set_table(subALign.getSeqSet()) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Creates a new alignment set from index 5 to 10</p>
+            {{ macros.sequence_set_table(subALign.getSeqSet()) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Creates a new alignment with selected indexes</p>
-                {{ macros.sequence_set_table(selectAlign.getSeqSet()) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Creates a new alignment with selected indexes</p>
+            {{ macros.sequence_set_table(selectAlign.getSeqSet()) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>
-                    Determines the index position of both variant and invariant residues according
-                    to a given "percentage threshold" similar to that in the consensus() method.
-                </p>
-                {{ macros.render_value(resVar) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>
+                Determines the index position of both variant and invariant residues according
+                to a given "percentage threshold" similar to that in the consensus() method.
+            </p>
+            {{ macros.render_value(resVar) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Returns the consensus string for an alignment set</p>
-                {{ macros.render_value(consensus) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Returns the consensus string for an alignment set</p>
+            {{ macros.render_value(consensus) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Adding a new sequence object</p>
-                {{ macros.sequence_set_table(sequenceAlignmentManagerAdd.getSeqSet()) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Adding a new sequence object</p>
+            {{ macros.sequence_set_table(sequenceAlignmentManagerAdd.getSeqSet()) }}
         </div>
+    </div>
 
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p>Dropping a sequence</p>
-                {{ macros.sequence_set_table(sequenceAlignmentManagerDel.getSeqSet()) }}
-            </div>
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <p>Dropping a sequence</p>
+            {{ macros.sequence_set_table(sequenceAlignmentManagerDel.getSeqSet()) }}
         </div>
     </div>
 {% endblock %}

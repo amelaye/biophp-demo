@@ -1,28 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/sample.html.twig' %}
 {% import 'macros.html.twig' as macros %}
-{% block body %}
-    <div class="container">
-        <h1>HGBASE: human genome variation record</h1>
-        <br>
-        <h4>Sample code : </h4>
-        <br>
-        {{ code | raw }}
-        <br>
-        <h4>Result :</h4>
-        <div class="card border-info mb-3" style="font-size:0.9em">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <table class="table table-sm">
-                    <tr><th>Haplotype id</th><td>{{ haplotypeId }}</td></tr>
-                    <tr><th>Allele</th><td>{{ allele }}</td></tr>
-                    <tr><th>Population</th><td>{{ popName }}</td></tr>
-                    <tr><th>Individuals in population</th><td>{{ popIndiv }}</td></tr>
-                    <tr><th>Frequency (%)</th><td>{{ freqPerc }}</td></tr>
-                    <tr><th>Frequency (individuals)</th><td>{{ freqIndiv }}</td></tr>
-                    <tr><th>Citation</th><td>{{ citation }}</td></tr>
-                    <tr><th>Submitter</th><td>{{ submitterName }}</td></tr>
-                </table>
-            </div>
+
+{% set page_icon  = 'file' %}
+{% set page_title = 'HGBASE: human genome variation record' %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <div class="card-header">Results of your request</div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <tr><th>Haplotype id</th><td>{{ haplotypeId }}</td></tr>
+                <tr><th>Allele</th><td>{{ allele }}</td></tr>
+                <tr><th>Population</th><td>{{ popName }}</td></tr>
+                <tr><th>Individuals in population</th><td>{{ popIndiv }}</td></tr>
+                <tr><th>Frequency (%)</th><td>{{ freqPerc }}</td></tr>
+                <tr><th>Frequency (individuals)</th><td>{{ freqIndiv }}</td></tr>
+                <tr><th>Citation</th><td>{{ citation }}</td></tr>
+                <tr><th>Submitter</th><td>{{ submitterName }}</td></tr>
+            </table>
         </div>
     </div>
 {% endblock %}
