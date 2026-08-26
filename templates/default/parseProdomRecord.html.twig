@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
+{% block body %}
+    <div class="container">
+        <h1>ProDom: protein domain family record</h1>
+        <br>
+        <h4>Sample code : </h4>
+        <br>
+        {{ code | raw }}
+        <br>
+        <h4>Result :</h4>
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>Entry number</th><td>{{ entryNo }}</td></tr>
+                    <tr><th>Accession</th><td>{{ accession }}</td></tr>
+                    <tr><th>Release</th><td>{{ release }}</td></tr>
+                    <tr><th>Domain count</th><td>{{ domainCount }}</td></tr>
+                    <tr><th>Frequent names</th><td>{{ macros.render_value(freqNames) }}</td></tr>
+                    <tr><th>Keywords</th><td>{{ macros.render_value(keywords) }}</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

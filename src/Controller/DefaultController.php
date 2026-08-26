@@ -10,6 +10,8 @@ use Amelaye\BioPHP\Domain\Sequence\Interfaces\SequenceAlignmentInterface;
 use Amelaye\BioPHP\Domain\Sequence\Interfaces\SequenceInterface;
 use Amelaye\BioPHP\Domain\Sequence\Interfaces\SequenceMatchInterface;
 use Amelaye\BioPHP\Domain\Sequence\Service\SequenceAlignmentManager;
+use Amelaye\BioPHP\Domain\Sequence\ValueObject\AminoAcidSequence;
+use Amelaye\BioPHP\Domain\Sequence\ValueObject\MolecularSequenceFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use GeSHi;
@@ -64,20 +66,31 @@ class DefaultController extends AbstractController
     public function parseaseqdb(DatabaseInterface $databaseManager)
     {
         $databaseManager->recording("humandb", "GENBANK", "human.seq", "demo.seq");
-        $oSequence = $databaseManager->fetch("NM_031438", "data/");
+        // fetch() returns the parser that read the record, not the Sequence itself
+        $oSequence = $databaseManager->fetch("NM_031438", "data/")->getSequence();
+
+        // New in biophp 1.1: wrap the parsed record into a validated DNA/RNA value object
+        $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
+        $fGcContent = $oMolecularSequence->getGcContent();
+
         $sCode =
 'public function parseaseqdb(DatabaseInterface $databaseManager)
 {
     $databaseManager->recording("humandb", "GENBANK", "human.seq", "demo.seq");
-    $oSequence = $databaseManager->fetch("NM_031438", "data/");
+    // fetch() returns the parser that read the record, not the Sequence itself
+    $oSequence = $databaseManager->fetch("NM_031438", "data/")->getSequence();
+
+    // New in biophp 1.1: wrap the parsed record into a validated DNA/RNA value object
+    $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
+    $fGcContent = $oMolecularSequence->getGcContent();
 
     return $this->render(\'default/parseseqdb.html.twig\',
-        ["sequence" => $oSequence]
+        ["sequence" => $oSequence, "gcContent" => $fGcContent]
     );
 }';
         $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/parseseqdb.html.twig',
-            ["sequence" => $oSequence, 'code' => $oGeshi->parse_code()]
+            ["sequence" => $oSequence, "gcContent" => $fGcContent, 'code' => $oGeshi->parse_code()]
         );
     }
 
@@ -90,20 +103,31 @@ class DefaultController extends AbstractController
     public function parseaswissprotdb(DatabaseInterface $databaseManager)
     {
         $databaseManager->recording("humandbSwiss", "SWISSPROT", "basicswiss.txt");
-        $oSequence = $databaseManager->fetch("1375", "data/");
+        // fetch() returns the parser that read the record, not the Sequence itself
+        $oSequence = $databaseManager->fetch("1375", "data/")->getSequence();
+
+        // New in biophp 1.1: wrap the parsed record into a validated amino acid value object
+        $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
+        $bHasUnknownResidue = $oMolecularSequence->hasUnknownResidue();
 
         $sCode =
 'public function parseaswissprotdb(DatabaseInterface $databaseManager)
 {
     $databaseManager->recording("humandbSwiss", "SWISSPROT", "basicswiss.txt");
-    $oSequence = $databaseManager->fetch("1375", "data/");
+    // fetch() returns the parser that read the record, not the Sequence itself
+    $oSequence = $databaseManager->fetch("1375", "data/")->getSequence();
+
+    // New in biophp 1.1: wrap the parsed record into a validated amino acid value object
+    $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
+    $bHasUnknownResidue = $oMolecularSequence->hasUnknownResidue();
+
     return $this->render(\'default/parseswissprotdb.html.twig\',
-        ["sequence" => $oSequence]
+        ["sequence" => $oSequence, "hasUnknownResidue" => $bHasUnknownResidue]
     );
 }';
         $oGeshi = new GeSHi($sCode, 'php');
         return $this->render('default/parseswissprotdb.html.twig',
-            ["sequence" => $oSequence, 'code' => $oGeshi->parse_code()]
+            ["sequence" => $oSequence, "hasUnknownResidue" => $bHasUnknownResidue, 'code' => $oGeshi->parse_code()]
         );
     }
 
@@ -355,6 +379,15 @@ public function clustalseqalignment(SequenceAlignmentInterface $sequenceAlignmen
         // Returns a two-dimensional array containing palindromic substrings found in a sequence
         $aTestPalindrome = $sequenceManager->findPalindrome(null, 2, 2);
 
+        // New in biophp 1.1: the sequence as a validated, immutable value object
+        $oDnaSeq = $sequenceManager->getMolecularSequence();
+        $sVoComplement = (string) $oDnaSeq->complement();
+        $sVoReverseComplement = (string) $oDnaSeq->reverseComplement();
+        $fVoGcContent = $oDnaSeq->getGcContent();
+        $sVoToRna = (string) $oDnaSeq->toRna();
+        $sVoSubSequence = (string) $oDnaSeq->subSequence(2, 100);
+        $bVoEquals = $oDnaSeq->equals($sequenceManager->getMolecularSequence());
+
         $sCode =
 '/**
   * Here is some samples of how to use the functions
@@ -419,6 +452,15 @@ public function playwithsequencies(
      // Returns a two-dimensional array containing palindromic substrings found in a sequence
      $aTestPalindrome = $sequenceManager->findPalindrome(null, 2, 2);
 
+     // New in biophp 1.1: the sequence as a validated, immutable value object
+     $oDnaSeq = $sequenceManager->getMolecularSequence();
+     $sVoComplement = (string) $oDnaSeq->complement();
+     $sVoReverseComplement = (string) $oDnaSeq->reverseComplement();
+     $fVoGcContent = $oDnaSeq->getGcContent();
+     $sVoToRna = (string) $oDnaSeq->toRna();
+     $sVoSubSequence = (string) $oDnaSeq->subSequence(2, 100);
+     $bVoEquals = $oDnaSeq->equals($sequenceManager->getMolecularSequence());
+
      return $this->render(\'default/playwithsequencies.html.twig\',
         [
             \'complement\'        => $aComplement,
@@ -433,7 +475,13 @@ public function playwithsequencies(
             \'translate\'         => $sTranslate,
             \'charge\'            => $sCharge,
             \'chemicalGroup\'     => $sChemicalGroup,
-            \'testPalindrome1\'   => $aTestPalindrome
+            \'testPalindrome1\'   => $aTestPalindrome,
+            \'voComplement\'          => $sVoComplement,
+            \'voReverseComplement\'   => $sVoReverseComplement,
+            \'voGcContent\'           => $fVoGcContent,
+            \'voToRna\'               => $sVoToRna,
+            \'voSubSequence\'         => $sVoSubSequence,
+            \'voEquals\'              => $bVoEquals
         ]
      );
 }';
@@ -455,6 +503,12 @@ public function playwithsequencies(
                 'charge'            => $sCharge,
                 'chemicalGroup'     => $sChemicalGroup,
                 'testPalindrome1'   => $aTestPalindrome,
+                'voComplement'          => $sVoComplement,
+                'voReverseComplement'   => $sVoReverseComplement,
+                'voGcContent'           => $fVoGcContent,
+                'voToRna'               => $sVoToRna,
+                'voSubSequence'         => $sVoSubSequence,
+                'voEquals'              => $bVoEquals,
                 'code'              => $oGeshi->parse_code()
             ]
         );
@@ -480,6 +534,13 @@ public function playwithsequencies(
         $iLength = $proteinManager->seqlen();
         $iMolwt = $proteinManager->molwt();
 
+        // New in biophp 1.1: the protein as a validated, immutable value object
+        $oAminoSeq = new AminoAcidSequence($sProtein);
+        $iVoLength = $oAminoSeq->getLength();
+        $bVoHasStop = $oAminoSeq->hasStop();
+        $bVoHasUnknownResidue = $oAminoSeq->hasUnknownResidue();
+        $iVoCountX = $oAminoSeq->countSymbol('X');
+
         $sCode =
 '/**
   * Here is some samples of how to use the functions
@@ -501,10 +562,21 @@ public function playwithproteins(ProteinInterface $proteinManager)
    $iLength = $proteinManager->seqlen();
    $iMolwt = $proteinManager->molwt();
 
+   // New in biophp 1.1: the protein as a validated, immutable value object
+   $oAminoSeq = new AminoAcidSequence($sProtein);
+   $iVoLength = $oAminoSeq->getLength();
+   $bVoHasStop = $oAminoSeq->hasStop();
+   $bVoHasUnknownResidue = $oAminoSeq->hasUnknownResidue();
+   $iVoCountX = $oAminoSeq->countSymbol(\'X\');
+
    return $this->render(\'default/playwithproteins.html.twig\',
        [
-           \'length\' => $iLength,
-           \'molwt\'  => $iMolwt
+           \'length\'              => $iLength,
+           \'molwt\'               => $iMolwt,
+           \'voLength\'            => $iVoLength,
+           \'voHasStop\'           => $bVoHasStop,
+           \'voHasUnknownResidue\' => $bVoHasUnknownResidue,
+           \'voCountX\'            => $iVoCountX
        ]
    );
 }';
@@ -514,6 +586,10 @@ public function playwithproteins(ProteinInterface $proteinManager)
             [
                 'length' => $iLength,
                 'molwt'  => $iMolwt,
+                'voLength'            => $iVoLength,
+                'voHasStop'           => $bVoHasStop,
+                'voHasUnknownResidue' => $bVoHasUnknownResidue,
+                'voCountX'            => $iVoCountX,
                 'code'   => $oGeshi->parse_code()
             ]
         );

@@ -113,5 +113,56 @@
                 {{ macros.render_value(testPalindrome1) }}
             </div>
         </div>
+
+        <h4>New in biophp 1.1: the sequence as a value object</h4>
+        <br>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>DNA Complement, computed by the DnaSequence value object</p>
+                {{ macros.render_value(voComplement) }}
+            </div>
+        </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>Reverse complement (the strand facing this one)</p>
+                {{ macros.render_value(voReverseComplement) }}
+            </div>
+        </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>GC content (%)</p>
+                {{ macros.render_value(voGcContent) }}
+            </div>
+        </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>Transcribed to RNA (thymine becomes uracil)</p>
+                {{ macros.render_value(voToRna) }}
+            </div>
+        </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>Substring of the sequence, still a validated DnaSequence</p>
+                {{ macros.render_value(voSubSequence) }}
+            </div>
+        </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>Two value objects built from the same symbols are equal</p>
+                {{ macros.render_value(voEquals) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

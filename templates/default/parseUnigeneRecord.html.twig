@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
+{% block body %}
+    <div class="container">
+        <h1>UniGene: EST cluster record</h1>
+        <br>
+        <h4>Sample code : </h4>
+        <br>
+        {{ code | raw }}
+        <br>
+        <h4>Result :</h4>
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>Cluster id</th><td>{{ clusterId }}</td></tr>
+                    <tr><th>Title</th><td>{{ recordTitle }}</td></tr>
+                    <tr><th>Expression sites</th><td>{{ macros.render_value(expression) }}</td></tr>
+                    <tr><th>Protein similarities</th><td>{{ macros.render_value(protSims) }}</td></tr>
+                    <tr><th>Sequence count</th><td>{{ seqCount }}</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

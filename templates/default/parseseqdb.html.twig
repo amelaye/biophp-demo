@@ -15,5 +15,13 @@
                 {{ macros.sequence_details(sequence) }}
             </div>
         </div>
+
+        <div class="card border-success mb-3" style="font-size:0.9em">
+            <div class="card-header">Results of your request</div>
+            <div class="card-body">
+                <p>New in biophp 1.1: GC content, computed by wrapping the record into a DnaSequence value object</p>
+                {{ macros.render_value(gcContent) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

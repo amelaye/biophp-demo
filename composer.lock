@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amelaye/biophp",
-            "version": "v1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amelaye/biophp.git",
-                "reference": "08fba4e9052d380bcef497652037b94078a423b1"
+                "reference": "fac973090fe1c1d4c4ef4d4dc348110c8386b330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amelaye/biophp/zipball/08fba4e9052d380bcef497652037b94078a423b1",
-                "reference": "08fba4e9052d380bcef497652037b94078a423b1",
+                "url": "https://api.github.com/repos/amelaye/biophp/zipball/fac973090fe1c1d4c4ef4d4dc348110c8386b330",
+                "reference": "fac973090fe1c1d4c4ef4d4dc348110c8386b330",
                 "shasum": ""
             },
             "require": {
@@ -78,22 +78,22 @@
             ],
             "support": {
                 "issues": "https://github.com/amelaye/biophp/issues",
-                "source": "https://github.com/amelaye/biophp/tree/v1.0.0"
+                "source": "https://github.com/amelaye/biophp/tree/1.1.0"
             },
-            "time": "2026-08-24T10:56:01+00:00"
+            "time": "2026-08-25T17:06:13+00:00"
         },
         {
             "name": "amelaye/biotools",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amelaye/biotools.git",
-                "reference": "8ea6ef6b1bcffc365482649561d21e452223be43"
+                "reference": "04e08031dc904e271f69e38e78820d528c614129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amelaye/biotools/zipball/8ea6ef6b1bcffc365482649561d21e452223be43",
-                "reference": "8ea6ef6b1bcffc365482649561d21e452223be43",
+                "url": "https://api.github.com/repos/amelaye/biotools/zipball/04e08031dc904e271f69e38e78820d528c614129",
+                "reference": "04e08031dc904e271f69e38e78820d528c614129",
                 "shasum": ""
             },
             "require": {
@@ -142,9 +142,9 @@
             ],
             "support": {
                 "issues": "https://github.com/amelaye/biotools/issues",
-                "source": "https://github.com/amelaye/biotools/tree/v1.0.0"
+                "source": "https://github.com/amelaye/biotools/tree/v1.0.1"
             },
-            "time": "2026-08-24T17:05:44+00:00"
+            "time": "2026-08-25T17:14:47+00:00"
         },
         {
             "name": "doctrine/collections",
