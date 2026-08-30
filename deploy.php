@@ -14,7 +14,7 @@ set('keep_releases', 3);
 set('application', 'demo.amelayes-biophp.net');
 
 // Dépôt Git
-set('repository', 'https://github.com/amelaye/demo-biophp.git');
+set('repository', 'https://github.com/amelaye/biophp-demo.git');
 
 // ---------------------------------------------------------------------------
 // Permissions / sécurité
@@ -74,12 +74,10 @@ add('writable_dirs', [
 // Hôtes
 // ---------------------------------------------------------------------------
 
-// CHANGÉ : hostname aligné sur le vrai domaine du projet (au lieu de
-// amelieonline.net, qui prêtait à confusion). Les deux résolvent vers la
-// même IP, mais autant que ce soit lisible.
-// NOTE : la branche 'develop' est conservée telle quelle — à confirmer si
-// tu veux plutôt déployer 'master'/'main'.
-host('biodemo-prod')
+// Le nom passé à host() sert directement de cible SSH : il doit donc
+// correspondre à un alias de ~/.ssh/config, qui porte le vrai hostname,
+// l'utilisateur (deploy), le port (243) et la clé.
+host('biophp-demo-prod')
     ->set('deploy_path', '/home/web/{{application}}')
     ->set('branch', 'master')
     ->setLabels(['stage' => 'prod']);
