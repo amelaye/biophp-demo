@@ -40,8 +40,11 @@ set('writable_use_sudo', true);
 
 set('ssh_multiplexing', true);
 
-set('bin/php', '/usr/bin/php8.1');
-set('bin/composer', '/usr/bin/php8.1 /usr/local/bin/composer');
+// composer.json exige php ^8.2 (et doctrine/instantiator ^8.4) : 8.1 ne
+// peut pas installer le lock. Le serveur dispose de 8.5, avec ctype,
+// iconv, intl, mbstring et pdo_mysql.
+set('bin/php', '/usr/bin/php8.5');
+set('bin/composer', '/usr/bin/php8.5 /usr/local/bin/composer');
 
 
 // ---------------------------------------------------------------------------
