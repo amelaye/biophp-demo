@@ -74,9 +74,6 @@
                         {% for item in group.items %}{{ ui.row(item) }}{% endfor %}
                     {% endfor %}
                 </div>
-                <div class="bp-card__foot">
-                    <a class="bp-btn" href="#code-samples">{{ 'index.code_samples.cta'|trans }} {{ ui.icon('chevron') }}</a>
-                </div>
             </section>
 
             <section class="bp-card bp-card--blue" id="biotools">
@@ -89,9 +86,6 @@
                 </div>
                 <div class="bp-card__body">
                     {% for item in bp_tools %}{{ ui.row(item) }}{% endfor %}
-                </div>
-                <div class="bp-card__foot">
-                    <a class="bp-btn" href="#biotools">{{ 'index.biotools.cta'|trans }} {{ ui.icon('chevron') }}</a>
                 </div>
             </section>
 
