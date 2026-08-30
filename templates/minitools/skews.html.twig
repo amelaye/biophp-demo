@@ -1,16 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'wave' %}
-{% set page_title    = 'Skews generator' %}
-{% set page_subtitle = 'Skews from custom sequences' %}
+{% set page_title    = 'tool.skews.page_title'|trans %}
+{% set page_subtitle = 'tool.skews.page_subtitle'|trans %}
 {% set has_result    = image != "" %}
 
 {% block intro %}
-    <p>
-        Compute GC-, AT-, KETO- and oligo-skews from a custom sequence. The input sequence is
-        scanned with a sliding window and the requested parameter is calculated for each window,
-        then plotted in a graph.
-    </p>
+    <p>{{ 'tool.skews.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -26,7 +22,7 @@
                 {{ form_row(form.window) }}
                 {{ form_row(form.window2) }}
             </div>
-            <p class="bp-form__help">bases(100-50000)</p>
+            <p class="bp-form__help">{{ 'tool.skews.bases_100_50000'|trans }}</p>
 
             <hr />
 
@@ -58,7 +54,7 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <div class="bp-figure">
@@ -68,47 +64,24 @@
 
 {% block result_aside %}
     <div class="bp-panel">
-        <h3 class="bp-panel__title">Export</h3>
+        <h3 class="bp-panel__title">{{ 'panel.export'|trans }}</h3>
         <a class="bp-download" href="/created_files/{{ image }}" download>
             <svg aria-hidden="true"><use href="#bp-i-download"></use></svg>
-            <span>Télécharger le graphique</span>
+            <span>{{ 'action.download_chart'|trans }}</span>
         </a>
     </div>
 {% endblock %}
 
-{% block description_lead %}Skews from custom sequences{% endblock %}
+{% block description_lead %}{{ 'tool.skews.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <p>
-        To compute skews, the input sequence is scanned with a sliding window, and the requested
-        parameter is calculate for each window. The data is shown in a graph.
-    </p>
-
-    <h5>G+C %</h5>
-    <p>The porcentaje of G+C is computed</p>
-
-    <h5>GC-skew</h5>
-    <p>For each window, (G-C)/(G+C) is computed, where G and C are the number of ocurrences for each nucleotide</p>
-
-    <h5>AT-skew</h5>
-    <p>For each window, (A-T)/(A+T) is computed, where A and T are the number of ocurrences for each nucleotide.</p>
-
-    <h5>KETO-skew</h5>
-    <p>For each window, (G+C-A-T)/(G+C+A+T) is computed, where A, C, G and T are the number of ocurrences for each nucleotide.</p>
-
-    <h5>Oligo-skew</h5>
-    <p>
-        For each window, frecuencies for all nucleotides with selected length is computed.
-        Those frecuencies are compared to frecuencies obtained from the complete sequence.
-        When comparing both frecuencies, global distance is computed, as described by
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=11331237"
-           target="_blank" rel="noopener">Almeida et al. (2001)</a>.
-    </p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/skews.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/skews.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

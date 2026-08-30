@@ -1,18 +1,15 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'percent' %}
-{% set page_title    = 'Fasta Upload' %}
-{% set page_subtitle = 'GC Content Finder' %}
+{% set page_title    = 'tool.gc_content_finder.page_title'|trans %}
+{% set page_subtitle = 'tool.gc_content_finder.page_subtitle'|trans %}
 {% set has_result    = length != 0 %}
 
 {% block intro %}
-    <p>
-        Compute the GC content of an uploaded FASTA file: total length, base counts and the
-        AT / GC percentages of the sequence.
-    </p>
+    <p>{{ 'tool.gc_content_finder.intro'|trans|raw }}</p>
 {% endblock %}
 
-{% block form_lead %}Important: Please use only txt files. The file should contain only letters.{% endblock %}
+{% block form_lead %}{{ 'tool.gc_content_finder.form_lead'|trans }}{% endblock %}
 
 {% block form %}
     {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
@@ -22,17 +19,17 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <dl class="bp-facts">
-        <dt>Total Length of Sequence</dt><dd>{{ length }}</dd>
-        <dt>Number of A</dt><dd>{{ a }}</dd>
-        <dt>Number of T</dt><dd>{{ t }}</dd>
-        <dt>Number of G</dt><dd>{{ g }}</dd>
-        <dt>Number of C</dt><dd>{{ c }}</dd>
-        <dt>% of at</dt><dd>{{ at }}</dd>
-        <dt>% of gc</dt><dd>{{ gc }}</dd>
+        <dt>{{ 'tool.gc_content_finder.total_length_of_sequence'|trans }}</dt><dd>{{ length }}</dd>
+        <dt>{{ 'tool.gc_content_finder.number_of_a'|trans }}</dt><dd>{{ a }}</dd>
+        <dt>{{ 'tool.gc_content_finder.number_of_t'|trans }}</dt><dd>{{ t }}</dd>
+        <dt>{{ 'tool.gc_content_finder.number_of_g'|trans }}</dt><dd>{{ g }}</dd>
+        <dt>{{ 'tool.gc_content_finder.number_of_c'|trans }}</dt><dd>{{ c }}</dd>
+        <dt>{{ 'tool.gc_content_finder.of_at'|trans }}</dt><dd>{{ at }}</dd>
+        <dt>{{ 'tool.gc_content_finder.of_gc'|trans }}</dt><dd>{{ gc }}</dd>
     </dl>
 {% endblock %}
 

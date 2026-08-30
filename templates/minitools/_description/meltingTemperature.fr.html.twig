@@ -1,0 +1,41 @@
+<h5>Calcul de base de la température de fusion (Tm)</h5>
+<p>Deux approximations standard sont utilisées.</p>
+<p>Pour les séquences de moins de 14 nucléotides, la formule est :</p>
+<pre>Tm= (wA+xT) * 2 + (yG+zC) * 4</pre>
+<p>où w, x, y, z sont respectivement les nombres de bases A, T, G, C de la séquence.</p>
+<p>Pour les séquences de plus de 13 nucléotides, l'équation utilisée est</p>
+<pre>Tm= 64.9 +41*(yG+zC-16.4)/(wA+xT+yG+zC)</pre>
+<p>
+    Lorsque des nucléotides dégénérés figurent dans la séquence de l'amorce (Y,R,W,S,K,M,D,V,H,B ou N),
+    ils sont substitués en interne avant le calcul des Tm minimale et maximale.
+</p>
+<pre>    Exemple :
+     Séquence de l'amorce :                        CTCT<b>RY</b>CT<b>WS</b>CTCTCT
+     Séquence pour le calcul de la Tm minimale :   CTCT<b>AT</b>CT<b>AG</b>CTCTCT
+     Séquence pour le calcul de la Tm maximale :   CTCT<b>GC</b>CT<b>AG</b>CTCTCT</pre>
+
+<h5>HYPOTHÈSES</h5>
+<p>
+    Les deux équations supposent que l'hybridation se produit dans les conditions standard de
+    50 nM d'amorce, 50 mM de Na<sup>+</sup>, et pH 7,0.
+</p>
+
+<h5>Calcul de la température de fusion (Tm) par empilement de bases</h5>
+<p>
+    Cette approximation s'appuie sur des concepts thermodynamiques pour calculer la T<sub>m</sub>.
+    Les références suivantes ont servi à développer le script :
+</p>
+<p>
+    SantaLucia J. A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor
+    thermodynamics. Proc Natl Acad Sci U S A. 1998 Feb 17;95(4):1460-5.
+    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=9465037"
+       target="_blank" rel="noopener">NCBI</a>
+</p>
+<p>
+    von Ahsen N, Oellerich M, Armstrong VW, Schutz E. Application of a thermodynamic nearest-neighbor
+    model to estimate nucleic acid stability and optimize probe design: prediction of melting points
+    of multiple mutations of apolipoprotein B-3500 and factor V with a hybridization probe genotyping
+    assay on the LightCycler. Clin Chem. 1999 Dec;45(12):2094-101.
+    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=10585340"
+       target="_blank" rel="noopener">NCBI</a>
+</p>

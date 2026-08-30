@@ -2,81 +2,80 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'target' %}
-{% set page_title = 'Sequence match' %}
+{% set page_title = 'doc.sequencematch.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Submatrix :</p>
+            <p>{{ 'doc.sequencematch.submatrix'|trans }}</p>
             {{ macros.render_value(submatrix.getRules()) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Sequence 1 :</p>
+            <p>{{ 'doc.sequencematch.sequence_1'|trans }}</p>
             {{ macros.render_value(sequence1) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Sequence 2 :</p>
+            <p>{{ 'doc.sequencematch.sequence_2'|trans }}</p>
             {{ macros.render_value(sequence2) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Computes the Hamming Distance between two sequences</p>
+            <p>{{ 'doc.sequencematch.computes_the_hamming_distance_between_two_sequences'|trans }}</p>
             {{ macros.render_value(distance) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <p>
-                Compares two letters $let1 and $let2 and returns another letter
-                indicating if the two were exact matches, partial matches, or non-matches.<br>
-                Not matching (A & T) :
+                {{ 'doc.sequencematch.compares_two_letters'|trans }}<br>
+                {{ 'doc.sequencematch.not_matching_a_t'|trans }}
             </p>
             {{ macros.render_value(compare1) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Matching (A & A) : </p>
+            <p>{{ 'doc.sequencematch.matching_a_a'|trans }}</p>
             {{ macros.render_value(compare2) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Computes the Levenshtein Distance between two sequences with equal/unequal lengths : </p>
+            <p>{{ 'doc.sequencematch.computes_the_levenshtein_distance_between_two_sequences'|trans }}</p>
             {{ macros.render_value(levdist) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Extended version of levdist() which accepts strings with length greater than 255 but not to exceed 1024 : </p>
+            <p>{{ 'doc.sequencematch.extended_version_of_levdist_which_accepts_strings'|trans }}</p>
             {{ macros.render_value(xlevdist) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Matching results : </p>
+            <p>{{ 'doc.sequencematch.matching_results'|trans }}</p>
             {{ macros.render_value(match) }}
         </div>
     </div>

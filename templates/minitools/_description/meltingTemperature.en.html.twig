@@ -1,0 +1,41 @@
+<h5>Basic Melting Temperature (Tm) Calculations</h5>
+<p>Two standard approximation calculations are used.</p>
+<p>For sequences less than 14 nucleotides the formula is:</p>
+<pre>Tm= (wA+xT) * 2 + (yG+zC) * 4</pre>
+<p>where w,x,y,z are the number of the bases A,T,G,C in the sequence, respectively.</p>
+<p>For sequences longer than 13 nucleotides, the equation used is</p>
+<pre>Tm= 64.9 +41*(yG+zC-16.4)/(wA+xT+yG+zC)</pre>
+<p>
+    When degenerated nucleotides are included in the primer sequence (Y,R,W,S,K,M,D,V,H,B or N),
+    those nucleotides will be internally substituted prior to minimum and maximum Tm calculation.
+</p>
+<pre>    Example:
+ Primer sequence:                            CTCT<b>RY</b>CT<b>WS</b>CTCTCT
+ Sequence for minimum Tm calculation:        CTCT<b>AT</b>CT<b>AG</b>CTCTCT
+ Sequence for maximum Tm calculation:        CTCT<b>GC</b>CT<b>AG</b>CTCTCT</pre>
+
+<h5>ASSUMPTIONS</h5>
+<p>
+    Both equations assume that the annealing occurs under the standard conditions of 50 nM primer,
+    50 mM Na<sup>+</sup>, and pH 7.0.
+</p>
+
+<h5>Base-Stacking Melting Temperature (Tm) Calculations</h5>
+<p>
+    This aproximation uses Thermodynamical concepts to compute T<sub>m</sub>.
+    The following references were used to develop the script:
+</p>
+<p>
+    SantaLucia J. A unified view of polymer, dumbbell, and oligonucleotide DNA nearest-neighbor
+    thermodynamics. Proc Natl Acad Sci U S A. 1998 Feb 17;95(4):1460-5.
+    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=9465037"
+       target="_blank" rel="noopener">NCBI</a>
+</p>
+<p>
+    von Ahsen N, Oellerich M, Armstrong VW, Schutz E. Application of a thermodynamic nearest-neighbor
+    model to estimate nucleic acid stability and optimize probe design: prediction of melting points
+    of multiple mutations of apolipoprotein B-3500 and factor V with a hybridization probe genotyping
+    assay on the LightCycler. Clin Chem. 1999 Dec;45(12):2094-101.
+    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&amp;Cmd=ShowDetailView&amp;TermToSearch=10585340"
+       target="_blank" rel="noopener">NCBI</a>
+</p>

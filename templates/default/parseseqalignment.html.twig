@@ -2,11 +2,11 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'align' %}
-{% set page_title = 'FASTA Alignment' %}
+{% set page_title = 'doc.parseseqalignment.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             {{ macros.sequence_set_table(sequences) }}
         </div>

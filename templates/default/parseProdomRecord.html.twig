@@ -2,19 +2,19 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'file' %}
-{% set page_title = 'ProDom: protein domain family record' %}
+{% set page_title = 'doc.parseProdomRecord.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <table class="table table-sm">
-                <tr><th>Entry number</th><td>{{ entryNo }}</td></tr>
-                <tr><th>Accession</th><td>{{ accession }}</td></tr>
-                <tr><th>Release</th><td>{{ release }}</td></tr>
-                <tr><th>Domain count</th><td>{{ domainCount }}</td></tr>
-                <tr><th>Frequent names</th><td>{{ macros.render_value(freqNames) }}</td></tr>
-                <tr><th>Keywords</th><td>{{ macros.render_value(keywords) }}</td></tr>
+                <tr><th>{{ 'doc.parseProdomRecord.entry_number'|trans }}</th><td>{{ entryNo }}</td></tr>
+                <tr><th>{{ 'doc.common.accession'|trans }}</th><td>{{ accession }}</td></tr>
+                <tr><th>{{ 'doc.parseProdomRecord.release'|trans }}</th><td>{{ release }}</td></tr>
+                <tr><th>{{ 'doc.parseProdomRecord.domain_count'|trans }}</th><td>{{ domainCount }}</td></tr>
+                <tr><th>{{ 'doc.parseProdomRecord.frequent_names'|trans }}</th><td>{{ macros.render_value(freqNames) }}</td></tr>
+                <tr><th>{{ 'doc.common.keywords'|trans }}</th><td>{{ macros.render_value(keywords) }}</td></tr>
             </table>
         </div>
     </div>

@@ -1,0 +1,44 @@
+<p>
+    Cet outil a été créé à l'origine pour réduire des séquences protéiques en regroupant les
+    acides aminés par classes. Au fil de son développement, du code a été ajouté pour restituer
+    les séquences en couleurs. Chaque acide aminé peut par ailleurs être affiché d'une couleur
+    distincte, sans appliquer aucune réduction.
+</p>
+<p>Les alphabets d'acides aminés réduits proviennent des références ci-dessous :</p>
+
+<pre>Li T, Fan K, Wang J, Wang W. Reduction of protein sequence
+complexity by residue grouping. Protein Eng 2003; 5:323-330.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12826723&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+<pre>Murphy LR, Wallqvist A, Levy RM. Simplified amino acid alphabets
+for protein fold recognition and implications for folding.
+Protein Eng 2000; 13:149-152.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10775656&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+<pre>Pommi&eacute; C, Levadoux S, Sabatier R, Lefranc G &amp; Lefranc MP.
+IMGT standardized criteria for statistical analysis of immunoglobulin
+V-REGION amino acid properties. Journal of Molecular Recognition 2004; 17:17-32.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14872534&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+<pre>Spitzer M, Fuellen G, Cullen P, Lorkowski S.
+VisCoSe: visualization and comparison of consensus sequences.
+Bioinformatics 2004; 20:433-435.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14960475&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+<pre>Wang J, Wang W. A computational approach to simplifying the protein
+folding alphabet. Nat Struct Biol 1999; 11:1033-1038.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10542095&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+<h5>Comment définir un alphabet réduit personnalisé</h5>
+<p><b>La procédure est très simple</b> :</p>
+<ul>
+    <li>une lettre doit être utilisée pour chaque groupe d'acides aminés
+        <br>p. ex. : les lettres A, R, C, T et D pour 5 groupes</li>
+    <li>dans la série « ARNDCEQGHILKMFPSTWYV », chaque acide aminé sera remplacé par la lettre définissant son groupe.
+        <br>p. ex. : de ARNDCEQGHILKMFPSTWYV à TCDCTCDTRAACDRDTDRRA</li>
+    <li>la série de lettres obtenue sera utilisée dans le formulaire.</li>
+</ul>
+<p>
+    Les couleurs sont attribuées automatiquement à chaque lettre de l'alphabet (ce comportement
+    n'est pas personnalisable pour le moment)
+</p>

@@ -2,18 +2,18 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'file' %}
-{% set page_title = 'UniGene: EST cluster record' %}
+{% set page_title = 'doc.parseUnigeneRecord.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <table class="table table-sm">
-                <tr><th>Cluster id</th><td>{{ clusterId }}</td></tr>
-                <tr><th>Title</th><td>{{ recordTitle }}</td></tr>
-                <tr><th>Expression sites</th><td>{{ macros.render_value(expression) }}</td></tr>
-                <tr><th>Protein similarities</th><td>{{ macros.render_value(protSims) }}</td></tr>
-                <tr><th>Sequence count</th><td>{{ seqCount }}</td></tr>
+                <tr><th>{{ 'doc.parseUnigeneRecord.cluster_id'|trans }}</th><td>{{ clusterId }}</td></tr>
+                <tr><th>{{ 'doc.common.title'|trans }}</th><td>{{ recordTitle }}</td></tr>
+                <tr><th>{{ 'doc.parseUnigeneRecord.expression_sites'|trans }}</th><td>{{ macros.render_value(expression) }}</td></tr>
+                <tr><th>{{ 'doc.parseUnigeneRecord.protein_similarities'|trans }}</th><td>{{ macros.render_value(protSims) }}</td></tr>
+                <tr><th>{{ 'doc.parseUnigeneRecord.sequence_count'|trans }}</th><td>{{ seqCount }}</td></tr>
             </table>
         </div>
     </div>

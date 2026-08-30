@@ -1,15 +1,15 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'ruler' %}
-{% set page_title    = 'Distance between sequences' %}
-{% set page_subtitle = 'Comparison of oligonucleotide composition' %}
+{% set page_title    = 'tool.distance_among_sequences.page_title'|trans %}
+{% set page_subtitle = 'tool.distance_among_sequences.page_subtitle'|trans %}
 {% set has_result    = oligo_array is not empty %}
 
 {% block intro %}
     <ul>
-        <li>This tool will compute distance between input sequences and UPGMA clustering will be applied.</li>
-        <li>Distances are shown in a table, and a dendrogram is displaied.</li>
-        <li>Check carefully the results. Their value for phylogenetics is limited.</li>
+        <li>{{ 'tool.distance_among_sequences.intro_1'|trans|raw }}</li>
+        <li>{{ 'tool.distance_among_sequences.intro_2'|trans|raw }}</li>
+        <li>{{ 'tool.distance_among_sequences.intro_3'|trans|raw }}</li>
     </ul>
 {% endblock %}
 
@@ -39,14 +39,14 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Distances, clustering and dendrogram{% endblock %}
+{% block result_lead %}{{ 'tool.distance_among_sequences.result_lead'|trans }}{% endblock %}
 
 {% block result %}
     <div class="bp-tablewrap">
         <table>
             <thead>
                 <tr>
-                    <th>Distances</th>
+                    <th>{{ 'tool.distance_among_sequences.distances'|trans }}</th>
                     {% for i in 1..oligo_array|length %}
                         <th>{{ loop.index }}</th>
                     {% endfor %}
@@ -65,12 +65,12 @@
         </table>
     </div>
 
-    <h5>Name of sequences</h5>
+    <h5>{{ 'tool.distance_among_sequences.name_of_sequences'|trans }}</h5>
     <pre>{% for n, name in seq_names %}{{ name }}
 {% endfor %}</pre>
 
-    <p>Length of oligoncleotides for comparison : {{ length }}</p>
-    <p>Clustering method: UPGMA<br />{{ textcluster }}</p>
+    <p>{{ 'tool.distance_among_sequences.oligo_length_for_comparison'|trans({'%length%': length}) }}</p>
+    <p>{{ 'tool.distance_among_sequences.clustering_method'|trans }}<br />{{ textcluster }}</p>
 
     <div class="bp-figure">
         <img src="/created_files/{{ dendogram_file }}?{{ "now"|date("U") }}" alt="UPGMA dendrogram" />
@@ -79,19 +79,19 @@
 
 {% block result_aside %}
     <div class="bp-panel">
-        <h3 class="bp-panel__title">Informations</h3>
+        <h3 class="bp-panel__title">{{ 'panel.informations'|trans }}</h3>
         <dl class="bp-facts">
-            <dt>Sequences</dt><dd>{{ oligo_array|length }}</dd>
-            <dt>Oligo length</dt><dd>{{ length }}</dd>
-            <dt>Clustering</dt><dd>UPGMA</dd>
+            <dt>{{ 'tool.distance_among_sequences.sequences'|trans }}</dt><dd>{{ oligo_array|length }}</dd>
+            <dt>{{ 'tool.distance_among_sequences.oligo_length'|trans }}</dt><dd>{{ length }}</dd>
+            <dt>{{ 'tool.distance_among_sequences.clustering'|trans }}</dt><dd>UPGMA</dd>
         </dl>
     </div>
 
     <div class="bp-panel">
-        <h3 class="bp-panel__title">Export</h3>
+        <h3 class="bp-panel__title">{{ 'panel.export'|trans }}</h3>
         <a class="bp-download" href="/created_files/{{ dendogram_file }}" download>
             <svg aria-hidden="true"><use href="#bp-i-download"></use></svg>
-            <span>Télécharger le dendrogramme</span>
+            <span>{{ 'action.download_dendrogram'|trans }}</span>
         </a>
     </div>
 {% endblock %}

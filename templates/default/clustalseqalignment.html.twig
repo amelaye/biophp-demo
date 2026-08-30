@@ -2,128 +2,125 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'align' %}
-{% set page_title = 'CLUSTAL Alignment (several examples)' %}
+{% set page_title = 'doc.clustalseqalignment.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Sort sequences :</p>
+            <p>{{ 'doc.clustalseqalignment.sort_sequences'|trans }}</p>
             {{ macros.sequence_set_table(sequenceAlSort) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>13th sequence</p>
+            <p>{{ 'doc.clustalseqalignment.13th_sequence'|trans }}</p>
             {{ macros.sequence_details(offset13) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Length of the longuest sequence</p>
+            <p>{{ 'doc.clustalseqalignment.length_of_the_longuest_sequence'|trans }}</p>
             {{ macros.render_value(maxLength) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Number of gaps</p>
+            <p>{{ 'doc.clustalseqalignment.number_of_gaps'|trans }}</p>
             {{ macros.render_value(numberGaps) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Do the sequences have the same length ?</p>
+            <p>{{ 'doc.clustalseqalignment.do_the_sequences_have_the_same_length'|trans }}</p>
             {{ macros.render_value(isFlush) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Char at res 10 (10th sequence)</p>
+            <p>{{ 'doc.clustalseqalignment.char_at_res_10_10th_sequence'|trans }}</p>
             {{ macros.render_value(sCharAtRes) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Substring between two residues in a sequence</p>
+            <p>{{ 'doc.clustalseqalignment.substring_between_two_residues_in_a_sequence'|trans }}</p>
             {{ macros.render_value(sSubstrBwRes) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Converts a column number to a residue number in a sequence</p>
+            <p>{{ 'doc.clustalseqalignment.converts_a_column_number_to_a_residue'|trans }}</p>
             {{ macros.render_value(colToRes) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Converts a residue number to a column number in a sequence</p>
+            <p>{{ 'doc.clustalseqalignment.converts_a_residue_number_to_a_column'|trans }}</p>
             {{ macros.render_value(resToCol) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Creates a new alignment set from index 5 to 10</p>
+            <p>{{ 'doc.clustalseqalignment.creates_a_new_alignment_set_from_index'|trans }}</p>
             {{ macros.sequence_set_table(subALign.getSeqSet()) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Creates a new alignment with selected indexes</p>
+            <p>{{ 'doc.clustalseqalignment.creates_a_new_alignment_with_selected_indexes'|trans }}</p>
             {{ macros.sequence_set_table(selectAlign.getSeqSet()) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>
-                Determines the index position of both variant and invariant residues according
-                to a given "percentage threshold" similar to that in the consensus() method.
-            </p>
+            <p>{{ 'doc.clustalseqalignment.determines_the_index_position_of_both_variant'|trans }}</p>
             {{ macros.render_value(resVar) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the consensus string for an alignment set</p>
+            <p>{{ 'doc.clustalseqalignment.returns_the_consensus_string_for_an_alignment'|trans }}</p>
             {{ macros.render_value(consensus) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Adding a new sequence object</p>
+            <p>{{ 'doc.clustalseqalignment.adding_a_new_sequence_object'|trans }}</p>
             {{ macros.sequence_set_table(sequenceAlignmentManagerAdd.getSeqSet()) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Dropping a sequence</p>
+            <p>{{ 'doc.clustalseqalignment.dropping_a_sequence'|trans }}</p>
             {{ macros.sequence_set_table(sequenceAlignmentManagerDel.getSeqSet()) }}
         </div>
     </div>

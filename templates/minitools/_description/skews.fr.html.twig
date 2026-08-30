@@ -1,0 +1,26 @@
+<p>
+    Pour calculer les skews, la séquence d'entrée est parcourue par une fenêtre glissante,
+    et le paramètre demandé est calculé pour chaque fenêtre. Les données sont présentées
+    dans un graphique.
+</p>
+
+<h5>G+C %</h5>
+<p>Le pourcentage de G+C est calculé</p>
+
+<h5>GC-skew</h5>
+<p>Pour chaque fenêtre, (G-C)/(G+C) est calculé, où G et C sont les nombres d'occurrences de chaque nucléotide</p>
+
+<h5>AT-skew</h5>
+<p>Pour chaque fenêtre, (A-T)/(A+T) est calculé, où A et T sont les nombres d'occurrences de chaque nucléotide.</p>
+
+<h5>KETO-skew</h5>
+<p>Pour chaque fenêtre, (G+C-A-T)/(G+C+A+T) est calculé, où A, C, G et T sont les nombres d'occurrences de chaque nucléotide.</p>
+
+<h5>Oligo-skew</h5>
+<p>
+    Pour chaque fenêtre, les fréquences de tous les nucléotides de la longueur choisie sont
+    calculées. Ces fréquences sont comparées à celles obtenues sur la séquence complète.
+    Lors de cette comparaison, une distance globale est calculée, selon la méthode décrite par
+    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=11331237"
+       target="_blank" rel="noopener">Almeida et al. (2001)</a>.
+</p>

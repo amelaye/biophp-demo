@@ -6,6 +6,10 @@
 parameters:
     brochures_directory: '%kernel.project_dir%/public/created_files'
 
+    # langues proposées par le sélecteur de la page d'accueil ; la première
+    # sert de repli et doit rester alignée sur framework.default_locale
+    app.supported_locales: ['en', 'fr']
+
     # names of the colors used for the "protein nature" legends (polar/non-polar/charged...)
     analysis_color:
         polar: 'magenta'
@@ -64,3 +68,8 @@ services:
         arguments:
             - '%amelaye_biotools.protein_colors%'
             - '%generic_colors%'
+
+    App\EventSubscriber\LocaleSubscriber:
+        arguments:
+            $defaultLocale: '%kernel.default_locale%'
+            $supportedLocales: '%app.supported_locales%'

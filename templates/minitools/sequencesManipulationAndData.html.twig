@@ -1,11 +1,11 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'atgc' %}
-{% set page_title    = 'DNA Sequence manipulation' %}
+{% set page_title    = 'tool.sequences_manipulation_and_data.page_title'|trans %}
 {% set has_result    = result != "" %}
 
 {% block intro %}
-    <p>Manipulate a DNA sequence and read its properties.</p>
+    <p>{{ 'tool.sequences_manipulation_and_data.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -28,26 +28,22 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <pre>{{ result | chunk_split(70) }}</pre>
 {% endblock %}
 
-{% block description_lead %}DNA sequence manipulation{% endblock %}
+{% block description_lead %}{{ 'tool.sequences_manipulation_and_data.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <p><b>NOTES</b>:</p>
-    <p>
-        Non-coding characters will be removed by default, and X is replaced by N.<br>
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=7957164&amp;dopt=abstract"
-           target="_blank" rel="noopener">NC-UIBMB</a> codes are used as a reference.
-    </p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/sequencesManipulationAndData.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/sequencesManipulationAndData.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

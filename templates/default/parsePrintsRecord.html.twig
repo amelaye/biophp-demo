@@ -2,18 +2,18 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'file' %}
-{% set page_title = 'PRINTS: protein fingerprint record' %}
+{% set page_title = 'doc.parsePrintsRecord.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <table class="table table-sm">
-                <tr><th>Entry name</th><td>{{ entryName }}</td></tr>
-                <tr><th>Entry type</th><td>{{ entryType }}</td></tr>
-                <tr><th>Create date</th><td>{{ createDate }}</td></tr>
-                <tr><th>Update date</th><td>{{ updDate }}</td></tr>
-                <tr><th>Description</th><td>{{ description }}</td></tr>
+                <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
+                <tr><th>{{ 'doc.common.entry_type'|trans }}</th><td>{{ entryType }}</td></tr>
+                <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
+                <tr><th>{{ 'doc.parsePrintsRecord.update_date'|trans }}</th><td>{{ updDate }}</td></tr>
+                <tr><th>{{ 'doc.common.description'|trans }}</th><td>{{ description }}</td></tr>
             </table>
         </div>
     </div>

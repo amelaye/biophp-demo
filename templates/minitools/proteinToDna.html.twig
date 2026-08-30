@@ -1,15 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'protein' %}
-{% set page_title    = 'Protein to DNA' %}
-{% set page_subtitle = 'Reverse translation' %}
+{% set page_title    = 'tool.protein_to_dna.page_title'|trans %}
+{% set page_subtitle = 'tool.protein_to_dna.page_subtitle'|trans %}
 {% set has_result    = sequence != "" %}
 
 {% block intro %}
-    <p>
-        Reverse-translate a protein sequence into the DNA sequence that encodes it, using one
-        of the predefined genetic codes.
-    </p>
+    <p>{{ 'tool.protein_to_dna.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -23,13 +20,13 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
-    <h5>Input sequence</h5>
+    <h5>{{ 'tool.protein_to_dna.input_sequence'|trans }}</h5>
     <pre>{{ sequence|chunk_split(20, '<br>') }}</pre>
 
-    <h5>Reverse Translated sequence</h5>
+    <h5>{{ 'tool.protein_to_dna.reverse_translated_sequence'|trans }}</h5>
     <pre>{{ dna|chunk_split(60, '<br>')|atgc_sublimer('red') }}</pre>
 {% endblock %}
 

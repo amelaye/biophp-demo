@@ -1,0 +1,79 @@
+<h5>Prise en main</h5>
+<p>
+    Cet outil fonctionne de manière comparable aux autres services en ligne ou aux logiciels
+    offrant cette fonctionnalité. Les codes génétiques utilisés ici sont ceux compilés par
+    <a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode" target="_blank" rel="noopener">Andrzej (Anjay) Elzanowski et Jim Ostell</a>.
+    <br/>
+    La séquence d'ADN peut être saisie telle que dans la séquence d'exemple ou dans tout autre
+    format (chiffres, espaces et retours à la ligne sont supprimés). Un navigateur avec JavaScript
+    activé pourra effectuer de petites tâches, comme mettre la séquence au propre ou en obtenir
+    la séquence inverse ou complémentaire.
+    <br/>
+    La traduction en protéine s'effectue à l'aide de l'un des codes génétiques prédéfinis, ou d'un
+    code génétique personnalisé. La taille minimale de la séquence protéique pour les cadres de
+    lecture ouverts (ORF) est paramétrable, et ceux-ci peuvent être rognés de MET à Stop.
+    L'affichage de l'alignement de traduction est facultatif, et les acides aminés sont présentés
+    en code à 1&nbsp;lettre.
+    <br/>
+    Après traduction, les ORF sont représentés par des flèches sur la page de réponse. Pour
+    examiner l'ORF que représente une flèche, cliquez dessus : une nouvelle fenêtre s'ouvre et
+    affiche en rouge la séquence d'ADN correspondant à cet ORF précis ainsi que la protéine
+    traduite. Cette fonctionnalité requiert un navigateur avec JavaScript activé.
+</p>
+
+<h5>Comment utiliser un code génétique personnalisé</h5>
+<p>
+    Le code génétique servant à traduire une séquence en protéine peut être personnalisé. <br/>
+    Ce service permet de saisir le code génétique sous forme de chaîne, où chaque caractère
+    correspond à un acide aminé et où les astérisques représentent les codons stop. L'exemple
+    ci-dessous présente le code génétique standard et les triplets correspondants.
+</p>
+
+<div class="bp-panel">
+    <h3 class="bp-panel__title">Code génétique standard</h3>
+    <dl class="bp-facts">
+        <dt>Acide aminé/Terminaison</dt>
+        <dd><code>F</code>FLLSSSSYY<code>*</code>*CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG</dd>
+        <dt>-- Base1</dt>
+        <dd><code>T</code>TTTTTTTTT<code>T</code>TTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG</dd>
+        <dt>-- Base2</dt>
+        <dd><code>T</code>TTTCCCCAA<code>A</code>AGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG</dd>
+        <dt>-- Base3</dt>
+        <dd><code>T</code>CAGTCAGTC<code>A</code>GTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG</dd>
+    </dl>
+</div>
+
+<h5>Explication</h5>
+<p>
+    Sur la première ligne, le premier caractère (« F ») représente la phénylalanine, codée par
+    le triplet TTT (premier caractère de « Base1 », premier caractère de « Base2 » et&nbsp;premier
+    caractère de « Base3 »).<br/>
+    Le onzième caractère (« * ») représente un codon stop, codé par le triplet TAA.
+</p>
+<p>
+    Le code génétique personnalisé fourni doit compter 64 caractères. La correspondance entre
+    caractères et acides aminés peut suivre le système utilisé par ce service ou en différer,
+    mais elle sera toujours insensible à la casse.
+</p>
+
+<h5>La méthionine comme codon d'initiation</h5>
+<p>
+    Lors d'une recherche d'« ORF rognés de MET à Stop », les plus longs ORF disponibles sont
+    affichés (de la méthionine au Stop), de sorte qu'un même ORF peut contenir plusieurs
+    méthionines, comme dans la séquence d'acides aminés ci-dessous :
+</p>
+<div class="bp-seq"><code>M</code>QVVLITLSDVNSTTWGSRISLGY<code>M</code>AACFRVREVELVKNL<code>M</code><code>M</code>TGVVLQFTVDFPPSNSEFPH<code>M</code>LGNSNTISPFIPISAT</div>
+
+<h5>Codes d'acides aminés à 1 lettre</h5>
+<div class="bp-split">
+    <dl class="bp-facts">
+        {% for key, aminoacid in amino_left %}
+            <dt>{{ aminoacid.1 }}</dt><dd>{{ key }}</dd>
+        {% endfor %}
+    </dl>
+    <dl class="bp-facts">
+        {% for key, aminoacid in amino_right %}
+            <dt>{{ aminoacid.1 }}</dt><dd>{{ key }}</dd>
+        {% endfor %}
+    </dl>
+</div>

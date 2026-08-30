@@ -1,0 +1,52 @@
+<div class="bp-split">
+    <div>
+        <p>
+            As described by
+            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=2336393"
+               target="_blank" rel="noopener">Jeffrey</a> (1990).
+            Represents DNA primary sequence organization.
+        </p>
+        <p>
+            Starting from the centre of the square, every base of the sequence moves the
+            current point halfway towards its corner, and that new position is plotted.
+            Unlike FCGR, each successive position is drawn rather than an oligonucleotide
+            frequency.
+        </p>
+    </div>
+
+    <div class="bp-figure">
+        {# les quatre sommets, et les deux premiers demi-pas pour la séquence « GA » #}
+        <svg viewBox="0 0 300 230" width="300" height="230" role="img"
+             aria-label="Square with A top left, C bottom left, G top right and T bottom right; starting
+                         from the centre, each base moves the point halfway towards its corner.">
+            <rect x="74" y="46" width="150" height="150" rx="3"
+                  fill="rgba(139,92,246,.06)" stroke="#8b5cf6" stroke-opacity=".45"/>
+
+            <line x1="149" y1="121" x2="186.5" y2="83.5" stroke="#fbbf24" stroke-opacity=".65"
+                  stroke-width="1.4" stroke-dasharray="4 3"/>
+            <line x1="186.5" y1="83.5" x2="130.25" y2="64.75" stroke="#4ade80" stroke-opacity=".65"
+                  stroke-width="1.4" stroke-dasharray="4 3"/>
+
+            <circle cx="149" cy="121" r="3.4" fill="#ece9ff"/>
+            <text x="139" y="137" font-size="10" fill="#a79fd4">start</text>
+            <circle cx="186.5" cy="83.5" r="3" fill="#fbbf24"/>
+            <circle cx="130.25" cy="64.75" r="3" fill="#4ade80"/>
+
+            <circle cx="74" cy="46" r="4.5" fill="#4ade80"/>
+            <text x="10" y="36" font-size="12" fill="#4ade80" font-weight="600">A</text>
+            <text x="22" y="36" font-size="11" fill="#a79fd4">(Adenine)</text>
+
+            <circle cx="74" cy="196" r="4.5" fill="#60a5fa"/>
+            <text x="10" y="216" font-size="12" fill="#60a5fa" font-weight="600">C</text>
+            <text x="22" y="216" font-size="11" fill="#a79fd4">(Cytosine)</text>
+
+            <circle cx="224" cy="46" r="4.5" fill="#fbbf24"/>
+            <text x="236" y="36" font-size="12" fill="#fbbf24" font-weight="600">G</text>
+            <text x="248" y="36" font-size="11" fill="#a79fd4">(Guanine)</text>
+
+            <circle cx="224" cy="196" r="4.5" fill="#f87171"/>
+            <text x="236" y="216" font-size="12" fill="#f87171" font-weight="600">T</text>
+            <text x="248" y="216" font-size="11" fill="#a79fd4">(Thymine)</text>
+        </svg>
+    </div>
+</div>

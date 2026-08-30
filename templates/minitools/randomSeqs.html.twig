@@ -1,17 +1,14 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'shuffle' %}
-{% set page_title    = 'Random sequences' %}
+{% set page_title    = 'tool.random_seqs.page_title'|trans %}
 {% set has_result    = results != "" %}
 
 {% block intro %}
-    <p>
-        Generate random DNA, RNA or protein sequences: by shuffling an input sequence, from
-        custom base proportions, or from custom aminoacid frequencies.
-    </p>
+    <p>{{ 'tool.random_seqs.intro'|trans|raw }}</p>
 {% endblock %}
 
-{% block form_lead %}Pick one of the three procedures below, then submit.{% endblock %}
+{% block form_lead %}{{ 'tool.random_seqs.form_lead'|trans }}{% endblock %}
 
 {% block form %}
     {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
@@ -24,10 +21,7 @@
                     {{ form_label(form.procedure.0) }}
                 </div>
                 {{ form_row(form.seq) }}
-                <p class="bp-form__help">
-                    DNA or protein nature of the sequence will be automatically detected.
-                    Non coding characters are removed by default.
-                </p>
+                <p class="bp-form__help">{{ 'tool.random_seqs.dna_or_protein_nature_of_the_sequence'|trans }}</p>
                 <div class="bp-form__inline">
                     {{ form_label(form.length1) }}
                     {{ form_widget(form.length1) }}
@@ -76,27 +70,23 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
-    <h5>Random sequences</h5>
+    <h5>{{ 'tool.random_seqs.random_sequences'|trans }}</h5>
     <pre>{{ results|chunk_split(70, '<br>') }}</pre>
 {% endblock %}
 
-{% block description_lead %}Definitions{% endblock %}
+{% block description_lead %}{{ 'tool.random_seqs.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <h5>Notes</h5>
-    <p>
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=7957164&amp;dopt=abstract"
-           target="_blank" rel="noopener">NC-UIBMB</a> codes are used as a reference.
-        Default values are based in human genome.
-    </p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/randomSeqs.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/randomSeqs.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

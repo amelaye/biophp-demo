@@ -1,16 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'protein' %}
-{% set page_title    = 'Reduced alphabets for proteins' %}
-{% set page_subtitle = 'Redundant or simplified alphabets' %}
+{% set page_title    = 'tool.reduce_protein_alphabet.page_title'|trans %}
+{% set page_subtitle = 'tool.reduce_protein_alphabet.page_subtitle'|trans %}
 {% set has_result    = reduced_seq != "" %}
 
 {% block intro %}
-    <p>
-        Reduce protein sequences by grouping the aminoacids in classes, using either a predefined
-        alphabet or a custom one. Each aminoacid may also be displayed with a distinct colour
-        without applying any reduction.
-    </p>
+    <p>{{ 'tool.reduce_protein_alphabet.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -50,7 +46,7 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     {% if reduced_code is not empty %}
@@ -61,13 +57,13 @@
     {% endif %}
 
     {% if mode == "custom" %}
-        <h5>Personalized alphabet</h5>
-        <pre>Aminoacids   : {{ "ARNDCEQGHILKMFPSTWYV" | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }}
-Reduced code : {{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }} </pre>
+        <h5>{{ 'tool.reduce_protein_alphabet.personalized_alphabet'|trans }}</h5>
+        <pre>{{ '%-14s'|format('tool.reduce_protein_alphabet.aminoacids'|trans) }}{{ "ARNDCEQGHILKMFPSTWYV" | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }}
+{{ '%-14s'|format('tool.reduce_protein_alphabet.reduced_code'|trans) }}{{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }} </pre>
     {% endif %}
 
     {% if show_reduced %}
-        <h5>Reduced alphabet</h5>
+        <h5>{{ 'tool.reduce_protein_alphabet.reduced_alphabet'|trans }}</h5>
         {% if mode == "custom" %}
             <pre>{{ reduced_seq | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre>
         {% elseif mode == "pre" %}
@@ -75,7 +71,7 @@ Reduced code : {{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom
         {% endif %}
     {% endif %}
 
-    <h5>Colored sequence</h5>
+    <h5>{{ 'tool.reduce_protein_alphabet.colored_sequence'|trans }}</h5>
     {% if mode == "custom" %}
         <pre>{{ sequence | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre>
     {% elseif mode == "pre" %}
@@ -83,57 +79,16 @@ Reduced code : {{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom
     {% endif %}
 {% endblock %}
 
-{% block description_lead %}How to define a custom reduced alphabet{% endblock %}
+{% block description_lead %}{{ 'tool.reduce_protein_alphabet.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <p>
-        This tool was originally created to reduce protein sequences by grouping the aminoacids in classes.
-        During its development code to retrieve sequences with colours was added. Additionally, each aminoacid
-        may be displayed with a distinct colour (without applying reductions).
-    </p>
-    <p>The reduced aminoacid alphabets has been obtained from the references bellow :</p>
-
-    <pre>Li T, Fan K, Wang J, Wang W. Reduction of protein sequence
-complexity by residue grouping. Protein Eng 2003; 5:323-330.
-<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12826723&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
-
-    <pre>Murphy LR, Wallqvist A, Levy RM. Simplified amino acid alphabets
-for protein fold recognition and implications for folding.
-Protein Eng 2000; 13:149-152.
-<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10775656&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
-
-    <pre>Pommi&eacute; C, Levadoux S, Sabatier R, Lefranc G &amp; Lefranc MP.
-IMGT standardized criteria for statistical analysis of immunoglobulin
-V-REGION amino acid properties. Journal of Molecular Recognition 2004; 17:17-32.
-<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14872534&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
-
-    <pre>Spitzer M, Fuellen G, Cullen P, Lorkowski S.
-VisCoSe: visualization and comparison of consensus sequences.
-Bioinformatics 2004; 20:433-435.
-<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14960475&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
-
-    <pre>Wang J, Wang W. A computational approach to simplifying the protein
-folding alphabet. Nat Struct Biol 1999; 11:1033-1038.
-<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10542095&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
-
-    <h5>How to define a custom reduced alphabet</h5>
-    <p><b>The procedure is very simple</b>:</p>
-    <ul>
-        <li>one letter must be used for each group of aminoacids
-            <br>p.e.: letters A,R,C,T and D for 5 groups</li>
-        <li>aminoacid in the serie "ARNDCEQGHILKMFPSTWYV" will be substitute by letters defining the group.
-            <br> p.e: from ARNDCEQGHILKMFPSTWYV to TCDCTCDTRAACDRDTDRRA </li>
-        <li>the resulting serie of letters will be used in the form.</li>
-    </ul>
-    <p>
-        Colors will be automatically assigned to each letter of the alphabet (this behavior can not
-        be personalized at the moment)
-    </p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/reduceProteinAlphabet.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/reduceProteinAlphabet.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

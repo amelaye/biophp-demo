@@ -1,15 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'scissors' %}
-{% set page_title    = 'Restriction enzyme digest of DNA' %}
-{% set page_subtitle = 'with commercially available restriction enzymes' %}
+{% set page_title    = 'tool.restriction_digest.page_title'|trans %}
+{% set page_subtitle = 'tool.restriction_digest.page_subtitle'|trans %}
 {% set has_result    = digestion is not empty %}
 
 {% block intro %}
-    <p>
-        Digest one or more DNA sequences with commercially available restriction enzymes, and
-        list the cut positions for each of them. Click an enzyme name to load its vendors.
-    </p>
+    <p>{{ 'tool.restriction_digest.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -45,7 +42,7 @@
 
             <hr />
 
-            <p class="bp-form__help">When two or more input sequences are searched :</p>
+            <p class="bp-form__help">{{ 'tool.restriction_digest.when_two_or_more_input_sequences_are'|trans }}</p>
             {{ form_row(form.onlydiff) }}
 
             {{ form_row(form.submit) }}
@@ -53,7 +50,7 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     {% if show_code %}
@@ -65,7 +62,7 @@
             {% set countG = seq|split('G')|length - 1 %}
             {% set countC = seq|split('C')|length - 1 %}
             {% set result = (countG + countC ) * 100 / seq | length %}
-            <p><b>Lengh of code: {{ seq|length }}</b><br />G + C = {{ result | round(1, 'floor') }} %</p>
+            <p><b>{{ 'tool.restriction_digest.length_of_code'|trans({'%length%': seq|length}) }}</b><br />G + C = {{ result | round(1, 'floor') }} %</p>
             <div class="bp-seq">{{ seq | digest_code }}</div>
         {% endfor %}
     {% endif %}
@@ -74,13 +71,13 @@
         <table class="biotable">
             <thead>
                 <tr>
-                    <th>Restriction enzyme</th>
+                    <th>{{ 'tool.restriction_digest.restriction_enzyme'|trans }}</th>
                     {% if sequence | length == 1 %}
-                        <th>Cuts</th>
-                        <th>Positions</th>
+                        <th>{{ 'tool.restriction_digest.cuts'|trans }}</th>
+                        <th>{{ 'tool.restriction_digest.positions'|trans }}</th>
                     {% else %}
                         {% for key, val in sequence %}
-                            <th>Seq. {{ key + 1 }}</th>
+                            <th>{{ 'tool.restriction_digest.seq_n'|trans({'%n%': key + 1}) }}</th>
                         {% endfor %}
                     {% endif %}
                 </tr>
@@ -166,7 +163,7 @@
             })
             .done(function(data) {
                 $("#vendors").html('');
-                $("#vendors").append('<h3 class="bp-panel__title">Vendors</h3>');
+                $("#vendors").append({{ ('<h3 class="bp-panel__title">' ~ 'panel.vendors'|trans ~ '</h3>')|json_encode|raw }});
                 $("#vendors").append('<p>'+data.message+'</p>');
                 $.each(data.vendors, function( index, value ) {
                     $("#vendors").append('<h5>'+index+'</h5> > <a href="'+value.company.url+'">REBASE</a>');

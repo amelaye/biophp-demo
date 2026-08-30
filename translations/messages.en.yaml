@@ -1,0 +1,538 @@
+# Catalogue de référence. La langue par défaut du site est l'anglais
+# (framework.default_locale), et messages.fr.yaml retombe ici pour toute clé
+# qu'il ne définit pas.
+#
+# Les longs blocs de description scientifique ne sont pas ici : ils vivent dans
+# templates/minitools/_description/<outil>.<langue>.html.twig, parce qu'ils sont
+# riches en HTML et illisibles une fois enfouis dans du YAML.
+
+note:
+    biophp_credit: 'Text taken from %source%.'
+    insilico: >-
+        This script has been extracted from online tools at
+        <a href="http://insilico.ehu.es/" target="_blank" rel="noopener">insilico.ehu.es</a>.
+        CGR images for all sequenced bacterial genomes are available
+        <a href="http://insilico.ehu.es/describe/" target="_blank" rel="noopener">here</a>.
+        To understand how CGR images are generated, check
+        <a href="http://insilico.ehu.es/describe/CGR/info_position_CGR.html" target="_blank" rel="noopener">here</a>.
+        Example representations for <i>E. coli</i> K12 :
+        <a href="http://insilico.ehu.es/mini_tools/CGR-FCGR/E_coli_K12_CGR.html" target="_blank" rel="noopener">CGR</a>,
+        <a href="http://insilico.ehu.es/mini_tools/CGR-FCGR/E_coli_K12_FCGR.html" target="_blank" rel="noopener">FCGR</a>.
+        Text taken from <cite title="Source Title">biophp.org</cite>.
+
+nav:
+    home: Home
+    code_samples: Code Samples
+    biotools: BioTools
+    repository: GitHub repository
+    breadcrumb: Breadcrumb
+    language: Language
+
+index:
+    tagline: |
+        A modern PHP library for bioinformatics,
+        simple, powerful and extensible.
+    footer: The power of PHP serving bioinformatics.
+    code_samples:
+        lead: Discover BioPHP through concrete, ready-to-use examples.
+        cta: See all examples
+    biotools:
+        lead: Browse a collection of integrated, ready-to-use bioinformatics tools.
+        cta: See all tools
+
+step:
+    code: Starting code
+    code_lead: This is the PHP code used by this example.
+    result: Result
+    result_lead_sample: Result returned by BioPHP for the demonstration data.
+    result_lead_tool: Result returned by BioPHP for the parameters above.
+    parameters: Parameters
+    parameters_lead: Fill in the data to analyse, then run the computation.
+    description: Description
+    description_lead: How this tool works.
+    results_of_request: Results of your request
+
+action:
+    copy: Copy the code
+    copied: Copied!
+    download_image: Download the image
+    download_chart: Download the chart
+    download_dendrogram: Download the dendrogram
+
+panel:
+    informations: Informations
+    export: Export
+    vendors: Vendors
+
+value:
+    yes: 'Yes'
+    no: 'No'
+    none: '(none)'
+
+page:
+    welcome: Welcome!
+    sample_default: Code sample
+    tool_default: BioTools
+
+group:
+    sequencing: Sequencing
+    database_parsers: Database parsers
+
+
+# Titres et descriptions des entrées de navigation (bp_samples / bp_tools,
+# config/packages/twig.yaml). Ce sont les libellés d'origine, en anglais.
+
+sample:
+    note: >-
+        The code above is the one actually executed by this page. Find the other examples
+        in the left-hand column, or the tools in %biotools%.
+    sequence_analysis:
+        title: 'Simple sequence analysis'
+        desc: 'Sample code and result for a basic sequence analysis.'
+    sequence_alignment_fasta:
+        title: 'FASTA alignement'
+        desc: 'Read and parse a FASTA alignment.'
+    sequence_alignment_clustal:
+        title: 'Clustal parsing'
+        desc: 'CLUSTAL alignment: several examples, demo of all the functions.'
+    play_with_sequencies:
+        title: 'Play with sequencies'
+        desc: 'The sequence as a value object (new in BioPHP 1.1).'
+    play_with_proteins:
+        title: 'Play with proteins'
+        desc: 'The protein as a value object (new in BioPHP 1.1).'
+    sequence_match:
+        title: 'Sequence match'
+        desc: 'Find matches inside a sequence.'
+    restriction_enzyme:
+        title: 'Restriction enzyme'
+        desc: 'Name, pattern, cut position and length of restriction enzymes.'
+    read_sequence_genbank:
+        title: 'GENBANK'
+        desc: 'Puts GENBANK into database and loads a array of objects.'
+    read_sequence_swissprot:
+        title: 'SWISSPROT'
+        desc: 'Puts SWISSPROT into database and loads a array of objects.'
+    read_sequence_prf:
+        title: 'PRF'
+        desc: 'Protein Research Foundation record.'
+    read_sequence_pir:
+        title: 'PIR'
+        desc: 'Protein Information Resource record.'
+    read_sequence_unigene:
+        title: 'UniGene'
+        desc: 'EST cluster record.'
+    read_sequence_genome:
+        title: 'GENOME'
+        desc: 'Whole-genome record.'
+    read_sequence_hgbase:
+        title: 'HGBASE'
+        desc: 'Human genome variation record.'
+    read_sequence_prints:
+        title: 'PRINTS'
+        desc: 'Protein fingerprint record.'
+    read_sequence_prodom:
+        title: 'ProDom'
+        desc: 'Protein domain family record.'
+    read_sequence_aaindex:
+        title: 'AAindex'
+        desc: 'Amino acid index record.'
+    read_sequence_epd:
+        title: 'EPD'
+        desc: 'Eukaryotic Promoter Database record.'
+
+tool:
+    chaos_game_representation_fcgr:
+        title: 'Chaos Game Representation of DNA'
+        desc: 'Graphical representation of genomes and oligonucleotide frequencies.'
+        description_lead: 'Chaos Game Representation of Frequencies (FCGR)'
+        form_lead: 'Paste the sequence to represent and set the image size.'
+        intro: 'Graphical representation of genomes and oligonucleotide frequencies. Each base (A, C, G, T) is mapped to a corner of a square and points are plotted iteratively, revealing the fractal patterns that are characteristic of the analysed sequence.'
+        page_subtitle: 'Chaos Game Representation of Frequencies'
+        page_title: 'FCGR'
+        bases: 'Bases'
+        image_map: 'Image map'
+        occurences: 'Occurences'
+        oligos: 'Oligos'
+        raw_data: 'Raw data used to generate images above :'
+        sequence: 'Sequence'
+    chaos_game_representation_cgr:
+        title: 'Chaos Game Representation of DNA'
+        desc: 'Graphical representation of genomes and oligonucleotide frequencies.'
+        description_lead: 'Chaos Game Representation (CGR)'
+        form_lead: 'Paste the sequence to represent and set the image size.'
+        intro: 'Graphical representation of genomes and oligonucleotide frequencies. Represents DNA primary sequence organization: each base is mapped to a corner of a square and every position of the sequence is plotted in turn.'
+        page_subtitle: 'Chaos Game Representation'
+        page_title: 'CGR'
+    distance_among_sequences:
+        title: 'Distance among sequences'
+        desc: 'Oligonucleotide frequency based comparison of composition.'
+        intro_1: 'This tool will compute distance between input sequences and UPGMA clustering will be applied.'
+        intro_2: 'Distances are shown in a table, and a dendrogram is displaied.'
+        intro_3: 'Check carefully the results. Their value for phylogenetics is limited.'
+        page_subtitle: 'Comparison of oligonucleotide composition'
+        page_title: 'Distance between sequences'
+        result_lead: 'Distances, clustering and dendrogram'
+        clustering: 'Clustering'
+        clustering_method: 'Clustering method: UPGMA'
+        distances: 'Distances'
+        name_of_sequences: 'Name of sequences'
+        oligo_length: 'Oligo length'
+        oligo_length_for_comparison: 'Length of oligoncleotides for comparison : %length%'
+        sequences: 'Sequences'
+    dna_to_protein:
+        title: 'DNA to protein translation'
+        desc: 'Translate a DNA sequence into its protein sequence.'
+        description_lead: 'DNA to protein translation tool'
+        intro: 'Translate a DNA sequence into its protein product, using one of the predefined genetic codes or a custom one. Open Reading Frames can be searched, trimmed to MET-to-Stop and shown aligned.'
+        page_title: 'DNA to protein translation'
+        clear: 'Clear'
+        complement: 'Complement'
+        frame: 'Frame %n%'
+        reverse: 'Reverse'
+        tidy_up: 'Tidy Up'
+        translation_of_requested_code_5_gt_3: 'Translation of requested code (5''-&gt;3'')'
+        translation_of_requested_code_complementary_dna_chain: 'Translation of requested code (complementary DNA chain)'
+    find_palindromes:
+        title: 'Palindromic sequences finder'
+        desc: 'Locate palindromic motifs in a DNA sequence.'
+        description_lead: 'Definitions'
+        intro: 'Locate palindromic motifs in a DNA sequence.'
+        page_title: 'Palindromic sequences finder'
+        result_lead: 'Palindromic sequences with length %min% to %max% within string'
+        position: 'Position'
+        sequence: 'Sequence'
+    gc_content_finder:
+        title: 'GC Content Finder'
+        desc: 'Compute the GC content of an uploaded FASTA file.'
+        form_lead: 'Important: Please use only txt files. The file should contain only letters.'
+        intro: 'Compute the GC content of an uploaded FASTA file: total length, base counts and the AT / GC percentages of the sequence.'
+        page_subtitle: 'GC Content Finder'
+        page_title: 'Fasta Upload'
+        number_of_a: 'Number of A'
+        number_of_c: 'Number of C'
+        number_of_g: 'Number of G'
+        number_of_t: 'Number of T'
+        of_at: '% of at'
+        of_gc: '% of gc'
+        total_length_of_sequence: 'Total Length of Sequence'
+    melting_temperature:
+        title: 'Melting Temperature (Tm) Calculation'
+        desc: 'Estimate the melting temperature of a DNA duplex.'
+        description_lead: 'Melting Temperature (Tm) Calculations'
+        intro: 'Estimate the melting temperature of a DNA duplex, either with the basic approximation (degenerated nucleotides allowed) or with the base-stacking nearest-neighbor model.'
+        page_subtitle: '(Tm) Calculation'
+        page_title: 'Melting Temperature'
+        basic_tm_degenerated_nucleotides_are_allowed: 'Basic Tm (Degenerated nucleotides are allowed)'
+        basic_tm_degenerated_nucleotides_are_not_allowed: 'Basic Tm (Degenerated nucleotides are NOT allowed)'
+        cg_percent: 'C+G%'
+        enthalpy_entropy: 'Enthalpy: %enthalpy%     Entropy: %entropy%'
+        length: 'LENGTH'
+        maximum: 'Maximum'
+        minimum: 'Minimun'
+        molecular_weight: 'Molecular weight:'
+        tm: 'Tm :'
+        upper_lower_mwt: 'Upper Molecular weight:  %upper% - Lower Molecular weight:  %lower%'
+    micro_array_analysis_adaptive_quantification:
+        title: 'Microarray Data Analysis'
+        desc: 'Adaptive quantification method.'
+        description_lead: 'Computational procedure'
+        intro: 'Copy tabulated data to the textarea as shown. First valid data must correspond to Column 1/Row 1. All lines preceding data for Column 1/Row 1 will be removed previous to calculations.'
+        page_subtitle: 'Adaptive quantification'
+        page_title: 'Microarray Data Analysis'
+        channel_1: 'Channel 1'
+        channel_2: 'Channel 2'
+        identification: 'Identification'
+        log10: 'log10'
+        log10_2: 'log10'
+        no_data: 'No. data'
+    microsatellite_repeats_finder:
+        title: 'Microsatellite repeats finder'
+        desc: 'Detect short tandem repeats in a sequence.'
+        description_lead: 'Definitions'
+        intro: 'Detect short tandem repeats in a DNA sequence.'
+        page_title: 'Microsatellite repeats finder'
+        cicle: 'Cicle'
+        position: 'Position'
+        repeats: 'Repeats'
+        sequence: 'Sequence'
+    oligonucleotide_frequency:
+        title: 'Frequency of nucleotides'
+        desc: 'Nucleotide and oligonucleotide frequencies in a sequence.'
+        intro: 'This demo is limited to oligos 1-3 bases long, and a maximum input sequence of 10000 bp. This version does not work with degenerated nucleotides.'
+        page_subtitle: 'and oligonucleotides in a sequence'
+        page_title: 'Frequency of nucleotides'
+        frequency: 'Frequency'
+        non_coding_characters_as_number_returns_or: '(non coding characters, as number, returns or spaces will be removed)'
+        oligo: 'Oligo'
+        oligos_with_length: 'Frequencie of oligos with length %length%'
+    pcr_amplification:
+        title: 'PCR amplification'
+        desc: 'In silico PCR amplification.'
+        intro_1: 'A,T,G,C and N are allowed; A+T+G+C must be 10 or more.'
+        intro_2: 'One mismatch is allowed in any position of primers.'
+        page_title: 'In silico PCR amplification'
+        list_of_amplicons_position_in_sequence_length: 'List of amplicons: position in sequence, length and sequence'
+        primer_1: 'Primer 1:'
+        primer_2: 'Primer 2:'
+    protein_properties:
+        title: 'Protein sequence properties'
+        desc: 'Protein sequence information and derived properties.'
+        description_lead: 'Protein sequence information tool'
+        intro: 'Protein sequence information and derived properties: aminoacid composition, molecular weight, molar absorption coefficient, isoelectric point and charge at a given pH.'
+        page_title: 'Protein sequence information'
+        1_letter: '1 letter'
+        3_letters: '3 letters'
+        aminoacid_composition_of_protein: 'Aminoacid composition of protein'
+        both_included_for_computation: '(both included) for computation'
+        charge_at_ph: 'Charge of sequence at pH = %ph% (%source%)'
+        charged: 'Charged'
+        count: 'count'
+        daltons: '%value% Daltons'
+        hydrophobic: 'hydrophobic'
+        isoelectric_point: 'Isoelectric point of sequence (%source%)'
+        legend_type1: '%polar%, %nonpolar% or %charged% aminoacids'
+        legend_type2: '%polar%, %small_nonpolar%, %hydrophobic%, %negatively% or %positively% charged aminoacids'
+        molar_absorption_coefficient_at_280_nm: 'Molar Absorption Coefficient at 280 nm'
+        molecular_weight: 'Molecular weight'
+        negatively: 'negatively'
+        nonpolar: 'Nonpolar'
+        polar: 'Polar'
+        positively: 'positively'
+        sequence_as_three_letters_aminoacid_code: 'Sequence as three letters aminoacid code'
+        small_nonpolar: 'small non-polar'
+        subsequence_used_for_calculations: 'Subsequence used for calculations'
+    protein_to_dna:
+        title: 'Protein to DNA reverse translation'
+        desc: 'Reverse-translate a protein into a DNA sequence.'
+        intro: 'Reverse-translate a protein sequence into the DNA sequence that encodes it, using one of the predefined genetic codes.'
+        page_subtitle: 'Reverse translation'
+        page_title: 'Protein to DNA'
+        input_sequence: 'Input sequence'
+        reverse_translated_sequence: 'Reverse Translated sequence'
+    random_seqs:
+        title: 'Random sequences'
+        desc: 'Generate random DNA, RNA or protein sequences.'
+        description_lead: 'Definitions'
+        form_lead: 'Pick one of the three procedures below, then submit.'
+        intro: 'Generate random DNA, RNA or protein sequences: by shuffling an input sequence, from custom base proportions, or from custom aminoacid frequencies.'
+        page_title: 'Random sequences'
+        dna_or_protein_nature_of_the_sequence: 'DNA or protein nature of the sequence will be automatically detected. Non coding characters are removed by default.'
+        random_sequences: 'Random sequences'
+    reduce_protein_alphabet:
+        title: 'Reduced alphabets for proteins'
+        desc: 'Redundant or simplified alphabets for proteins.'
+        description_lead: 'How to define a custom reduced alphabet'
+        intro: 'Reduce protein sequences by grouping the aminoacids in classes, using either a predefined alphabet or a custom one. Each aminoacid may also be displayed with a distinct colour without applying any reduction.'
+        page_subtitle: 'Redundant or simplified alphabets'
+        page_title: 'Reduced alphabets for proteins'
+        aminoacids: 'Aminoacids   :'
+        colored_sequence: 'Colored sequence'
+        personalized_alphabet: 'Personalized alphabet'
+        reduced_alphabet: 'Reduced alphabet'
+        reduced_code: 'Reduced code :'
+    restriction_digest:
+        title: 'Restriction enzyme digest of DNA'
+        desc: 'With commercially available restriction enzymes.'
+        intro: 'Digest one or more DNA sequences with commercially available restriction enzymes, and list the cut positions for each of them. Click an enzyme name to load its vendors.'
+        page_subtitle: 'with commercially available restriction enzymes'
+        page_title: 'Restriction enzyme digest of DNA'
+        cuts: 'Cuts'
+        length_of_code: 'Lengh of code: %length%'
+        positions: 'Positions'
+        restriction_enzyme: 'Restriction enzyme'
+        seq_n: 'Seq. %n%'
+        when_two_or_more_input_sequences_are: 'When two or more input sequences are searched :'
+    seq_alignment:
+        title: 'Sequence alignment'
+        desc: 'Alignment of two DNA, RNA or protein sequences.'
+        description_lead: 'Alignment of two DNA sequences'
+        intro: 'Align two DNA, RNA or protein sequences with a Smith-Waterman type method. Paste both sequences in the form and submit the data; sequences with gaps are shown at the bottom of the result.'
+        page_subtitle: 'Alignment of two DNA, RNA or protein sequences'
+        page_title: 'Sequence alignment'
+    sequences_manipulation_and_data:
+        title: 'DNA sequence manipulation'
+        desc: 'Manipulate a DNA sequence and read its properties.'
+        description_lead: 'DNA sequence manipulation'
+        intro: 'Manipulate a DNA sequence and read its properties.'
+        page_title: 'DNA Sequence manipulation'
+    skews:
+        title: 'Skews generator'
+        desc: 'GC-, AT-, KETO- and oligo-skews from custom sequences.'
+        description_lead: 'Skews from custom sequences'
+        intro: 'Compute GC-, AT-, KETO- and oligo-skews from a custom sequence. The input sequence is scanned with a sliding window and the requested parameter is calculated for each window, then plotted in a graph.'
+        page_subtitle: 'Skews from custom sequences'
+        page_title: 'Skews generator'
+        bases_100_50000: 'bases(100-50000)'
+    useful_formulas:
+        title: 'Formula functions'
+        desc: 'Useful formulas for sequence and protein calculations.'
+
+        form_lead: 'Pick a formula, then fill in the values it needs.'
+        intro: 'Molecular weight, quantity and unit conversions for DNA, RNA and proteins.'
+        page_subtitle: 'Formula functions'
+        page_title: 'Useful formulas'
+
+# Contenu des pages Code Samples (templates/default/). `doc.common` regroupe
+# les libelles de fiche partages par plusieurs parseurs.
+
+doc:
+    clustalseqalignment:
+        13th_sequence: '13th sequence'
+        adding_a_new_sequence_object: 'Adding a new sequence object'
+        char_at_res_10_10th_sequence: 'Char at res 10 (10th sequence)'
+        converts_a_column_number_to_a_residue: 'Converts a column number to a residue number in a sequence'
+        converts_a_residue_number_to_a_column: 'Converts a residue number to a column number in a sequence'
+        creates_a_new_alignment_set_from_index: 'Creates a new alignment set from index 5 to 10'
+        creates_a_new_alignment_with_selected_indexes: 'Creates a new alignment with selected indexes'
+        determines_the_index_position_of_both_variant: 'Determines the index position of both variant and invariant residues according to a given "percentage threshold" similar to that in the consensus() method.'
+        do_the_sequences_have_the_same_length: 'Do the sequences have the same length ?'
+        dropping_a_sequence: 'Dropping a sequence'
+        length_of_the_longuest_sequence: 'Length of the longuest sequence'
+        number_of_gaps: 'Number of gaps'
+        page_title: 'CLUSTAL Alignment (several examples)'
+        returns_the_consensus_string_for_an_alignment: 'Returns the consensus string for an alignment set'
+        sort_sequences: 'Sort sequences :'
+        substring_between_two_residues_in_a_sequence: 'Substring between two residues in a sequence'
+    common:
+        accession: 'Accession'
+        date: 'Date'
+        fragment: 'Fragment'
+        mol_type: 'Mol type'
+        molecule_type: 'Molecule type'
+        primary_accession: 'Primary accession'
+        sequence: 'Sequence'
+        source: 'Source'
+        start_end: 'Start / End'
+        accessions: 'Accessions'
+        common_name: 'Common name'
+        create_date: 'Create date'
+        description: 'Description'
+        entry_name: 'Entry name'
+        entry_type: 'Entry type'
+        insert_a_sequence_into_a_database_and: 'Insert a sequence into a database, and loads a array of objects'
+        journal: 'Journal'
+        keywords: 'Keywords'
+        length: 'Length'
+        organism: 'Organism'
+        title: 'Title'
+    parseAaindexRecord:
+        author: 'Author'
+        literature_refs: 'Literature refs'
+        page_title: 'AAindex: amino acid index record'
+    parseEpdRecord:
+        comments: 'Comments'
+        data_class: 'Data class'
+        page_title: 'EPD: Eukaryotic Promoter Database record'
+        taxonomic_division: 'Taxonomic division'
+    parseGenomeRecord:
+        genbank_basepairs: 'GenBank basepairs'
+        genbank_entries: 'GenBank entries'
+        genbank_release: 'GenBank release'
+        genome_size_bp: 'Genome size (bp)'
+        is_complete: 'Is complete'
+        page_title: 'GENOME: whole-genome record'
+        taxonomic_class: 'Taxonomic class'
+    parseHgbaseRecord:
+        allele: 'Allele'
+        citation: 'Citation'
+        frequency: 'Frequency (%)'
+        frequency_individuals: 'Frequency (individuals)'
+        haplotype_id: 'Haplotype id'
+        individuals_in_population: 'Individuals in population'
+        page_title: 'HGBASE: human genome variation record'
+        population: 'Population'
+        submitter: 'Submitter'
+    parsePirRecord:
+        checksum: 'Checksum'
+        mol_weight: 'Mol. weight'
+        page_title: 'PIR: Protein Information Resource record'
+        species: 'Species'
+    parsePrfRecord:
+        authors: 'Authors'
+        entry_code: 'Entry code'
+        page_title: 'PRF: Protein Research Foundation record'
+        sequence: 'Sequence'
+        source_organism: 'Source organism'
+        taxonomy: 'Taxonomy'
+    parsePrintsRecord:
+        page_title: 'PRINTS: protein fingerprint record'
+        update_date: 'Update date'
+    parseProdomRecord:
+        domain_count: 'Domain count'
+        entry_number: 'Entry number'
+        frequent_names: 'Frequent names'
+        page_title: 'ProDom: protein domain family record'
+        release: 'Release'
+    parseUnigeneRecord:
+        cluster_id: 'Cluster id'
+        expression_sites: 'Expression sites'
+        page_title: 'UniGene: EST cluster record'
+        protein_similarities: 'Protein similarities'
+        sequence_count: 'Sequence count'
+    parseseqalignment:
+        page_title: 'FASTA Alignment'
+    parseseqdb:
+        new_in_biophp_1_1_gc_content: 'New in biophp 1.1: GC content, computed by wrapping the record into a DnaSequence value object'
+    parseswissprotdb:
+        new_in_biophp_1_1_does_it: 'New in biophp 1.1: does it hold an unknown residue, computed by wrapping the record into an AminoAcidSequence value object ?'
+    playwithproteins:
+        does_the_chain_hold_a_stop_codon: 'Does the chain hold a stop codon ("*") ?'
+        does_the_chain_hold_an_unknown_residue: 'Does the chain hold an unknown residue ("X") ?'
+        length_computed_by_the_aminoacidsequence_value_object: 'Length, computed by the AminoAcidSequence value object'
+        new_in_biophp_1_1_the_protein: 'New in biophp 1.1: the protein as a value object'
+        number_of_x_residues_in_the_chain: 'Number of "X" residues in the chain'
+        page_title: 'Play with proteins'
+        returns_the_length_of_a_protein: 'Returns the length of a protein :'
+        returns_the_molweight_of_a_protein: 'Returns the molweight of a protein :'
+    playwithsequencies:
+        array_where_each_key_is_a_substring: 'Array where each key is a substring matching a given pattern ("TTT")'
+        computes_the_molecular_weight_of_a_particular: 'Computes the molecular weight of a particular sequence.'
+        creates_a_new_sequence_object_with_a: 'Creates a new sequence object with a sequence that is a substring of another'
+        dna_complement: 'DNA Complement :'
+        dna_complement_computed_by_the_dnasequence_value: 'DNA Complement, computed by the DnaSequence value object'
+        gc_content: 'GC content (%)'
+        new_in_biophp_1_1_the_sequence: 'New in biophp 1.1: the sequence as a value object'
+        page_title: 'Play with sequencies'
+        returns_a_string_of_symbols_from_an: 'Returns a string of symbols from an 8-letter alphabet: A, L, M, R, C, H, I, S'
+        returns_a_two_dimensional_array_containing_palindromic: 'Returns a two-dimensional array containing palindromic substrings found in a sequence'
+        returns_the_3rd_codon_in_a_sequence: 'Returns the 3rd codon in a sequence, with numbering starting at 0'
+        returns_the_expansion_of_a_nucleic_acid: 'Returns the expansion of a nucleic acid sequence ("GATTAGSW")'
+        returns_the_frequency_of_a_given_symbol: 'Returns the frequency of a given symbol in the sequence property string ("A")'
+        reverse_complement_the_strand_facing_this_one: 'Reverse complement (the strand facing this one)'
+        shows_halfstring_for_pattern_gattag: 'Shows halfstring for pattern "GATTAG"'
+        similar_to_patpos_except_that_this_allows: 'Similar to patPos() except that this allows for overlapping patterns. ("TTT")'
+        substring_of_the_sequence_still_a_validated: 'Substring of the sequence, still a validated DnaSequence'
+        transcribed_to_rna_thymine_becomes_uracil: 'Transcribed to RNA (thymine becomes uracil)'
+        translates_a_particular_dna_sequence_into_its: 'Translates a particular DNA sequence into its protein product sequence'
+        translates_an_amino_acid_sequence_gavlifywkrh_into: 'Translates an amino acid sequence ("GAVLIFYWKRH") into its equivalent "charge sequence"'
+        two_value_objects_built_from_the_same: 'Two value objects built from the same symbols are equal'
+    restrictionenzyme:
+        cut_position: 'Cut position'
+        cuts_a_dna_sequence_into_fragments_using: 'Cuts a DNA sequence into fragments using the restriction enzyme object (patpos group)'
+        cuts_a_dna_sequence_into_fragments_using_2: 'Cuts a DNA sequence into fragments using the restriction enzyme object (patposo group)'
+        fetch_cutpos_3_only: 'Fetch cutpos 3 only'
+        fetch_length_6_and_cutpos_3_no: 'Fetch length 6 and cutpos 3 (no results)'
+        fetch_length_6_only: 'Fetch length 6 only'
+        fetch_pattern_aggcct_cutpos_3: 'Fetch pattern "AGGCCT" & cutpos 3'
+        fetch_pattern_only: 'Fetch pattern "AGGCCT" only'
+        gets_the_enzyme_aati_properties: 'Gets the enzyme "AatI" properties'
+        name: 'Name'
+        page_title: 'Restriction Enzyme'
+        pattern: 'Pattern'
+        searching_endonucleases: 'Searching our database of endonucleases for a particular restriction enzyme'
+    sequenceanalysis:
+        page_title: 'Simple sequence analysis'
+        this_code_finds_mirrors_into_a_sequence: 'This code finds mirrors into a sequence string. It takes as parameter one start and one end.'
+    sequencematch:
+        compares_two_letters: 'Compares two letters $let1 and $let2 and returns another letter indicating if the two were exact matches, partial matches, or non-matches.'
+        computes_the_hamming_distance_between_two_sequences: 'Computes the Hamming Distance between two sequences'
+        computes_the_levenshtein_distance_between_two_sequences: 'Computes the Levenshtein Distance between two sequences with equal/unequal lengths :'
+        extended_version_of_levdist_which_accepts_strings: 'Extended version of levdist() which accepts strings with length greater than 255 but not to exceed 1024 :'
+        matching_a_a: 'Matching (A & A) :'
+        matching_results: 'Matching results :'
+        not_matching_a_t: 'Not matching (A & T) :'
+        page_title: 'Sequence match'
+        sequence_1: 'Sequence 1 :'
+        sequence_2: 'Sequence 2 :'
+        submatrix: 'Submatrix :'

@@ -2,21 +2,21 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'protein' %}
-{% set page_title = 'Play with proteins' %}
+{% set page_title = 'doc.playwithproteins.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the length of a protein :</p>
+            <p>{{ 'doc.playwithproteins.returns_the_length_of_a_protein'|trans }}</p>
             {{ macros.render_value(length) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the molweight of a protein :</p>
+            <p>{{ 'doc.playwithproteins.returns_the_molweight_of_a_protein'|trans }}</p>
             {{ macros.render_value(molwt) }}
         </div>
     </div>
@@ -27,7 +27,7 @@
         <div class="bp-step__head">
             <span class="bp-step__num">3</span>
             <div>
-                <h2 class="bp-step__title">New in biophp 1.1: the protein as a value object</h2>
+                <h2 class="bp-step__title">{{ 'doc.playwithproteins.new_in_biophp_1_1_the_protein'|trans }}</h2>
             </div>
             <span></span>
         </div>
@@ -35,33 +35,33 @@
             <br>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Length, computed by the AminoAcidSequence value object</p>
+                    <p>{{ 'doc.playwithproteins.length_computed_by_the_aminoacidsequence_value_object'|trans }}</p>
                     {{ macros.render_value(voLength) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Does the chain hold a stop codon ("*") ?</p>
+                    <p>{{ 'doc.playwithproteins.does_the_chain_hold_a_stop_codon'|trans }}</p>
                     {{ macros.render_value(voHasStop) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Does the chain hold an unknown residue ("X") ?</p>
+                    <p>{{ 'doc.playwithproteins.does_the_chain_hold_an_unknown_residue'|trans }}</p>
                     {{ macros.render_value(voHasUnknownResidue) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Number of "X" residues in the chain</p>
+                    <p>{{ 'doc.playwithproteins.number_of_x_residues_in_the_chain'|trans }}</p>
                     {{ macros.render_value(voCountX) }}
                 </div>
             </div>

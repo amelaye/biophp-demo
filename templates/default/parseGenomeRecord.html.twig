@@ -2,21 +2,21 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'file' %}
-{% set page_title = 'GENOME: whole-genome record' %}
+{% set page_title = 'doc.parseGenomeRecord.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <table class="table table-sm">
-                <tr><th>Organism</th><td>{{ organism }}</td></tr>
-                <tr><th>Common name</th><td>{{ commonName }}</td></tr>
-                <tr><th>Taxonomic class</th><td>{{ macros.render_value(taxClass) }}</td></tr>
-                <tr><th>Is complete</th><td>{{ isComplete }}</td></tr>
-                <tr><th>GenBank release</th><td>{{ gbRelease }}</td></tr>
-                <tr><th>GenBank entries</th><td>{{ gbEntries }}</td></tr>
-                <tr><th>GenBank basepairs</th><td>{{ gbBasepairs }}</td></tr>
-                <tr><th>Genome size (bp)</th><td>{{ size }}</td></tr>
+                <tr><th>{{ 'doc.common.organism'|trans }}</th><td>{{ organism }}</td></tr>
+                <tr><th>{{ 'doc.common.common_name'|trans }}</th><td>{{ commonName }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.taxonomic_class'|trans }}</th><td>{{ macros.render_value(taxClass) }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.is_complete'|trans }}</th><td>{{ isComplete }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.genbank_release'|trans }}</th><td>{{ gbRelease }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.genbank_entries'|trans }}</th><td>{{ gbEntries }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.genbank_basepairs'|trans }}</th><td>{{ gbBasepairs }}</td></tr>
+                <tr><th>{{ 'doc.parseGenomeRecord.genome_size_bp'|trans }}</th><td>{{ size }}</td></tr>
             </table>
         </div>
     </div>

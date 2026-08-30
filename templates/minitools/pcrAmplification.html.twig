@@ -1,12 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'dna' %}
-{% set page_title    = 'In silico PCR amplification' %}
+{% set page_title    = 'tool.pcr_amplification.page_title'|trans %}
 {% set has_result    = results is not empty %}
 
 {% block intro %}
-    <p>A,T,G,C and N are allowed; A+T+G+C must be 10 or more.</p>
-    <p>One mismatch is allowed in any position of primers.</p>
+    <p>{{ 'tool.pcr_amplification.intro_1'|trans|raw }}</p>
+    <p>{{ 'tool.pcr_amplification.intro_2'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -38,13 +38,13 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
-    <pre>Primer 1: {{ primer1 }}</pre>
-    <pre>Primer 2: {{ primer2 }}</pre>
+    <pre>{{ 'tool.pcr_amplification.primer_1'|trans }} {{ primer1 }}</pre>
+    <pre>{{ 'tool.pcr_amplification.primer_2'|trans }} {{ primer2 }}</pre>
 
-    <h5>List of amplicons: position in sequence, length and sequence</h5>
+    <h5>{{ 'tool.pcr_amplification.list_of_amplicons_position_in_sequence_length'|trans }}</h5>
     {% for key, val in results %}
         <pre>{{ key }} {{ val }}     {{ sequence|slice(key, val) }}</pre>
     {% endfor %}

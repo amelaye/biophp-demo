@@ -1,14 +1,11 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'flask' %}
-{% set page_title    = 'Protein sequence information' %}
+{% set page_title    = 'tool.protein_properties.page_title'|trans %}
 {% set has_result    = results %}
 
 {% block intro %}
-    <p>
-        Protein sequence information and derived properties: aminoacid composition, molecular
-        weight, molar absorption coefficient, isoelectric point and charge at a given pH.
-    </p>
+    <p>{{ 'tool.protein_properties.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -21,7 +18,7 @@
                 {{ form_row(form.start) }}
                 {{ form_row(form.end) }}
             </div>
-            <p class="bp-form__help">(both included) for computation</p>
+            <p class="bp-form__help">{{ 'tool.protein_properties.both_included_for_computation'|trans }}</p>
         </div>
 
         <div class="bp-form__col">
@@ -53,18 +50,18 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
-    <h5>Subsequence used for calculations</h5>
+    <h5>{{ 'tool.protein_properties.subsequence_used_for_calculations'|trans }}</h5>
     <pre>{{ subsequence | chunk_split(70) }}</pre>
 
     {% if aminoacids is not empty %}
-        <h5>Aminoacid composition of protein</h5>
+        <h5>{{ 'tool.protein_properties.aminoacid_composition_of_protein'|trans }}</h5>
         <div class="bp-tablewrap">
             <table>
                 <thead>
-                    <tr><th>1 letter</th><th>3 letters</th><th>count</th></tr>
+                    <tr><th>{{ 'tool.protein_properties.1_letter'|trans }}</th><th>{{ 'tool.protein_properties.3_letters'|trans }}</th><th>{{ 'tool.protein_properties.count'|trans }}</th></tr>
                 </thead>
                 <tbody>
                     {% for amino in aminoacids %}
@@ -80,29 +77,34 @@
     {% endif %}
 
     {% if three_letter_code != "" %}
-        <h5>Sequence as three letters aminoacid code</h5>
+        <h5>{{ 'tool.protein_properties.sequence_as_three_letters_aminoacid_code'|trans }}</h5>
         <pre>{{ three_letter_code }}</pre>
     {% endif %}
 
     {% if colored_seq is not empty %}
-        <h5>
-            <span style="color: {{ colors.polar }}">Polar</span>,
-            <span style="color: {{ colors.nonpolar }}">Nonpolar</span> or
-            <span style="color: {{ colors.charged }}">Charged</span> aminoacids
-        </h5>
+        {# chaque famille est un fragment coloré injecté dans la phrase traduite,
+           pour que le français puisse en changer l'ordre #}
+        {% set c_polar    = '<span style="color: ' ~ colors.polar    ~ '">' ~ 'tool.protein_properties.polar'|trans    ~ '</span>' %}
+        {% set c_nonpolar = '<span style="color: ' ~ colors.nonpolar ~ '">' ~ 'tool.protein_properties.nonpolar'|trans ~ '</span>' %}
+        {% set c_charged  = '<span style="color: ' ~ colors.charged  ~ '">' ~ 'tool.protein_properties.charged'|trans  ~ '</span>' %}
+        <h5>{{ 'tool.protein_properties.legend_type1'|trans({
+            '%polar%': c_polar, '%nonpolar%': c_nonpolar, '%charged%': c_charged
+        })|raw }}</h5>
         <div class="bp-seq">
             {% for seq in colored_seq %}<span style="color:{{ seq.1 }}">{{ seq.0 }}</span>{% endfor %}
         </div>
     {% endif %}
 
     {% if colored_seq2 is not empty %}
-        <h5>
-            <span style="color: {{ colors.polar }}">Polar</span>,
-            <span style="color: {{ colors.nonpolar }}">small non-polar</span>,
-            <span style="color: {{ colors.hydrophobic }}">hydrophobic</span>,
-            <span style="color: {{ colors.negatively_charged }}">negatively</span> or
-            <span style="color: {{ colors.positively_charged }}">positively</span> charged aminoacids
-        </h5>
+        {% set c_polar  = '<span style="color: ' ~ colors.polar               ~ '">' ~ 'tool.protein_properties.polar'|trans          ~ '</span>' %}
+        {% set c_small  = '<span style="color: ' ~ colors.nonpolar            ~ '">' ~ 'tool.protein_properties.small_nonpolar'|trans ~ '</span>' %}
+        {% set c_hydro  = '<span style="color: ' ~ colors.hydrophobic         ~ '">' ~ 'tool.protein_properties.hydrophobic'|trans    ~ '</span>' %}
+        {% set c_neg    = '<span style="color: ' ~ colors.negatively_charged  ~ '">' ~ 'tool.protein_properties.negatively'|trans     ~ '</span>' %}
+        {% set c_pos    = '<span style="color: ' ~ colors.positively_charged  ~ '">' ~ 'tool.protein_properties.positively'|trans     ~ '</span>' %}
+        <h5>{{ 'tool.protein_properties.legend_type2'|trans({
+            '%polar%': c_polar, '%small_nonpolar%': c_small, '%hydrophobic%': c_hydro,
+            '%negatively%': c_neg, '%positively%': c_pos
+        })|raw }}</h5>
         <div class="bp-seq">
             {% for seq in colored_seq2 %}<span style="color:{{ seq.1 }}">{{ seq.0 }}</span>{% endfor %}
         </div>
@@ -111,71 +113,34 @@
 
 {% block result_aside %}
     <div class="bp-panel">
-        <h3 class="bp-panel__title">Informations</h3>
+        <h3 class="bp-panel__title">{{ 'panel.informations'|trans }}</h3>
         <dl class="bp-facts">
             {% if molweight != 0 %}
-                <dt>Molecular weight</dt><dd>{{ molweight }} Daltons</dd>
+                <dt>{{ 'tool.protein_properties.molecular_weight'|trans }}</dt><dd>{{ 'tool.protein_properties.daltons'|trans({'%value%': molweight}) }}</dd>
             {% endif %}
             {% if abscoef != 0 %}
-                <dt>Molar Absorption Coefficient at 280 nm</dt><dd>{{ abscoef | round(2) }}</dd>
+                <dt>{{ 'tool.protein_properties.molar_absorption_coefficient_at_280_nm'|trans }}</dt><dd>{{ abscoef | round(2) }}</dd>
             {% endif %}
             {% if charge != 0 %}
-                <dt>Isoelectric point of sequence ({{ data_source }})</dt><dd>{{ charge | round(2) }}</dd>
+                <dt>{{ 'tool.protein_properties.isoelectric_point'|trans({'%source%': data_source}) }}</dt><dd>{{ charge | round(2) }}</dd>
             {% endif %}
             {% if charge2 != 0 %}
-                <dt>Charge of sequence at pH = {{ pH }} ({{ data_source }})</dt><dd>{{ charge2 | round(2) }}</dd>
+                <dt>{{ 'tool.protein_properties.charge_at_ph'|trans({'%ph%': pH, '%source%': data_source}) }}</dt><dd>{{ charge2 | round(2) }}</dd>
             {% endif %}
         </dl>
     </div>
 {% endblock %}
 
-{% block description_lead %}Protein sequence information tool{% endblock %}
+{% block description_lead %}{{ 'tool.protein_properties.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <h5>Notes</h5>
-    <p>
-        Non-coding characters will be removed by default.<br />
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=7957164&amp;dopt=abstract"
-           target="_blank" rel="noopener">NC-UIBMB</a> codes are used as a reference.
-    </p>
-
-    <h5>Computation</h5>
-    <p>Molecular Weight:</p>
-    <pre>MW =(A*71.07)+(R*156.18)+(nN*114.08)+(nD*115.08)+(nC*103.10)
-+(nQ*128.13)+(nE*129.11)+(nG*57.05)+(nH*137.14)+(nI*113.15)+
-+(nL*113.15)+(nK*128.17)+(nM*131.19)+(nF*147.17)+(nP*97.11)+
-+(nS*87.07)+(nT*101.10)+(nW*186.20)+(nY*163.17)+(nV*99.13)+18.02</pre>
-    <p>
-        Molar absorption coefficient:
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=8563639"
-           target="_blank" rel="noopener">Pace et al., 1995</a>
-    </p>
-    <p>
-        Isoelectric point estimation:
-        <a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf"
-           target="_blank" rel="noopener">Tabb D., 2003</a>
-    </p>
-
-    <h5>Type of aminoacid (1)</h5>
-    <ul>
-        <li>Polar: SCTNQHYW</li>
-        <li>Non-Polar: GAPVILFM</li>
-        <li>Charged: DEKR</li>
-    </ul>
-
-    <h5>Type of aminoacid (2)</h5>
-    <ul>
-        <li>Small non-polar: SCTNQHYW (Yellow)</li>
-        <li>Hydrophobic: CVILPFYMW (Green)</li>
-        <li>Polar: DQH (Magenta)</li>
-        <li>Negatively charged: NE (Red)</li>
-        <li>Positively charged: KR (Blue)</li>
-    </ul>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/proteinProperties.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/proteinProperties.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

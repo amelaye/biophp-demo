@@ -1,0 +1,25 @@
+<p>
+    To compute skews, the input sequence is scanned with a sliding window, and the requested
+    parameter is calculate for each window. The data is shown in a graph.
+</p>
+
+<h5>G+C %</h5>
+<p>The porcentaje of G+C is computed</p>
+
+<h5>GC-skew</h5>
+<p>For each window, (G-C)/(G+C) is computed, where G and C are the number of ocurrences for each nucleotide</p>
+
+<h5>AT-skew</h5>
+<p>For each window, (A-T)/(A+T) is computed, where A and T are the number of ocurrences for each nucleotide.</p>
+
+<h5>KETO-skew</h5>
+<p>For each window, (G+C-A-T)/(G+C+A+T) is computed, where A, C, G and T are the number of ocurrences for each nucleotide.</p>
+
+<h5>Oligo-skew</h5>
+<p>
+    For each window, frecuencies for all nucleotides with selected length is computed.
+    Those frecuencies are compared to frecuencies obtained from the complete sequence.
+    When comparing both frecuencies, global distance is computed, as described by
+    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=11331237"
+       target="_blank" rel="noopener">Almeida et al. (2001)</a>.
+</p>

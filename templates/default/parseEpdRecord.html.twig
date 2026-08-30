@@ -2,20 +2,20 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'file' %}
-{% set page_title = 'EPD: Eukaryotic Promoter Database record' %}
+{% set page_title = 'doc.parseEpdRecord.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <table class="table table-sm">
-                <tr><th>Entry name</th><td>{{ entryName }}</td></tr>
-                <tr><th>Data class</th><td>{{ dataClass }}</td></tr>
-                <tr><th>Taxonomic division</th><td>{{ taxDiv }}</td></tr>
-                <tr><th>Accessions</th><td>{{ macros.render_value(accessions) }}</td></tr>
-                <tr><th>Create date</th><td>{{ createDate }}</td></tr>
-                <tr><th>Description</th><td>{{ description }}</td></tr>
-                <tr><th>Comments</th><td>{{ comments }}</td></tr>
+                <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
+                <tr><th>{{ 'doc.parseEpdRecord.data_class'|trans }}</th><td>{{ dataClass }}</td></tr>
+                <tr><th>{{ 'doc.parseEpdRecord.taxonomic_division'|trans }}</th><td>{{ taxDiv }}</td></tr>
+                <tr><th>{{ 'doc.common.accessions'|trans }}</th><td>{{ macros.render_value(accessions) }}</td></tr>
+                <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
+                <tr><th>{{ 'doc.common.description'|trans }}</th><td>{{ description }}</td></tr>
+                <tr><th>{{ 'doc.parseEpdRecord.comments'|trans }}</th><td>{{ comments }}</td></tr>
             </table>
         </div>
     </div>

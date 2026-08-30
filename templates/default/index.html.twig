@@ -16,9 +16,9 @@
     <a class="bp-row" href="{{ url(item.route, item.params|default({})) }}">
         <span class="bp-tile bp-tile--sm">{{ ui.icon(item.icon) }}</span>
         <span class="bp-row__text">
-            <span class="bp-row__title">{{ item.title }}</span>
+            <span class="bp-row__title">{{ item.title|trans }}</span>
             {% if item.desc is defined and item.desc %}
-                <span class="bp-row__desc">{{ item.desc }}</span>
+                <span class="bp-row__desc">{{ item.desc|trans }}</span>
             {% endif %}
         </span>
         {% if item.badge is defined and item.badge %}
@@ -38,14 +38,23 @@
 
     <div class="bp-shell">
 
+        {# ------------------------------------------- sélecteur de langue #}
+        {# seule page à le porter : le choix est mémorisé en session et suivi
+           ensuite sur tout le site (App\EventSubscriber\LocaleSubscriber) #}
+        <nav class="bp-locale" aria-label="{{ 'nav.language'|trans }}">
+            {% for locale in bp_locales %}
+                <a class="bp-locale__link{{ app.request.locale == locale ? ' is-active' : '' }}"
+                   href="{{ url('index', {'_locale': locale}) }}"
+                   lang="{{ locale }}"
+                   {{ app.request.locale == locale ? 'aria-current="true"' : '' }}>{{ locale|upper }}</a>
+            {% endfor %}
+        </nav>
+
         {# ------------------------------------------------------------ hero #}
         <header class="bp-hero">
             <img class="bp-hero__logo" src="{{ asset('img/biophp-logo-hero.png') }}" alt="BioPHP" width="880" height="631">
             <h1 class="bp-hero__title">Amelaye's BioPHP demo</h1>
-            <p class="bp-hero__tagline">
-                Une bibliothèque PHP moderne pour la bioinformatique<br>
-                simple, puissante et extensible.
-            </p>
+            <p class="bp-hero__tagline">{{ 'index.tagline'|trans|nl2br }}</p>
         </header>
 
         {# ----------------------------------------------------------- cards #}
@@ -55,18 +64,18 @@
                 <div class="bp-card__head">
                     <span class="bp-tile bp-tile--lg">{{ ui.icon('code') }}</span>
                     <div>
-                        <h2 class="bp-card__title">Code Samples</h2>
-                        <p class="bp-card__lead">Découvrez BioPHP à travers des exemples concrets et prêts à l'emploi.</p>
+                        <h2 class="bp-card__title">{{ 'nav.code_samples'|trans }}</h2>
+                        <p class="bp-card__lead">{{ 'index.code_samples.lead'|trans }}</p>
                     </div>
                 </div>
                 <div class="bp-card__body">
                     {% for group in bp_samples %}
-                        <h3 class="bp-group">{{ group.group }}</h3>
+                        <h3 class="bp-group">{{ group.group|trans }}</h3>
                         {% for item in group.items %}{{ ui.row(item) }}{% endfor %}
                     {% endfor %}
                 </div>
                 <div class="bp-card__foot">
-                    <a class="bp-btn" href="#code-samples">Voir tous les exemples {{ ui.icon('chevron') }}</a>
+                    <a class="bp-btn" href="#code-samples">{{ 'index.code_samples.cta'|trans }} {{ ui.icon('chevron') }}</a>
                 </div>
             </section>
 
@@ -74,15 +83,15 @@
                 <div class="bp-card__head">
                     <span class="bp-tile bp-tile--lg">{{ ui.icon('briefcase') }}</span>
                     <div>
-                        <h2 class="bp-card__title">BioTools</h2>
-                        <p class="bp-card__lead">Accédez à une collection d'outils bioinformatiques intégrés et prêts à l'emploi.</p>
+                        <h2 class="bp-card__title">{{ 'nav.biotools'|trans }}</h2>
+                        <p class="bp-card__lead">{{ 'index.biotools.lead'|trans }}</p>
                     </div>
                 </div>
                 <div class="bp-card__body">
                     {% for item in bp_tools %}{{ ui.row(item) }}{% endfor %}
                 </div>
                 <div class="bp-card__foot">
-                    <a class="bp-btn" href="#biotools">Voir tous les tools {{ ui.icon('chevron') }}</a>
+                    <a class="bp-btn" href="#biotools">{{ 'index.biotools.cta'|trans }} {{ ui.icon('chevron') }}</a>
                 </div>
             </section>
 
@@ -91,7 +100,7 @@
         {# ---------------------------------------------------------- footer #}
         <footer class="bp-footer">
             <img class="bp-footer__mark" src="{{ asset('img/biophp-mark.png') }}" alt="" width="256" height="179">
-            <span><span class="bp-footer__name">BioPHP</span> &ndash; La puissance de PHP au service de la bioinformatique.</span>
+            <span><span class="bp-footer__name">BioPHP</span> &ndash; {{ 'index.footer'|trans }}</span>
         </footer>
 
     </div>

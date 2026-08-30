@@ -1,16 +1,12 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'align' %}
-{% set page_title    = 'Sequence alignment' %}
-{% set page_subtitle = 'Alignment of two DNA, RNA or protein sequences' %}
+{% set page_title    = 'tool.seq_alignment.page_title'|trans %}
+{% set page_subtitle = 'tool.seq_alignment.page_subtitle'|trans %}
 {% set has_result    = compare != "" %}
 
 {% block intro %}
-    <p>
-        Align two DNA, RNA or protein sequences with a Smith-Waterman type method. Paste both
-        sequences in the form and submit the data; sequences with gaps are shown at the bottom
-        of the result.
-    </p>
+    <p>{{ 'tool.seq_alignment.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -32,7 +28,7 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <div class="bp-seq">{{ compare | dispose_sequences(align_seqa, align_seqb) }}</div>
@@ -44,28 +40,16 @@
     <input type="text" value="{{ align_seqb }}" readonly>
 {% endblock %}
 
-{% block description_lead %}Alignment of two DNA sequences{% endblock %}
+{% block description_lead %}{{ 'tool.seq_alignment.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <p>
-        This script has been adapted to PHP scripting language from the
-        original version written in Visual Basic for Applications and available on a
-        Excel page <a href="http://webpages.ull.es/users/jmhernan/" target="_blank" rel="noopener">here</a>.
-    </p>
-    <p>
-        The alignment method is the Smith-Waterman type (Smith, T. F., &amp; M. S.
-        Waterman. 1981. Identification of common molecular subsequences.
-        Journal of Molecular Biology 147:195-197.
-        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=7265238"
-           target="_blank" rel="noopener">PubMed</a>).
-        To run the program, paste the DNA or RNA sequences in the form and submit the data.
-    </p>
-    <p>Alignment is shown on the response page, and sequences with gabs are at the bottom.</p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/seqAlignment.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/seqAlignment.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}

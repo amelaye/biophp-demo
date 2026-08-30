@@ -2,109 +2,109 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'shuffle' %}
-{% set page_title = 'Play with sequencies' %}
+{% set page_title = 'doc.playwithsequencies.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>DNA Complement :</p>
+            <p>{{ 'doc.playwithsequencies.dna_complement'|trans }}</p>
             {{ macros.render_value(complement) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the expansion of a nucleic acid sequence ("GATTAGSW")</p>
+            <p>{{ 'doc.playwithsequencies.returns_the_expansion_of_a_nucleic_acid'|trans }}</p>
             {{ macros.render_value(expandNa) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Shows halfstring for pattern "GATTAG"</p>
+            <p>{{ 'doc.playwithsequencies.shows_halfstring_for_pattern_gattag'|trans }}</p>
             {{ macros.render_value(halfStr) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Computes the molecular weight of a particular sequence.</p>
+            <p>{{ 'doc.playwithsequencies.computes_the_molecular_weight_of_a_particular'|trans }}</p>
             {{ macros.render_value(molWt) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Creates a new sequence object with a sequence that is a substring of another</p>
+            <p>{{ 'doc.playwithsequencies.creates_a_new_sequence_object_with_a'|trans }}</p>
             {{ macros.render_value(coupe) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Array where each key is a substring matching a given pattern ("TTT")</p>
+            <p>{{ 'doc.playwithsequencies.array_where_each_key_is_a_substring'|trans }}</p>
             {{ macros.render_value(patpos) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Similar to patPos() except that this allows for overlapping patterns. ("TTT")</p>
+            <p>{{ 'doc.playwithsequencies.similar_to_patpos_except_that_this_allows'|trans }}</p>
             {{ macros.render_value(patposo) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the frequency of a given symbol in the sequence property string ("A")</p>
+            <p>{{ 'doc.playwithsequencies.returns_the_frequency_of_a_given_symbol'|trans }}</p>
             {{ macros.render_value(symfreq) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns the 3rd codon in a sequence, with numbering starting at 0</p>
+            <p>{{ 'doc.playwithsequencies.returns_the_3rd_codon_in_a_sequence'|trans }}</p>
             {{ macros.render_value(codon) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Translates a particular DNA sequence into its protein product sequence</p>
+            <p>{{ 'doc.playwithsequencies.translates_a_particular_dna_sequence_into_its'|trans }}</p>
             {{ macros.render_value(translate) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Translates an amino acid sequence ("GAVLIFYWKRH") into its equivalent "charge sequence"</p>
+            <p>{{ 'doc.playwithsequencies.translates_an_amino_acid_sequence_gavlifywkrh_into'|trans }}</p>
             {{ macros.render_value(charge) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns a string of symbols from an 8-letter alphabet: A, L, M, R, C, H, I, S</p>
+            <p>{{ 'doc.playwithsequencies.returns_a_string_of_symbols_from_an'|trans }}</p>
             {{ macros.render_value(chemicalGroup) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Returns a two-dimensional array containing palindromic substrings found in a sequence</p>
+            <p>{{ 'doc.playwithsequencies.returns_a_two_dimensional_array_containing_palindromic'|trans }}</p>
             {{ macros.render_value(testPalindrome1) }}
         </div>
     </div>
@@ -115,7 +115,7 @@
         <div class="bp-step__head">
             <span class="bp-step__num">3</span>
             <div>
-                <h2 class="bp-step__title">New in biophp 1.1: the sequence as a value object</h2>
+                <h2 class="bp-step__title">{{ 'doc.playwithsequencies.new_in_biophp_1_1_the_sequence'|trans }}</h2>
             </div>
             <span></span>
         </div>
@@ -123,49 +123,49 @@
             <br>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>DNA Complement, computed by the DnaSequence value object</p>
+                    <p>{{ 'doc.playwithsequencies.dna_complement_computed_by_the_dnasequence_value'|trans }}</p>
                     {{ macros.render_value(voComplement) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Reverse complement (the strand facing this one)</p>
+                    <p>{{ 'doc.playwithsequencies.reverse_complement_the_strand_facing_this_one'|trans }}</p>
                     {{ macros.render_value(voReverseComplement) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>GC content (%)</p>
+                    <p>{{ 'doc.playwithsequencies.gc_content'|trans }}</p>
                     {{ macros.render_value(voGcContent) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Transcribed to RNA (thymine becomes uracil)</p>
+                    <p>{{ 'doc.playwithsequencies.transcribed_to_rna_thymine_becomes_uracil'|trans }}</p>
                     {{ macros.render_value(voToRna) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Substring of the sequence, still a validated DnaSequence</p>
+                    <p>{{ 'doc.playwithsequencies.substring_of_the_sequence_still_a_validated'|trans }}</p>
                     {{ macros.render_value(voSubSequence) }}
                 </div>
             </div>
 
             <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">Results of your request</div>
+                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
                 <div class="card-body">
-                    <p>Two value objects built from the same symbols are equal</p>
+                    <p>{{ 'doc.playwithsequencies.two_value_objects_built_from_the_same'|trans }}</p>
                     {{ macros.render_value(voEquals) }}
                 </div>
             </div>

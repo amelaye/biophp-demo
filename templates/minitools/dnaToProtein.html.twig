@@ -1,15 +1,11 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'atgc' %}
-{% set page_title    = 'DNA to protein translation' %}
+{% set page_title    = 'tool.dna_to_protein.page_title'|trans %}
 {% set has_result    = frames is not empty %}
 
 {% block intro %}
-    <p>
-        Translate a DNA sequence into its protein product, using one of the predefined genetic
-        codes or a custom one. Open Reading Frames can be searched, trimmed to MET-to-Stop and
-        shown aligned.
-    </p>
+    <p>{{ 'tool.dna_to_protein.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -18,10 +14,10 @@
             {{ form_errors(form) }}
 
             <div class="bp-form__toolbar">
-                <button type="button" id="tidyup-button">Tidy Up</button>
-                <button type="button" id="reverse-button">Reverse</button>
-                <button type="button" id="complement-button">Complement</button>
-                <button type="button" id="clear-button">Clear</button>
+                <button type="button" id="tidyup-button">{{ 'tool.dna_to_protein.tidy_up'|trans }}</button>
+                <button type="button" id="reverse-button">{{ 'tool.dna_to_protein.reverse'|trans }}</button>
+                <button type="button" id="complement-button">{{ 'tool.dna_to_protein.complement'|trans }}</button>
+                <button type="button" id="clear-button">{{ 'tool.dna_to_protein.clear'|trans }}</button>
             </div>
 
             {{ form_row(form.sequence) }}
@@ -56,21 +52,21 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     {% if show_aligned %}
-        <h5>Translation of requested code (5'-&gt;3')</h5>
+        <h5>{{ 'tool.dna_to_protein.translation_of_requested_code_5_gt_3'|trans }}</h5>
         <pre>{{ scale_and_bar() }}<br />{{ aligned_results|raw|upper }}</pre>
     {% endif %}
 
     {% if aligned_results_compl != "" %}
-        <h5>Translation of requested code (complementary DNA chain)</h5>
+        <h5>{{ 'tool.dna_to_protein.translation_of_requested_code_complementary_dna_chain'|trans }}</h5>
         <pre>{{ scale_and_bar() }}<br />{{ aligned_results_compl|raw }}</pre>
     {% endif %}
 
     {% for key, frame in frames %}
-        <h5>Frame {{ key }}</h5>
+        <h5>{{ 'tool.dna_to_protein.frame'|trans({'%n%': key}) }}</h5>
         {% if dgaps %}
             <pre>{{ frame | chunk_split(1, '--') | chunk_split(100, '<br>') |raw }}</pre>
         {% else %}
@@ -79,90 +75,17 @@
     {% endfor %}
 {% endblock %}
 
-{% block description_lead %}DNA to protein translation tool{% endblock %}
+{% block description_lead %}{{ 'tool.dna_to_protein.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <h5>Start using this tool</h5>
-    <p>
-        This tool works similarly to other ones available online or programs allowing this feature.
-        Genetic codes used in this service are those ones compiled by
-        <a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode" target="_blank" rel="noopener">Andrzej (Anjay) Elzanowski and Jim Ostell</a>.
-        <br/>
-        DNA sequence may be added as shown in the example sequence or in any other format (number, spaces and
-        line feeds are removed). JavaScript enable browser will be able to perform
-        small tasks as for example tiding up the sequence and getting reverse or complement sequences.
-        <br/>
-        Translation to protein will be performed by using one of the predefined genetic codes, or by using
-        custom genetic code. Minimum size of protein sequence for Open Reading Frames (ORF)
-        is customizable, and they can be trimmed to MET-to-Stop. Showing translation alignment is optional,
-        and aminoacids will be displaied as a 1-letter&nbsp;aminoacids code.
-        <br/>
-        After translation, in the response page ORFs are shown as arrow. In order to check ORFs represented by
-        those arrows, click on them and a new browser window will be opened showing in red letters the DNA sequence
-        corresponding to that specific ORF and translated protein. This feature requires a JavaScript enable
-        browser.
-    </p>
-
-    <h5>How to use custom genetic codes</h5>
-    <p>
-        The genetic code used to translate a sequence into protein may be customized. <br/>
-        This service allows introducing the genetic code as a string, where each character corresponds
-        to one aminoacid and asteriscs represents termination codes. In the example bellow is shown the standard genetic
-        code and the corresponding triplets.
-    </p>
-
-    <div class="bp-panel">
-        <h3 class="bp-panel__title">Standard genetic code</h3>
-        <dl class="bp-facts">
-            <dt>Aminoacid/Termination</dt>
-            <dd><code>F</code>FLLSSSSYY<code>*</code>*CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG</dd>
-            <dt>-- Base1</dt>
-            <dd><code>T</code>TTTTTTTTT<code>T</code>TTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG</dd>
-            <dt>-- Base2</dt>
-            <dd><code>T</code>TTTCCCCAA<code>A</code>AGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG</dd>
-            <dt>-- Base3</dt>
-            <dd><code>T</code>CAGTCAGTC<code>A</code>GTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG</dd>
-        </dl>
-    </div>
-
-    <h5>Explanation</h5>
-    <p>
-        In the first line, the first character ("F") represents Phenylalanine, which is encoded by
-        the triplet TTT (first character of "Base1", first character of "Base2" and&nbsp;first character of "Base3").<br/>
-        The eleventh character ("*") represents a termination code, which is encoded by the triplet TAA.
-    </p>
-    <p>
-        The custom genetic code provided must be 64 characters long. Correspondence between characters and
-        aminoacids may follow the system used in this service or may be different, but it will be always case
-        insentitive.
-    </p>
-
-    <h5>Methionine as a initiation code</h5>
-    <p>
-        When searching "ORFs trimmed to MET-to-Stop", they will be shown the longest ORFs available (from methionine to Stop),
-        so that within the ORF there may be several methionines, as for example in the aminoacid secuence bellow :
-    </p>
-    <div class="bp-seq"><code>M</code>QVVLITLSDVNSTTWGSRISLGY<code>M</code>AACFRVREVELVKNL<code>M</code><code>M</code>TGVVLQFTVDFPPSNSEFPH<code>M</code>LGNSNTISPFIPISAT</div>
-
-    <h5>1-letter aminoacid codes</h5>
-    <div class="bp-split">
-        <dl class="bp-facts">
-            {% for key, aminoacid in amino_left %}
-                <dt>{{ aminoacid.1 }}</dt><dd>{{ key }}</dd>
-            {% endfor %}
-        </dl>
-        <dl class="bp-facts">
-            {% for key, aminoacid in amino_right %}
-                <dt>{{ aminoacid.1 }}</dt><dd>{{ key }}</dd>
-            {% endfor %}
-        </dl>
-    </div>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/dnaToProtein.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/dnaToProtein.en.html.twig'
+]) }}{% endblock %}
 
 {% block note %}
     <p class="bp-note">
         <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
-        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+        <span>{{ 'note.biophp_credit'|trans({'%source%': '<cite title="Source Title">biophp.org</cite>'})|raw }}</span>
     </p>
 {% endblock %}
 

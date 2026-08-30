@@ -1,11 +1,11 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'search' %}
-{% set page_title    = 'Microsatellite repeats finder' %}
+{% set page_title    = 'tool.microsatellite_repeats_finder.page_title'|trans %}
 {% set has_result    = results is not empty %}
 
 {% block intro %}
-    <p>Detect short tandem repeats in a DNA sequence.</p>
+    <p>{{ 'tool.microsatellite_repeats_finder.intro'|trans|raw }}</p>
 {% endblock %}
 
 {% block form %}
@@ -41,13 +41,13 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <div class="bp-tablewrap">
         <table>
             <thead>
-                <tr><th>Position</th><th>Cicle</th><th>Repeats</th><th>Sequence</th></tr>
+                <tr><th>{{ 'tool.microsatellite_repeats_finder.position'|trans }}</th><th>{{ 'tool.microsatellite_repeats_finder.cicle'|trans }}</th><th>{{ 'tool.microsatellite_repeats_finder.repeats'|trans }}</th><th>{{ 'tool.microsatellite_repeats_finder.sequence'|trans }}</th></tr>
             </thead>
             <tbody>
                 {% for val in results %}
@@ -63,21 +63,9 @@
     </div>
 {% endblock %}
 
-{% block description_lead %}Definitions{% endblock %}
+{% block description_lead %}{{ 'tool.microsatellite_repeats_finder.description_lead'|trans }}{% endblock %}
 
-{% block description %}
-    <h5>Microsatellite Repeat</h5>
-    <p>
-        A variety of simple di- (DINUCLEOTIDE REPEATS), tri- (TRINUCLEOTIDE REPEATS), tetra-,
-        and pentanucleotide tandem repeats (usually less than 100 bases long).
-    </p>
-
-    <h5>Tandem repeats</h5>
-    <p>Copies of DNA sequences which lie adjacent to each other.</p>
-
-    <h5>Related terms</h5>
-    <p>
-        Simple Tandem Repeats (STR), Exact Tandem Repeats (ETRs), Short Sequence Repeats (SSRs),
-        Repetitive DNA, Simple Sequence Repeats (SSR).
-    </p>
-{% endblock %}
+{% block description %}{{ include([
+    'minitools/_description/microsatelliteRepeatsFinder.' ~ app.request.locale ~ '.html.twig',
+    'minitools/_description/microsatelliteRepeatsFinder.en.html.twig'
+]) }}{% endblock %}

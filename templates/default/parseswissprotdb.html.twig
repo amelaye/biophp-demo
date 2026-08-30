@@ -2,20 +2,20 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'database' %}
-{% set page_title = 'Insert a sequence into a database, and loads a array of objects' %}
+{% set page_title = 'doc.common.insert_a_sequence_into_a_database_and'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             {{ macros.sequence_details(sequence) }}
         </div>
     </div>
 
     <div class="card border-success mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>New in biophp 1.1: does it hold an unknown residue, computed by wrapping the record into an AminoAcidSequence value object ?</p>
+            <p>{{ 'doc.parseswissprotdb.new_in_biophp_1_1_does_it'|trans }}</p>
             {{ macros.render_value(hasUnknownResidue) }}
         </div>
     </div>

@@ -25,7 +25,7 @@
 #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ page_title|default('BioTools') }} – BioPHP BioTools{% endblock %}
+{% block title %}{{ page_title|default('page.tool_default'|trans) }} – BioPHP BioTools{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/biophp-theme.css') }}">
@@ -52,15 +52,15 @@
 
         <div class="bp-nav__links">
             <a class="bp-nav__link" href="{{ url('index') }}">
-                <svg aria-hidden="true"><use href="#bp-i-home"></use></svg> Accueil
+                <svg aria-hidden="true"><use href="#bp-i-home"></use></svg> {{ 'nav.home'|trans }}
             </a>
             <a class="bp-nav__link" href="{{ url('index') }}#code-samples">
-                <svg aria-hidden="true"><use href="#bp-i-code"></use></svg> Code Samples
+                <svg aria-hidden="true"><use href="#bp-i-code"></use></svg> {{ 'nav.code_samples'|trans }}
             </a>
             <a class="bp-nav__link is-active" href="{{ url('index') }}#biotools">
-                <svg aria-hidden="true"><use href="#bp-i-briefcase"></use></svg> BioTools
+                <svg aria-hidden="true"><use href="#bp-i-briefcase"></use></svg> {{ 'nav.biotools'|trans }}
             </a>
-            <a class="bp-nav__icon-link" href="{{ bp_repo_url }}" target="_blank" rel="noopener" title="Dépôt GitHub">
+            <a class="bp-nav__icon-link" href="{{ bp_repo_url }}" target="_blank" rel="noopener" title="{{ 'nav.repository'|trans }}">
                 <svg aria-hidden="true"><use href="#bp-i-github"></use></svg>
                 <span class="sr-only">GitHub</span>
             </a>
@@ -71,7 +71,7 @@
 
         {# -------------------------------------------------- barre latérale #}
         <aside class="bp-aside">
-            <h2 class="bp-aside__title">BioTools</h2>
+            <h2 class="bp-aside__title">{{ 'nav.biotools'|trans }}</h2>
             {% for item in bp_tools %}
                 {# CGR et FCGR partagent la même route : les paramètres les départagent #}
                 {% set is_active = item.route == bp_route and item.params|default({}) == bp_params %}
@@ -81,12 +81,12 @@
                     <svg aria-hidden="true"><use href="#bp-i-{{ item.icon }}"></use></svg>
                     <span>
                         <span class="bp-aside__name">
-                            {{ item.title }}
+                            {{ item.title|trans }}
                             {% if item.badge is defined and item.badge %}
                                 <span class="bp-aside__badge">{{ item.badge }}</span>
                             {% endif %}
                         </span>
-                        <span class="bp-aside__desc">{{ item.desc }}</span>
+                        <span class="bp-aside__desc">{{ item.desc|trans }}</span>
                     </span>
                 </a>
             {% endfor %}
@@ -95,10 +95,10 @@
         {# -------------------------------------------------------- contenu #}
         <main class="bp-main bp-tool">
 
-            <nav class="bp-crumb" aria-label="Fil d'Ariane">
-                <a href="{{ url('index') }}#biotools">BioTools</a>
+            <nav class="bp-crumb" aria-label="{{ 'nav.breadcrumb'|trans }}">
+                <a href="{{ url('index') }}#biotools">{{ 'nav.biotools'|trans }}</a>
                 <svg aria-hidden="true"><use href="#bp-i-chevron"></use></svg>
-                <span>{{ page_title|default('BioTools') }}</span>
+                <span>{{ page_title|default('page.tool_default'|trans) }}</span>
             </nav>
 
             <header class="bp-tool__hero">
@@ -107,7 +107,7 @@
                         <svg aria-hidden="true"><use href="#bp-i-{{ page_icon|default('briefcase') }}"></use></svg>
                     </span>
                     <div>
-                        <h1 class="bp-tool__title">{{ page_title|default('BioTools') }}</h1>
+                        <h1 class="bp-tool__title">{{ page_title|default('page.tool_default'|trans) }}</h1>
                         {% if page_subtitle|default('') %}
                             <p class="bp-tool__sub">{{ page_subtitle }}</p>
                         {% endif %}
@@ -121,8 +121,8 @@
                 <div class="bp-step__head">
                     <span class="bp-step__num">1</span>
                     <div>
-                        <h2 class="bp-step__title">Paramètres</h2>
-                        <p class="bp-step__lead">{% block form_lead %}Renseignez les données à analyser, puis lancez le calcul.{% endblock %}</p>
+                        <h2 class="bp-step__title">{{ 'step.parameters'|trans }}</h2>
+                        <p class="bp-step__lead">{% block form_lead %}{{ 'step.parameters_lead'|trans }}{% endblock %}</p>
                     </div>
                     <span></span>
                 </div>
@@ -134,8 +134,8 @@
                     <div class="bp-step__head">
                         <span class="bp-step__num">2</span>
                         <div>
-                            <h2 class="bp-step__title">Résultat</h2>
-                            <p class="bp-step__lead">{% block result_lead %}Résultat renvoyé par BioPHP pour les paramètres ci-dessus.{% endblock %}</p>
+                            <h2 class="bp-step__title">{{ 'step.result'|trans }}</h2>
+                            <p class="bp-step__lead">{% block result_lead %}{{ 'step.result_lead_tool'|trans }}{% endblock %}</p>
                         </div>
                         <span></span>
                     </div>
@@ -151,8 +151,8 @@
                     <div class="bp-step__head">
                         <span class="bp-step__num">{{ has_result|default(false) ? 3 : 2 }}</span>
                         <div>
-                            <h2 class="bp-step__title">Description</h2>
-                            <p class="bp-step__lead">{% block description_lead %}Comment fonctionne cet outil.{% endblock %}</p>
+                            <h2 class="bp-step__title">{{ 'step.description'|trans }}</h2>
+                            <p class="bp-step__lead">{% block description_lead %}{{ 'step.description_lead'|trans }}{% endblock %}</p>
                         </div>
                         <span></span>
                     </div>

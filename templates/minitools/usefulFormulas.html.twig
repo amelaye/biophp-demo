@@ -1,15 +1,15 @@
 {% extends 'layout/minitool.html.twig' %}
 
 {% set page_icon     = 'calc' %}
-{% set page_title    = 'Useful formulas' %}
-{% set page_subtitle = 'Formula functions' %}
+{% set page_title    = 'tool.useful_formulas.page_title'|trans %}
+{% set page_subtitle = 'tool.useful_formulas.page_subtitle'|trans %}
 {% set has_result    = result is not null %}
 
 {% block intro %}
-    <p>Molecular weight, quantity and unit conversions for DNA, RNA and proteins.</p>
+    <p>{{ 'tool.useful_formulas.intro'|trans|raw }}</p>
 {% endblock %}
 
-{% block form_lead %}Pick a formula, then fill in the values it needs.{% endblock %}
+{% block form_lead %}{{ 'tool.useful_formulas.form_lead'|trans }}{% endblock %}
 
 {% block form %}
     {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
@@ -37,7 +37,7 @@
     {{ form_end(form) }}
 {% endblock %}
 
-{% block result_lead %}Results of your request{% endblock %}
+{% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
     <pre>{{ result|number_format(4, '.', '') }}</pre>

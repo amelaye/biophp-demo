@@ -2,15 +2,15 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'dna' %}
-{% set page_title = 'Simple sequence analysis' %}
+{% set page_title = 'doc.sequenceanalysis.page_title'|trans %}
 
 {% block intro %}
-    <p>This code finds mirrors into a sequence string. It takes as parameter one start and one end.</p>
+    <p>{{ 'doc.sequenceanalysis.this_code_finds_mirrors_into_a_sequence'|trans }}</p>
 {% endblock %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             {{ macros.render_value(mirrors) }}
         </div>

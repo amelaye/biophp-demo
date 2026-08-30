@@ -2,77 +2,77 @@
 {% import 'macros.html.twig' as macros %}
 
 {% set page_icon  = 'scissors' %}
-{% set page_title = 'Restriction Enzyme' %}
+{% set page_title = 'doc.restrictionenzyme.page_title'|trans %}
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Gets the enzyme "AatI" properties</p>
+            <p>{{ 'doc.restrictionenzyme.gets_the_enzyme_aati_properties'|trans }}</p>
             <table class="table table-sm">
-                <tr><th>Name</th><td>{{ enzymeParsed.getName() }}</td></tr>
-                <tr><th>Pattern</th><td>{{ enzymeParsed.getPattern() }}</td></tr>
-                <tr><th>Cut position</th><td>{{ enzymeParsed.getCutpos() }}</td></tr>
-                <tr><th>Length</th><td>{{ enzymeParsed.getLength() }}</td></tr>
+                <tr><th>{{ 'doc.restrictionenzyme.name'|trans }}</th><td>{{ enzymeParsed.getName() }}</td></tr>
+                <tr><th>{{ 'doc.restrictionenzyme.pattern'|trans }}</th><td>{{ enzymeParsed.getPattern() }}</td></tr>
+                <tr><th>{{ 'doc.restrictionenzyme.cut_position'|trans }}</th><td>{{ enzymeParsed.getCutpos() }}</td></tr>
+                <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ enzymeParsed.getLength() }}</td></tr>
             </table>
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Cuts a DNA sequence into fragments using the restriction enzyme object (patpos group)</p>
+            <p>{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using'|trans }}</p>
             {{ macros.render_value(cutseq) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Cuts a DNA sequence into fragments using the restriction enzyme object (patposo group)</p>
+            <p>{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using_2'|trans }}</p>
             {{ macros.render_value(cutseq2) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
             <p>
-                Searching our database of endonucleases for a particular restriction enzyme <br>
-                Fetch pattern "AGGCCT" only
+                {{ 'doc.restrictionenzyme.searching_endonucleases'|trans }} <br>
+                {{ 'doc.restrictionenzyme.fetch_pattern_only'|trans }}
             </p>
             {{ macros.render_value(list) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Fetch pattern "AGGCCT" & cutpos 3 </p>
+            <p>{{ 'doc.restrictionenzyme.fetch_pattern_aggcct_cutpos_3'|trans }}</p>
             {{ macros.render_value(list2) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Fetch cutpos 3 only</p>
+            <p>{{ 'doc.restrictionenzyme.fetch_cutpos_3_only'|trans }}</p>
             {{ macros.render_value(list3) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Fetch length 6 only</p>
+            <p>{{ 'doc.restrictionenzyme.fetch_length_6_only'|trans }}</p>
             {{ macros.render_value(list4) }}
         </div>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">Results of your request</div>
+        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
         <div class="card-body">
-            <p>Fetch length 6 and cutpos 3 (no results)</p>
+            <p>{{ 'doc.restrictionenzyme.fetch_length_6_and_cutpos_3_no'|trans }}</p>
             {{ macros.render_value(list5) }}
         </div>
     </div>
