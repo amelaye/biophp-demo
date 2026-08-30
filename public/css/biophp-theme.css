@@ -52,14 +52,49 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* La page casse le .container de base.html.twig pour occuper toute la largeur */
+/* --- barres de défilement ------------------------------------------------ */
+
+/* la barre native, claire et large, jure sur le fond sombre */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.4) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(6, 3, 26, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background: rgba(139, 92, 246, 0.4);
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.7);
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* base.html.twig ne pose plus de .container : la page occupe déjà toute la
+   largeur, sans width:100vw (qui compte la barre de défilement et déborde) ni
+   overflow:hidden (qui empêcherait la nav et la barre latérale de rester
+   collées, `position: sticky` ne fonctionnant pas sous un ancêtre à overflow
+   masqué). */
 .bp-page {
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: 100%;
     min-height: 100vh;
     padding: 56px 24px 40px;
-    overflow: hidden;
 }
 
 .bp-page__bg {

@@ -9,10 +9,21 @@
 {% endblock %}
 
 {% block form %}
-    {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
+    {# lignes explicites plutôt que form_widget(form) : celui-ci enveloppe tout
+       dans un div supplémentaire, et les lignes perdent alors leur espacement #}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
         <div class="bp-form__col">
-            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.seq) }}
         </div>
+
+        <div class="bp-form__col">
+            {{ form_row(form.min) }}
+            {{ form_row(form.max) }}
+            {{ form_row(form.submit) }}
+        </div>
+
+        {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
 

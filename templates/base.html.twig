@@ -21,9 +21,10 @@
     </style>
 </head>
 <body>
-<div class="container">
-    {% block body %}{% endblock %}
-</div>
+{# pas de .container ici : chaque page gère sa propre largeur. L'y remettre
+   obligerait .bp-page à en ressortir avec un width:100vw, qui déborde de la
+   largeur de la barre de défilement et casse les positions sticky. #}
+{% block body %}{% endblock %}
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>

@@ -12,10 +12,16 @@
 {% block form_lead %}{{ 'tool.gc_content_finder.form_lead'|trans }}{% endblock %}
 
 {% block form %}
+    {# lignes explicites plutôt que form_widget(form) : celui-ci enveloppe tout
+       dans un div supplémentaire, et les lignes perdent alors leur espacement #}
     {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
         <div class="bp-form__col">
-            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.fasta) }}
+            {{ form_row(form.submit) }}
         </div>
+
+        {{ form_rest(form) }}
     {{ form_end(form) }}
 {% endblock %}
 

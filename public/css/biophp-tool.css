@@ -325,23 +325,39 @@
     color: #fff;
 }
 
-/* cases à cocher et boutons radio : <div><input><label></div>, donc le label
-   ne doit plus être en bloc */
-.bp-form input[type="checkbox"],
-.bp-form input[type="radio"] {
-    width: 17px;
-    height: 17px;
-    margin-right: 9px;
-    vertical-align: -3px;
-    accent-color: var(--bp-violet);
+/* Cases à cocher et boutons radio.
+   form_row rend <div><label>…</label><input></div> : le label sort AVANT la
+   case. On remet la case devant le texte avec row-reverse plutôt qu'en
+   touchant au thème de formulaire. En row-reverse, l'axe part de la droite :
+   flex-end est donc le bord gauche, et l'ordre visuel devient case puis texte. */
+/* .bp-form__group-head est exclu : il pose déjà le widget avant le label à la
+   main, row-reverse l'inverserait. */
+.bp-form div:has(> input[type="checkbox"]):not(.bp-form__group-head),
+.bp-form div:has(> input[type="radio"]):not(.bp-form__group-head) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
 }
 
-.bp-form input[type="checkbox"] + label,
-.bp-form input[type="radio"] + label {
-    display: inline;
+.bp-form div:has(> input[type="checkbox"]):not(.bp-form__group-head) > label,
+.bp-form div:has(> input[type="radio"]):not(.bp-form__group-head) > label {
     margin: 0;
     font-size: 0.93rem;
+    font-weight: 400;
+    line-height: 1.4;
     color: #d6cff3;
+    cursor: pointer;
+}
+
+.bp-form input[type="checkbox"],
+.bp-form input[type="radio"] {
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: var(--bp-violet);
     cursor: pointer;
 }
 
@@ -358,6 +374,15 @@
     padding-left: 18px;
     font-size: 0.86rem;
     color: #fca5a5;
+}
+
+/* le bouton d'envoi se détache du dernier champ, quelle que soit la façon dont
+   Symfony l'a rendu (ligne enveloppée ou bouton nu) */
+.bp-form div:has(> button[type="submit"]),
+.bp-form div:has(> input[type="submit"]),
+.bp-form > button[type="submit"],
+.bp-form__col > button[type="submit"] {
+    margin-top: 12px;
 }
 
 /* bouton d'envoi : même traitement que .bp-btn, en plus compact */

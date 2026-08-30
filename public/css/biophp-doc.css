@@ -143,14 +143,38 @@
     min-height: calc(100vh - var(--bp-nav-h));
 }
 
+/* la barre latérale reste sous la nav et défile pour son propre compte :
+   elle ne suit pas le défilement de la page (voir .bp-page, qui ne doit pas
+   porter d'overflow masqué sous peine de neutraliser ce sticky) */
 .bp-aside {
     position: sticky;
     top: var(--bp-nav-h);
-    max-height: calc(100vh - var(--bp-nav-h));
+    height: calc(100vh - var(--bp-nav-h));
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 30px 20px 40px;
     border-right: 1px solid var(--bp-panel-line);
     background: rgba(11, 5, 33, 0.5);
+
+    /* ascenseur discret : piste invisible, pouce violet fin */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.35) transparent;
+}
+
+.bp-aside::-webkit-scrollbar { width: 10px; }
+
+.bp-aside::-webkit-scrollbar-track { background: transparent; }
+
+.bp-aside::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background: rgba(139, 92, 246, 0.3);
+    background-clip: content-box;
+}
+
+.bp-aside::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.6);
+    background-clip: content-box;
 }
 
 .bp-aside__title {
@@ -512,7 +536,8 @@ table.bp-code pre {
     .bp-aside {
         order: 2;
         position: static;
-        max-height: none;
+        height: auto;
+        overflow-y: visible;
         border-right: 0;
         border-top: 1px solid var(--bp-panel-line);
         background: rgba(11, 5, 33, 0.65);
