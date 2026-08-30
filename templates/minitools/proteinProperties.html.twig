@@ -1,188 +1,181 @@
-{% extends 'base.html.twig' %}
-{% block title %}Protein sequence information{% endblock %}
-{% block body %}
-    <h2>Protein sequence information</h2>
+{% extends 'layout/minitool.html.twig' %}
 
-    {% if results %}
-        <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <p><b>Subsequence used for calculations :</b><br>{{ subsequence | chunk_split(70) }}</p>
+{% set page_icon     = 'flask' %}
+{% set page_title    = 'Protein sequence information' %}
+{% set has_result    = results %}
 
-                {% if aminoacids is not empty %}
-                    <p><b>Aminoacid composition of protein:</b><br>
-                        <table border="1">
-                        <th>1 letter</th>
-                        <th>3 letters</th>
-                        <th>count</th>
-                        {% for amino in aminoacids  %}
-                            <tr>
-                                <td>{{ amino.one_letter }}</td>
-                                <td>{{ amino.three_letters }}</td>
-                                <td>{{ amino.count }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table></p>
-                {% endif %}
+{% block intro %}
+    <p>
+        Protein sequence information and derived properties: aminoacid composition, molecular
+        weight, molar absorption coefficient, isoelectric point and charge at a given pH.
+    </p>
+{% endblock %}
 
-                {% if molweight != 0 %}
-                    <p><b>Molecular weight : </b><br>{{ molweight }} Daltons</p>
-                {% endif %}
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
+        <div class="bp-form__col">
+            {{ form_errors(form) }}
+            {{ form_row(form.seq) }}
 
-                {% if abscoef != 0 %}
-                    <p><b>Molar Absorption Coefficient at 280 nm : </b><br>{{ abscoef | round(2) }}</p>
-                {% endif %}
-
-                {% if charge != 0 %}
-                    <p><b>Isoelectric point of sequence ({{ data_source }}) :</b><br /> {{ charge | round(2) }} </p>
-                {% endif %}
-
-                {% if charge2 != 0 %}
-                    <p><b>Charge of sequence at pH = {{ pH }} ({{ data_source }}):</b><br /> {{ charge2 | round(2) }} </p>
-                {% endif %}
-
-                {% if three_letter_code != "" %}
-                    <p><b>Sequence as three letters aminoacid code:</b><br>{{ three_letter_code }} </p>
-                {% endif %}
-
-                {% if colored_seq is not empty %}
-                <p><b>
-                        <span style="color: {{ colors.polar }}">Polar</span>,
-                        <span style="color: {{ colors.nonpolar }}">Nonpolar</span></b> or <b>
-                        <span style="color: {{ colors.charged }}">Charged</span></b> aminoacids:<br>
-                    {% for seq in colored_seq %}
-                        <span style="color:{{ seq.1 }}">{{ seq.0 }}</span>
-                    {% endfor %}
-                </p>
-                {% endif %}
-
-                {% if colored_seq2 is not empty %}
-                <p><b>
-                        <span style="color: {{ colors.polar }}">Polar</span>,
-                        <span style="color: {{ colors.nonpolar }}">small non-polar</span>,
-                        <span style="color: {{ colors.hydrophobic }}">hydrophobic</span>,
-                        <span style="color: {{ colors.negatively_charged }}">negatively</span></b> or <b>
-                        <span style="color: {{ colors.positively_charged }}">positively</span> charged</b> aminoacids:<br>
-                    {% for seq in colored_seq2 %}
-                        <span style="color:{{ seq.1 }}">{{ seq.0 }}</span>
-                    {% endfor %}
-                </p>
-                {% endif %}
+            <div class="bp-form__pair">
+                {{ form_row(form.start) }}
+                {{ form_row(form.end) }}
             </div>
+            <p class="bp-form__help">(both included) for computation</p>
+        </div>
+
+        <div class="bp-form__col">
+            {{ form_row(form.composition) }}
+            {{ form_row(form.molweight) }}
+            {{ form_row(form.abscoef) }}
+
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.charge) }}
+                    {{ form_label(form.charge) }}
+                </div>
+                {{ form_widget(form.data_source) }}
+            </div>
+
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.charge2) }}
+                    {{ form_label(form.charge2) }}
+                </div>
+                {{ form_widget(form.pH) }}
+            </div>
+
+            {{ form_row(form.three_letters) }}
+            {{ form_row(form.type1) }}
+            {{ form_row(form.type2) }}
+            {{ form_row(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <h5>Subsequence used for calculations</h5>
+    <pre>{{ subsequence | chunk_split(70) }}</pre>
+
+    {% if aminoacids is not empty %}
+        <h5>Aminoacid composition of protein</h5>
+        <div class="bp-tablewrap">
+            <table>
+                <thead>
+                    <tr><th>1 letter</th><th>3 letters</th><th>count</th></tr>
+                </thead>
+                <tbody>
+                    {% for amino in aminoacids %}
+                        <tr>
+                            <td>{{ amino.one_letter }}</td>
+                            <td>{{ amino.three_letters }}</td>
+                            <td>{{ amino.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     {% endif %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-    <div class="card bg-light mb-3">
-        <div class="card-body">
-            {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.seq) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">{{ form_label(form.start) }}</div>
-                <div class="col-md-2">{{ form_widget(form.start) }}</div>
-            </div>
+    {% if three_letter_code != "" %}
+        <h5>Sequence as three letters aminoacid code</h5>
+        <pre>{{ three_letter_code }}</pre>
+    {% endif %}
 
-            <div class="row">
-                <div class="col-md-5">{{ form_label(form.end) }}</div>
-                <div class="col-md-2">{{ form_widget(form.end) }}</div>
-                <div class="col-md-4"> (both included) for computation</div>
-            </div>
-
-            <hr />
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.composition) }}</div>
-                <div class="col-md-6">{{ form_label(form.composition) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.molweight) }}</div>
-                <div class="col-md-6">{{ form_label(form.molweight) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.abscoef) }}</div>
-                <div class="col-md-6">{{ form_label(form.abscoef) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.charge) }}</div>
-                <div class="col-md-4">{{ form_label(form.charge) }}</div>
-                <div class="col-md-2">{{ form_widget(form.data_source) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.charge2) }}</div>
-                <div class="col-md-4">{{ form_label(form.charge2) }}</div>
-                <div class="col-md-2">{{ form_widget(form.pH) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.three_letters) }}</div>
-                <div class="col-md-6">{{ form_label(form.three_letters) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.type1) }}</div>
-                <div class="col-md-6">{{ form_label(form.type1) }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.type2) }}</div>
-                <div class="col-md-6">{{ form_label(form.type2) }}</div>
-            </div>
-
-            <p>&nbsp;</p>
-            <div class="row">
-                <div class="col-md-12">{{ form_row(form.submit) }}</div>
-            </div>
-
+    {% if colored_seq is not empty %}
+        <h5>
+            <span style="color: {{ colors.polar }}">Polar</span>,
+            <span style="color: {{ colors.nonpolar }}">Nonpolar</span> or
+            <span style="color: {{ colors.charged }}">Charged</span> aminoacids
+        </h5>
+        <div class="bp-seq">
+            {% for seq in colored_seq %}<span style="color:{{ seq.1 }}">{{ seq.0 }}</span>{% endfor %}
         </div>
-    </div>
-    {{ form_end(form) }}
+    {% endif %}
 
-    <div class="card informations">
-        <h5 class="card-header">Protein sequence information tool</h5>
-        <span class="card-body">
-            <div class="card-text">
-                <h5 class="card-title">Notes : </h5>
-                <p>
-                    Non-coding characters will be removed by default.<br />
-                    <a href=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&list_uids=7957164&dopt=abstract>NC-UIBMB</a> codes are used as a reference.
-                </p>
-                <h5>Computation : </h5>
-                <p>
-                    Molecular Weight: <br />
-                <pre>
-                        MW =(A*71.07)+(R*156.18)+(nN*114.08)+(nD*115.08)+(nC*103.10)
-                        +(nQ*128.13)+(nE*129.11)+(nG*57.05)+(nH*137.14)+(nI*113.15)+
-                        +(nL*113.15)+(nK*128.17)+(nM*131.19)+(nF*147.17)+(nP*97.11)+
-                        +(nS*87.07)+(nT*101.10)+(nW*186.20)+(nY*163.17)+(nV*99.13)+18.02</pre>
-                </p>
-                <p> Molar absorption coefficient: <a href=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=8563639>Pace et al., 1995</a></p>
-                <p>Isoelectric point estimation: <a href=http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf>Tabb D., 2003</a></p>
-                Type of aminoacid (1):
-                <ul>
-                    <li>Polar: SCTNQHYW</li>
-                    <li>Non-Polar: GAPVILFM</li>
-                    <li>Charged: DEKR</li>
-                </ul>
-                Type of aminoacid (2):
-                <ul>
-                    <li>Small non-polar: SCTNQHYW (Yellow)</li>
-                    <li>Hydrophobic: CVILPFYMW (Green)</li>
-                    <li>Polar: DQH (Magenta)</li>
-                    <li>Negatively charged: NE (Red)</li>
-                    <li>Positively charged: KR (Blue)</li>
-                </ul>
-            </div>
-            <p>&nbsp;</p>
-            <footer class="blockquote-footer">Text taken from <cite title="Source Title">biophp.org</cite></footer>
-        </span>
-    </div>
+    {% if colored_seq2 is not empty %}
+        <h5>
+            <span style="color: {{ colors.polar }}">Polar</span>,
+            <span style="color: {{ colors.nonpolar }}">small non-polar</span>,
+            <span style="color: {{ colors.hydrophobic }}">hydrophobic</span>,
+            <span style="color: {{ colors.negatively_charged }}">negatively</span> or
+            <span style="color: {{ colors.positively_charged }}">positively</span> charged aminoacids
+        </h5>
+        <div class="bp-seq">
+            {% for seq in colored_seq2 %}<span style="color:{{ seq.1 }}">{{ seq.0 }}</span>{% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
 
+{% block result_aside %}
+    <div class="bp-panel">
+        <h3 class="bp-panel__title">Informations</h3>
+        <dl class="bp-facts">
+            {% if molweight != 0 %}
+                <dt>Molecular weight</dt><dd>{{ molweight }} Daltons</dd>
+            {% endif %}
+            {% if abscoef != 0 %}
+                <dt>Molar Absorption Coefficient at 280 nm</dt><dd>{{ abscoef | round(2) }}</dd>
+            {% endif %}
+            {% if charge != 0 %}
+                <dt>Isoelectric point of sequence ({{ data_source }})</dt><dd>{{ charge | round(2) }}</dd>
+            {% endif %}
+            {% if charge2 != 0 %}
+                <dt>Charge of sequence at pH = {{ pH }} ({{ data_source }})</dt><dd>{{ charge2 | round(2) }}</dd>
+            {% endif %}
+        </dl>
+    </div>
+{% endblock %}
+
+{% block description_lead %}Protein sequence information tool{% endblock %}
+
+{% block description %}
+    <h5>Notes</h5>
+    <p>
+        Non-coding characters will be removed by default.<br />
+        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=7957164&amp;dopt=abstract"
+           target="_blank" rel="noopener">NC-UIBMB</a> codes are used as a reference.
+    </p>
+
+    <h5>Computation</h5>
+    <p>Molecular Weight:</p>
+    <pre>MW =(A*71.07)+(R*156.18)+(nN*114.08)+(nD*115.08)+(nC*103.10)
++(nQ*128.13)+(nE*129.11)+(nG*57.05)+(nH*137.14)+(nI*113.15)+
++(nL*113.15)+(nK*128.17)+(nM*131.19)+(nF*147.17)+(nP*97.11)+
++(nS*87.07)+(nT*101.10)+(nW*186.20)+(nY*163.17)+(nV*99.13)+18.02</pre>
+    <p>
+        Molar absorption coefficient:
+        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=8563639"
+           target="_blank" rel="noopener">Pace et al., 1995</a>
+    </p>
+    <p>
+        Isoelectric point estimation:
+        <a href="http://fields.scripps.edu/DTASelect/20010710-pI-Algorithm.pdf"
+           target="_blank" rel="noopener">Tabb D., 2003</a>
+    </p>
+
+    <h5>Type of aminoacid (1)</h5>
+    <ul>
+        <li>Polar: SCTNQHYW</li>
+        <li>Non-Polar: GAPVILFM</li>
+        <li>Charged: DEKR</li>
+    </ul>
+
+    <h5>Type of aminoacid (2)</h5>
+    <ul>
+        <li>Small non-polar: SCTNQHYW (Yellow)</li>
+        <li>Hydrophobic: CVILPFYMW (Green)</li>
+        <li>Polar: DQH (Magenta)</li>
+        <li>Negatively charged: NE (Red)</li>
+        <li>Positively charged: KR (Blue)</li>
+    </ul>
+{% endblock %}
+
+{% block note %}
+    <p class="bp-note">
+        <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
+        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+    </p>
 {% endblock %}

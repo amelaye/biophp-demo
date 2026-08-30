@@ -1,149 +1,139 @@
-{% extends 'base.html.twig' %}
-{% block title %}Reduced (redundant or simplified) alphabets for proteins{% endblock %}
-{% block body %}
-    <h2>Reduced (redundant or simplified) alphabets for proteins</h2>
-    <p></p>
+{% extends 'layout/minitool.html.twig' %}
 
-    {% if reduced_seq != "" %}
-        <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
+{% set page_icon     = 'protein' %}
+{% set page_title    = 'Reduced alphabets for proteins' %}
+{% set page_subtitle = 'Redundant or simplified alphabets' %}
+{% set has_result    = reduced_seq != "" %}
 
-                {% if reduced_code is not empty %}
-                    <h5>{{ reduced_code.Description }}</h5>
-                    {% for key, element in reduced_code.Elements %}
-                        {{ key }} => {{ element }}<br />
-                    {% endfor %}
-                    <hr />
-                {% endif %}
+{% block intro %}
+    <p>
+        Reduce protein sequences by grouping the aminoacids in classes, using either a predefined
+        alphabet or a custom one. Each aminoacid may also be displayed with a distinct colour
+        without applying any reduction.
+    </p>
+{% endblock %}
 
-                {% if mode == "custom" %}
-                    <h5>Personalized alphabet</h5>
-                    <pre>Aminoacids   : {{ "ARNDCEQGHILKMFPSTWYV" | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }}
-Reduced code : {{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }} </pre>
-                    <hr />
-                {% endif %}
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
+        <div class="bp-form__col">
+            {{ form_errors(form) }}
+            {{ form_row(form.seq) }}
 
-
-                {% if show_reduced %}
-                    <h5>Reduced alphabet</h5>
-                    {% if mode == "custom" %}
-                        <b><pre>{{ reduced_seq | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre></b>
-                    {% elseif mode == "pre" %}
-                        <b><pre>{{ reduced_seq | chunk_split(aa_perline) | color_amino(reduced_seq, type) }}</pre></b>
-                    {% endif %}
-                    <hr />
-                {% endif %}
-
-                <h5>Colored sequence</h5>
-                {% if mode == "custom" %}
-                    <b><pre>{{ sequence | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre></b>
-                {% elseif mode == "pre" %}
-                    <b><pre>{{ sequence | chunk_split(aa_perline) | color_amino(reduced_seq, type) }}</pre></b>
-                {% endif %}
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.mode.0) }}
+                    {{ form_label(form.mode.0) }}
+                </div>
+                {{ form_widget(form.type) }}
             </div>
+
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.mode.1) }}
+                    {{ form_label(form.mode.1) }}
+                </div>
+                {{ form_widget(form.custom_alphabet) }}
+            </div>
+
+            <div class="bp-form__inline">
+                {{ form_label(form.aaperline) }}
+                {{ form_widget(form.aaperline) }}
+            </div>
+
+            <div class="bp-form__inline">
+                {{ form_label(form.show_reduced) }}
+                {{ form_widget(form.show_reduced) }}
+            </div>
+
+            {{ form_row(form.submit) }}
         </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    {% if reduced_code is not empty %}
+        <h5>{{ reduced_code.Description }}</h5>
+        {% for key, element in reduced_code.Elements %}
+            {{ key }} =&gt; {{ element }}<br />
+        {% endfor %}
     {% endif %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-    <div class="card bg-light mb-3">
-        <div class="card-body">
-            {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.seq) }}
-                </div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.mode.0) }}</div>
-                <div class="col-md-11">{{ form_label(form.mode.0) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">{{ form_widget(form.type) }}</div>
-            </div>
+    {% if mode == "custom" %}
+        <h5>Personalized alphabet</h5>
+        <pre>Aminoacids   : {{ "ARNDCEQGHILKMFPSTWYV" | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }}
+Reduced code : {{ custom_alphabet | chunk_split(aa_perline) | color_amino_custom(custom_alphabet, custom_alphabet) }} </pre>
+    {% endif %}
 
-            <p></p>
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.mode.1) }}</div>
-                <div class="col-md-11">{{ form_label(form.mode.1) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">{{ form_widget(form.custom_alphabet) }}</div>
-            </div>
+    {% if show_reduced %}
+        <h5>Reduced alphabet</h5>
+        {% if mode == "custom" %}
+            <pre>{{ reduced_seq | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre>
+        {% elseif mode == "pre" %}
+            <pre>{{ reduced_seq | chunk_split(aa_perline) | color_amino(reduced_seq, type) }}</pre>
+        {% endif %}
+    {% endif %}
 
-            <hr />
+    <h5>Colored sequence</h5>
+    {% if mode == "custom" %}
+        <pre>{{ sequence | chunk_split(aa_perline) | color_amino_custom(reduced_seq, custom_alphabet) }}</pre>
+    {% elseif mode == "pre" %}
+        <pre>{{ sequence | chunk_split(aa_perline) | color_amino(reduced_seq, type) }}</pre>
+    {% endif %}
+{% endblock %}
 
-            <div class="row">
-                <div class="col-md-3">{{ form_label(form.aaperline) }}</div>
-                <div class="col-md-2">{{ form_widget(form.aaperline) }}</div>
-            </div>
+{% block description_lead %}How to define a custom reduced alphabet{% endblock %}
 
-            <div class="row">
-                <div class="col-md-3">{{ form_label(form.show_reduced) }}</div>
-                <div class="col-md-2">{{ form_widget(form.show_reduced) }}</div>
-            </div>
+{% block description %}
+    <p>
+        This tool was originally created to reduce protein sequences by grouping the aminoacids in classes.
+        During its development code to retrieve sequences with colours was added. Additionally, each aminoacid
+        may be displayed with a distinct colour (without applying reductions).
+    </p>
+    <p>The reduced aminoacid alphabets has been obtained from the references bellow :</p>
 
-            <p>&nbsp;</p>
-            <div class="row">
-                <div class="col-md-12">{{ form_row(form.submit) }}</div>
-            </div>
+    <pre>Li T, Fan K, Wang J, Wang W. Reduction of protein sequence
+complexity by residue grouping. Protein Eng 2003; 5:323-330.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=12826723&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
 
-        </div>
-    </div>
-    {{ form_end(form) }}
+    <pre>Murphy LR, Wallqvist A, Levy RM. Simplified amino acid alphabets
+for protein fold recognition and implications for folding.
+Protein Eng 2000; 13:149-152.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10775656&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
 
-    <p>&nbsp;</p>
+    <pre>Pommi&eacute; C, Levadoux S, Sabatier R, Lefranc G &amp; Lefranc MP.
+IMGT standardized criteria for statistical analysis of immunoglobulin
+V-REGION amino acid properties. Journal of Molecular Recognition 2004; 17:17-32.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14872534&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
 
-    <div class="card informations">
-        <h5 class="card-header">How to define a custom reduced alphabet</h5>
-        <span class="card-body">
-            <div class="card-text">
-                <p>
-                    This tool was originally created to reduce protein sequences by grouping the aminoacids in classes.
-                    During its development code to retrieve sequences with colours was added. Additionally, each aminoacid
-                    may be displayed with a distinct colour (without applying reductions).</p>
-                <p>The reduced aminoacid alphabets has been obtained from the references bellow :</p>
-                <pre>
-                    Li T, Fan K, Wang J, Wang W. Reduction of protein sequence
-                    complexity by residue grouping. Protein Eng 2003; 5:323-330.
-                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=12826723&dopt=Abstract">PubMed</a>
-                </pre>
-                <pre>
-                    Murphy LR, Wallqvist A, Levy RM. Simplified amino acid alphabets
-                    for protein fold recognition and implications for folding.
-                    Protein Eng 2000; 13:149-152.
-                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=10775656&dopt=Abstract">PubMed</a>
-                </pre>
-                <pre>
-                    Pommi&eacute C, Levadoux S, Sabatier R, Lefranc G & Lefranc MP.
-                    IMGT standardized criteria for statistical analysis of immunoglobulin
-                    V-REGION amino acid properties. Journal of Molecular Recognition 2004; 17:17-32.
-                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14872534&dopt=Abstract">PubMed</a>
-                </pre>
-                <pre>
-                    Spitzer M, Fuellen G, Cullen P, Lorkowski S.
-                    VisCoSe: visualization and comparison of consensus sequences.
-                    Bioinformatics 2004; 20:433-435.
-                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14960475&dopt=Abstract">PubMed</a>
-                </pre>
-                <pre>
-                    Wang J, Wang W. A computational approach to simplifying the protein
-                    folding alphabet. Nat Struct Biol 1999; 11:1033-1038.
-                    <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=10542095&dopt=Abstract">PubMed</a>
-                </pre>
-                <h5>How to define a custom reduced alphabet</h5>
-                <b>The procedure is very simple</b>:
-                <ul>
-                    <li>one letter must be used for each group of aminoacids
-                        <br>p.e.: letters A,R,C,T and D for 5 groups</li>
-                    <li>aminoacid in the serie "ARNDCEQGHILKMFPSTWYV" will be substitute by letters defining the group.
-                        <br> p.e: from ARNDCEQGHILKMFPSTWYV to TCDCTCDTRAACDRDTDRRA </li>
-                    <li>the resulting serie of letters will be used in the form.</li>
-                </ul>
-                Colors will be automatically assigned to each letter of the alphabet (this behavior can not be personalized at the moment)
-            </div>
-            <footer class="blockquote-footer">Text taken from <cite title="Source Title">biophp.org</cite></footer>
-        </span>
-    </div>
+    <pre>Spitzer M, Fuellen G, Cullen P, Lorkowski S.
+VisCoSe: visualization and comparison of consensus sequences.
+Bioinformatics 2004; 20:433-435.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=14960475&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+    <pre>Wang J, Wang W. A computational approach to simplifying the protein
+folding alphabet. Nat Struct Biol 1999; 11:1033-1038.
+<a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;list_uids=10542095&amp;dopt=Abstract" target="_blank" rel="noopener">PubMed</a></pre>
+
+    <h5>How to define a custom reduced alphabet</h5>
+    <p><b>The procedure is very simple</b>:</p>
+    <ul>
+        <li>one letter must be used for each group of aminoacids
+            <br>p.e.: letters A,R,C,T and D for 5 groups</li>
+        <li>aminoacid in the serie "ARNDCEQGHILKMFPSTWYV" will be substitute by letters defining the group.
+            <br> p.e: from ARNDCEQGHILKMFPSTWYV to TCDCTCDTRAACDRDTDRRA </li>
+        <li>the resulting serie of letters will be used in the form.</li>
+    </ul>
+    <p>
+        Colors will be automatically assigned to each letter of the alphabet (this behavior can not
+        be personalized at the moment)
+    </p>
+{% endblock %}
+
+{% block note %}
+    <p class="bp-note">
+        <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
+        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+    </p>
 {% endblock %}

@@ -1,0 +1,170 @@
+{#
+    Gabarit des pages « BioTools ».
+    Une page fille définit :
+      {% set page_icon     = 'grid' %}      symbole du sprite (templates/partials/icons.html.twig)
+      {% set page_title    = 'FCGR' %}      titre H1, repris dans le fil d'Ariane et l'onglet
+      {% set page_subtitle = '...' %}       sous-titre violet sous le H1 (facultatif)
+      {% set has_result    = ... %}         à vrai, affiche l'étape « Résultat »
+      {% block intro %}                     paragraphe de présentation de l'outil (facultatif)
+      {% block form_lead %}                 phrase sous « Paramètres » (facultatif)
+      {% block form %}                      champs du formulaire (obligatoire)
+      {% block result %}                    contenu du résultat, affiché si has_result
+      {% block result_aside %}              panneaux latéraux du résultat (facultatif)
+      {% block description %}               étape « Description » (facultatif)
+      {% block note %}                      encart d'information de bas de page (facultatif)
+
+    Les étapes s'enchaînent Paramètres → Résultat → Description : après un calcul,
+    le résultat est immédiatement sous le formulaire, sans avoir à passer la
+    description. La numérotation s'ajuste selon qu'il y a un résultat ou non.
+
+    Le contenu propre à un outil (textes repris de biophp.org, en-têtes de
+    tableaux…) est rédigé en anglais ; seul l'habillage du gabarit est en français.
+
+    La barre latérale liste `bp_tools` (config/packages/twig.yaml), pendant BioTools
+    de la barre latérale des Code Samples.
+#}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_title|default('BioTools') }} – BioPHP BioTools{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/biophp-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/biophp-doc.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/biophp-tool.css') }}">
+{% endblock %}
+
+{% block body %}
+{% set bp_route  = app.request.attributes.get('_route') %}
+{% set bp_params = app.request.attributes.get('_route_params')|default({}) %}
+
+<div class="bp-page bp-page--doc">
+    <div class="bp-page__bg"></div>
+
+    {# ------------------------------------------------------ barre de nav #}
+    <nav class="bp-nav">
+        <a class="bp-brand" href="{{ url('index') }}">
+            <img class="bp-brand__mark" src="{{ asset('img/biophp-mark.png') }}" alt="" width="256" height="179">
+            <span>
+                <span class="bp-brand__name">Bio<em>PHP</em></span>
+                <span class="bp-brand__sub">BioTools</span>
+            </span>
+        </a>
+
+        <div class="bp-nav__links">
+            <a class="bp-nav__link" href="{{ url('index') }}">
+                <svg aria-hidden="true"><use href="#bp-i-home"></use></svg> Accueil
+            </a>
+            <a class="bp-nav__link" href="{{ url('index') }}#code-samples">
+                <svg aria-hidden="true"><use href="#bp-i-code"></use></svg> Code Samples
+            </a>
+            <a class="bp-nav__link is-active" href="{{ url('index') }}#biotools">
+                <svg aria-hidden="true"><use href="#bp-i-briefcase"></use></svg> BioTools
+            </a>
+            <a class="bp-nav__icon-link" href="{{ bp_repo_url }}" target="_blank" rel="noopener" title="Dépôt GitHub">
+                <svg aria-hidden="true"><use href="#bp-i-github"></use></svg>
+                <span class="sr-only">GitHub</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="bp-doc">
+
+        {# -------------------------------------------------- barre latérale #}
+        <aside class="bp-aside">
+            <h2 class="bp-aside__title">BioTools</h2>
+            {% for item in bp_tools %}
+                {# CGR et FCGR partagent la même route : les paramètres les départagent #}
+                {% set is_active = item.route == bp_route and item.params|default({}) == bp_params %}
+                <a class="bp-aside__link{{ is_active ? ' is-active' : '' }}"
+                   href="{{ url(item.route, item.params|default({})) }}"
+                   {{ is_active ? 'aria-current="page"' : '' }}>
+                    <svg aria-hidden="true"><use href="#bp-i-{{ item.icon }}"></use></svg>
+                    <span>
+                        <span class="bp-aside__name">
+                            {{ item.title }}
+                            {% if item.badge is defined and item.badge %}
+                                <span class="bp-aside__badge">{{ item.badge }}</span>
+                            {% endif %}
+                        </span>
+                        <span class="bp-aside__desc">{{ item.desc }}</span>
+                    </span>
+                </a>
+            {% endfor %}
+        </aside>
+
+        {# -------------------------------------------------------- contenu #}
+        <main class="bp-main bp-tool">
+
+            <nav class="bp-crumb" aria-label="Fil d'Ariane">
+                <a href="{{ url('index') }}#biotools">BioTools</a>
+                <svg aria-hidden="true"><use href="#bp-i-chevron"></use></svg>
+                <span>{{ page_title|default('BioTools') }}</span>
+            </nav>
+
+            <header class="bp-tool__hero">
+                <div class="bp-tool__headline">
+                    <span class="bp-tile bp-tile--lg">
+                        <svg aria-hidden="true"><use href="#bp-i-{{ page_icon|default('briefcase') }}"></use></svg>
+                    </span>
+                    <div>
+                        <h1 class="bp-tool__title">{{ page_title|default('BioTools') }}</h1>
+                        {% if page_subtitle|default('') %}
+                            <p class="bp-tool__sub">{{ page_subtitle }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bp-tool__intro">{% block intro %}{% endblock %}</div>
+            </header>
+
+            <section class="bp-step">
+                <div class="bp-step__head">
+                    <span class="bp-step__num">1</span>
+                    <div>
+                        <h2 class="bp-step__title">Paramètres</h2>
+                        <p class="bp-step__lead">{% block form_lead %}Renseignez les données à analyser, puis lancez le calcul.{% endblock %}</p>
+                    </div>
+                    <span></span>
+                </div>
+                {% block form %}{% endblock %}
+            </section>
+
+            {% if has_result|default(false) %}
+                <section class="bp-step">
+                    <div class="bp-step__head">
+                        <span class="bp-step__num">2</span>
+                        <div>
+                            <h2 class="bp-step__title">Résultat</h2>
+                            <p class="bp-step__lead">{% block result_lead %}Résultat renvoyé par BioPHP pour les paramètres ci-dessus.{% endblock %}</p>
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="bp-split bp-split--wide">
+                        <div class="bp-result">{% block result %}{% endblock %}</div>
+                        <div>{% block result_aside %}{% endblock %}</div>
+                    </div>
+                </section>
+            {% endif %}
+
+            {% block description_step %}
+                <section class="bp-step">
+                    <div class="bp-step__head">
+                        <span class="bp-step__num">{{ has_result|default(false) ? 3 : 2 }}</span>
+                        <div>
+                            <h2 class="bp-step__title">Description</h2>
+                            <p class="bp-step__lead">{% block description_lead %}Comment fonctionne cet outil.{% endblock %}</p>
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="bp-result">{% block description %}{% endblock %}</div>
+                </section>
+            {% endblock %}
+
+            {% block note %}{% endblock %}
+
+        </main>
+    </div>
+</div>
+
+{{ include('partials/icons.html.twig') }}
+{% endblock %}

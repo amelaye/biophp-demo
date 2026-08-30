@@ -1,51 +1,47 @@
-{% extends 'base.html.twig' %}
-{% block title %}Useful formulas{% endblock %}
-{% block body %}
-   <h1>Useful formulas</h1>
-   <p>Molecular weight, quantity and unit conversions for DNA, RNA and proteins.</p>
+{% extends 'layout/minitool.html.twig' %}
 
-   {% if result is not null %}
-      <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-         <div class="card-header">Results of your request</div>
-         <div class="card-body">
-            <pre>{{ result|number_format(4, '.', '') }}</pre>
-         </div>
-      </div>
-   {% endif %}
+{% set page_icon     = 'calc' %}
+{% set page_title    = 'Useful formulas' %}
+{% set page_subtitle = 'Formula functions' %}
+{% set has_result    = result is not null %}
 
-   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-   <div class="card bg-light mb-3">
-      <div class="card-body">
-         {{ form_errors(form) }}
-         <div class="row">
-            <div class="col-md-12">
-               {{ form_row(form.formula) }}
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-12">
-               {{ form_row(form.sequence) }}
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.quantity) }}</div>
-            <div class="col-md-3">{{ form_widget(form.quantity) }}</div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.value) }}</div>
-            <div class="col-md-3">{{ form_widget(form.value) }}</div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.molecularWeight) }}</div>
-            <div class="col-md-3">{{ form_widget(form.molecularWeight) }}</div>
-         </div>
-
-         <p>&nbsp;</p>
-         <div class="row">
-            <div class="col-md-12">{{ form_row(form.submit) }}</div>
-         </div>
-
-      </div>
-   </div>
-   {{ form_end(form) }}
+{% block intro %}
+    <p>Molecular weight, quantity and unit conversions for DNA, RNA and proteins.</p>
 {% endblock %}
+
+{% block form_lead %}Pick a formula, then fill in the values it needs.{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
+        <div class="bp-form__col">
+            {{ form_errors(form) }}
+            {{ form_row(form.formula) }}
+            {{ form_row(form.sequence) }}
+        </div>
+
+        <div class="bp-form__col">
+            <div class="bp-form__inline">
+                {{ form_label(form.quantity) }}
+                {{ form_widget(form.quantity) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.value) }}
+                {{ form_widget(form.value) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.molecularWeight) }}
+                {{ form_widget(form.molecularWeight) }}
+            </div>
+            {{ form_row(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <pre>{{ result|number_format(4, '.', '') }}</pre>
+{% endblock %}
+
+{# cet outil n'a pas de texte de description dans la version d'origine #}
+{% block description_step %}{% endblock %}

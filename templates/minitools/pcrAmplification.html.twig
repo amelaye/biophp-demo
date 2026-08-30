@@ -1,56 +1,54 @@
-{% extends 'base.html.twig' %}
-{% block title %}In silico PCR amplification{% endblock %}
-{% block body %}
-   <h1>In silico PCR amplification</h1>
-   <p>A,T,G,C and N are allowed; A+T+G+C must be 10 or more. </p>
-   <p>One mismatch is allowed in any position of primers. </p>
+{% extends 'layout/minitool.html.twig' %}
 
-   {% if results is not empty %}
-      <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-         <div class="card-header">Results of your request</div>
-         <div class="card-body">
-            <pre>Primer 1: {{ primer1 }}</pre>
-            <pre>Primer 2: {{ primer2 }}</pre>
-            <h5>List of amplicons: position in sequence, length and sequence</h5>
-            {% for key, val in results %}
-               <pre>{{ key }} {{ val }}     {{ sequence|slice(key, val) }}</pre>
-            {% endfor %}
-         </div>
-      </div>
-   {% endif %}
+{% set page_icon     = 'dna' %}
+{% set page_title    = 'In silico PCR amplification' %}
+{% set has_result    = results is not empty %}
 
-   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-   <div class="card bg-light mb-3">
-      <div class="card-body">
-         {{ form_errors(form) }}
-         <div class="row">
-            <div class="col-md-12">
-               {{ form_row(form.sequence) }}
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.primer1) }}</div>
-            <div class="col-md-2">{{ form_widget(form.primer1) }}</div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.primer2) }}</div>
-            <div class="col-md-2">{{ form_widget(form.primer2) }}</div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.allowmismatch) }}</div>
-            <div class="col-md-2">{{ form_widget(form.allowmismatch) }}</div>
-         </div>
-         <div class="row">
-            <div class="col-md-6">{{ form_label(form.length) }}</div>
-            <div class="col-md-2">{{ form_widget(form.length) }}</div>
-         </div>
-
-         <p>&nbsp;</p>
-         <div class="row">
-            <div class="col-md-12">{{ form_row(form.submit) }}</div>
-         </div>
-
-      </div>
-   </div>
-   {{ form_end(form) }}
+{% block intro %}
+    <p>A,T,G,C and N are allowed; A+T+G+C must be 10 or more.</p>
+    <p>One mismatch is allowed in any position of primers.</p>
 {% endblock %}
+
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
+        <div class="bp-form__col">
+            {{ form_errors(form) }}
+            {{ form_row(form.sequence) }}
+        </div>
+
+        <div class="bp-form__col">
+            <div class="bp-form__inline">
+                {{ form_label(form.primer1) }}
+                {{ form_widget(form.primer1) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.primer2) }}
+                {{ form_widget(form.primer2) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.allowmismatch) }}
+                {{ form_widget(form.allowmismatch) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.length) }}
+                {{ form_widget(form.length) }}
+            </div>
+            {{ form_row(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <pre>Primer 1: {{ primer1 }}</pre>
+    <pre>Primer 2: {{ primer2 }}</pre>
+
+    <h5>List of amplicons: position in sequence, length and sequence</h5>
+    {% for key, val in results %}
+        <pre>{{ key }} {{ val }}     {{ sequence|slice(key, val) }}</pre>
+    {% endfor %}
+{% endblock %}
+
+{# cet outil n'a pas de texte de description dans la version d'origine #}
+{% block description_step %}{% endblock %}

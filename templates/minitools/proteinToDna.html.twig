@@ -1,41 +1,37 @@
-{% extends 'base.html.twig' %}
-{% block title %}Protein to DNA reverse translation{% endblock %}
-{% block body %}
-    <h2>Protein to DNA reverse translation</h2>
+{% extends 'layout/minitool.html.twig' %}
 
-    {% if sequence != "" %}
-        <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <h5>Input sequence</h5>
-                <pre>{{ sequence|chunk_split(20, '<br>') }}</pre>
-                <h5>Reverse Translated sequence</h5>
-                <pre>{{ dna|chunk_split(60, '<br>')|atgc_sublimer('red') }}</pre>
-            </div>
-        </div>
-    {% endif %}
+{% set page_icon     = 'protein' %}
+{% set page_title    = 'Protein to DNA' %}
+{% set page_subtitle = 'Reverse translation' %}
+{% set has_result    = sequence != "" %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-    <div class="card bg-light mb-3">
-        <div class="card-body">
+{% block intro %}
+    <p>
+        Reverse-translate a protein sequence into the DNA sequence that encodes it, using one
+        of the predefined genetic codes.
+    </p>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
+        <div class="bp-form__col">
             {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.sequence) }}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-1">{{ form_label(form.genetic_code) }}</div>
-                <div class="col-md-6">{{ form_widget(form.genetic_code) }}</div>
-            </div>
-
-            <p>&nbsp;</p>
-            <div class="row">
-                <div class="col-md-12">{{ form_row(form.submit) }}</div>
-            </div>
-
+            {{ form_row(form.sequence) }}
+            {{ form_row(form.genetic_code) }}
+            {{ form_row(form.submit) }}
         </div>
-    </div>
     {{ form_end(form) }}
 {% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <h5>Input sequence</h5>
+    <pre>{{ sequence|chunk_split(20, '<br>') }}</pre>
+
+    <h5>Reverse Translated sequence</h5>
+    <pre>{{ dna|chunk_split(60, '<br>')|atgc_sublimer('red') }}</pre>
+{% endblock %}
+
+{# cet outil n'a pas de texte de description dans la version d'origine #}
+{% block description_step %}{% endblock %}

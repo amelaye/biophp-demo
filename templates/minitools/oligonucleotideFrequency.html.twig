@@ -1,56 +1,56 @@
-{% extends 'base.html.twig' %}
-{% block title %}Frequency of nucleotides and oligonucleotides in a sequence{% endblock %}
-{% block body %}
-    <h1>Frequency of nucleotides and oligonucleotides in a sequence</h1>
-    <p>This demo is limited to oligos 1-3 bases long, and a maximum input sequence of 10000 bp. This version does not work with degenerated nucleotides</p>
+{% extends 'layout/minitool.html.twig' %}
 
-    {% if results is not empty %}
-        <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                <h5>Frequencie of oligos with length {{ length }}</h5>
-                <table cellpadding="4">
-                    <tr>
-                        <th>Oligo</th>
-                        <th>Frequency</th>
-                    </tr>
-                    {% for frequency, oligo in results %}
-                        <tr>
-                            <td>{{ frequency }}</td>
-                            <td>{{ oligo }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    {% endif %}
+{% set page_icon     = 'chart' %}
+{% set page_title    = 'Frequency of nucleotides' %}
+{% set page_subtitle = 'and oligonucleotides in a sequence' %}
+{% set has_result    = results is not empty %}
 
+{% block intro %}
+    <p>
+        This demo is limited to oligos 1-3 bases long, and a maximum input sequence of 10000 bp.
+        This version does not work with degenerated nucleotides.
+    </p>
+{% endblock %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-    <div class="card bg-light mb-3">
-        <div class="card-body">
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
+        <div class="bp-form__col">
             {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.sequence) }}
-                    <span>(non coding characters, as number, returns or spaces will be removed)</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">{{ form_label(form.len) }}</div>
-                <div class="col-md-2">{{ form_widget(form.len) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">{{ form_label(form.strands) }}</div>
-                <div class="col-md-2">{{ form_widget(form.strands) }}</div>
-            </div>
-
-            <p>&nbsp;</p>
-            <div class="row">
-                <div class="col-md-12">{{ form_row(form.submit) }}</div>
-            </div>
-
+            {{ form_row(form.sequence) }}
+            <p class="bp-form__help">(non coding characters, as number, returns or spaces will be removed)</p>
         </div>
-    </div>
+
+        <div class="bp-form__col">
+            <div class="bp-form__inline">
+                {{ form_label(form.len) }}
+                {{ form_widget(form.len) }}
+            </div>
+            <div class="bp-form__inline">
+                {{ form_label(form.strands) }}
+                {{ form_widget(form.strands) }}
+            </div>
+            {{ form_row(form.submit) }}
+        </div>
     {{ form_end(form) }}
 {% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <h5>Frequencie of oligos with length {{ length }}</h5>
+    <div class="bp-tablewrap">
+        <table>
+            <thead>
+                <tr><th>Oligo</th><th>Frequency</th></tr>
+            </thead>
+            <tbody>
+                {% for frequency, oligo in results %}
+                    <tr><td>{{ frequency }}</td><td>{{ oligo }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{# cet outil n'a pas de texte de description dans la version d'origine #}
+{% block description_step %}{% endblock %}

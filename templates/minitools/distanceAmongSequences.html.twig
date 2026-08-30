@@ -1,84 +1,100 @@
-{% extends 'base.html.twig' %}
-{% block title %}Distance between sequences : comparison of oligonucleotide compositions{% endblock %}
-{% block body %}
-    <h1>Distance between sequences : comparison of oligonucleotide composition</h1>
+{% extends 'layout/minitool.html.twig' %}
 
+{% set page_icon     = 'ruler' %}
+{% set page_title    = 'Distance between sequences' %}
+{% set page_subtitle = 'Comparison of oligonucleotide composition' %}
+{% set has_result    = oligo_array is not empty %}
+
+{% block intro %}
     <ul>
         <li>This tool will compute distance between input sequences and UPGMA clustering will be applied.</li>
         <li>Distances are shown in a table, and a dendrogram is displaied.</li>
         <li>Check carefully the results. Their value for phylogenetics is limited.</li>
     </ul>
-    <p></p>
+{% endblock %}
 
-    <!-- DISPLAY TABLE WITH DISTANCES -->
-    {% if oligo_array is empty %}
-    {% else %}
-        <table border=1>
-            <tr>
-                <td bgcolor=DDDDFF width=75>Distances</td>
-                {% for i  in 1..oligo_array|length %}
-                    <td bgcolor=DDDDFF width=75>{{ loop.index }}</td>
-                {% endfor %}
-            </tr>
-            {% for key, val in data %}
-                <tr>
-                    <td bgcolor=DDDDFF width=75>{{ key }}</td>
-                    {% for i  in 1..oligo_array|length %}
-                        {% if data[key][i] is defined %}
-                            <td>{{ data[key][i] }}</td>
-                        {% else %}
-                            <td>&nbsp;</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-
-        <!-- DISPLAY NAME OF SEQUENCES -->
-
-        <b>Name of sequences</b>
-        <pre>
-            {% for n, name in seq_names %}
-                {{ name }}
-            {% endfor %}
-        </pre>
-
-        <p>Length of oligoncleotides for comparison : {{ length }}</p>
-
-        <p>Clustering method: UPGMA<br />{{ textcluster }}<p>
-
-        <img src="/created_files/{{ dendogram_file }}?{{ "now"|date("U") }}" style="border-style: solid" />
-    {% endif %}
-
-
-    <p>&nbsp;</p>
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
-    <div class="card bg-light mb-3">
-        <div class="card-body">
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form bp-form--single'}}) }}
+        <div class="bp-form__col">
             {{ form_errors(form) }}
+            {{ form_widget(form.seq) }}
 
-            <div class="row">
-                {{ form_widget(form.seq) }}
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.method.0) }}
+                    {{ form_label(form.method.0) }}
+                </div>
             </div>
 
-            <p>&nbsp;</p>
-
-            <div class="row">
-                <div class="col-md-7">{{ form_widget(form.method.0) }} {{ form_label(form.method.0) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">{{ form_widget(form.method.1) }} {{ form_label(form.method.1) }}</div>
-                <div class="col-md-5">{{ form_widget(form.len) }}</div>
+            <div class="bp-form__group">
+                <div class="bp-form__group-head">
+                    {{ form_widget(form.method.1) }}
+                    {{ form_label(form.method.1) }}
+                </div>
+                {{ form_widget(form.len) }}
             </div>
 
-
-            <p>&nbsp;</p>
-            <div class="row">
-                <div class="col-md-12">{{ form_widget(form.submit) }}</div>
-            </div>
+            {{ form_widget(form.submit) }}
         </div>
-    </div>
-
     {{ form_end(form) }}
 {% endblock %}
+
+{% block result_lead %}Distances, clustering and dendrogram{% endblock %}
+
+{% block result %}
+    <div class="bp-tablewrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Distances</th>
+                    {% for i in 1..oligo_array|length %}
+                        <th>{{ loop.index }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, val in data %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        {% for i in 1..oligo_array|length %}
+                            <td>{{ data[key][i] is defined ? data[key][i] : '' }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h5>Name of sequences</h5>
+    <pre>{% for n, name in seq_names %}{{ name }}
+{% endfor %}</pre>
+
+    <p>Length of oligoncleotides for comparison : {{ length }}</p>
+    <p>Clustering method: UPGMA<br />{{ textcluster }}</p>
+
+    <div class="bp-figure">
+        <img src="/created_files/{{ dendogram_file }}?{{ "now"|date("U") }}" alt="UPGMA dendrogram" />
+    </div>
+{% endblock %}
+
+{% block result_aside %}
+    <div class="bp-panel">
+        <h3 class="bp-panel__title">Informations</h3>
+        <dl class="bp-facts">
+            <dt>Sequences</dt><dd>{{ oligo_array|length }}</dd>
+            <dt>Oligo length</dt><dd>{{ length }}</dd>
+            <dt>Clustering</dt><dd>UPGMA</dd>
+        </dl>
+    </div>
+
+    <div class="bp-panel">
+        <h3 class="bp-panel__title">Export</h3>
+        <a class="bp-download" href="/created_files/{{ dendogram_file }}" download>
+            <svg aria-hidden="true"><use href="#bp-i-download"></use></svg>
+            <span>Télécharger le dendrogramme</span>
+        </a>
+    </div>
+{% endblock %}
+
+{# cet outil n'a pas de texte de description dans la version d'origine #}
+{% block description_step %}{% endblock %}

@@ -1,0 +1,557 @@
+/* ==========================================================================
+   BioPHP - pages BioTools : héro illustré, formulaire de paramètres,
+   panneau de résultat et d'export.
+   Nécessite biophp-theme.css puis biophp-doc.css, chargés avant.
+   ========================================================================== */
+
+/* --- ossature ------------------------------------------------------------- */
+
+/* .bp-tool est posé sur .bp-main : l'ossature (grille, gouttières, barre
+   latérale) vient de biophp-doc.css, cette classe ne sert qu'à distinguer les
+   pages BioTools des pages Code Samples. */
+
+/* --- héro ----------------------------------------------------------------- */
+
+/* pas de fond propre : le calque .bp-page__bg de la page se voit au travers */
+.bp-tool__hero {
+    margin-bottom: 32px;
+    background: none;
+}
+
+.bp-tool__headline {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.bp-tool__title {
+    margin: 0;
+    font-size: 2.9rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #fff;
+}
+
+.bp-tool__sub {
+    margin: 4px 0 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #a78bfa;
+}
+
+.bp-tool__intro {
+    max-width: 78ch;
+    font-size: 1rem;
+    line-height: 1.62;
+    color: #cdc5ee;
+}
+
+.bp-tool__intro ul { margin: 0; padding-left: 20px; }
+
+.bp-tool__intro p { margin: 0 0 10px; }
+.bp-tool__intro > :last-child { margin-bottom: 0; }
+
+/* --- étapes : variante « outil » ------------------------------------------ */
+
+/* titres d'étape en capitales violettes (le gabarit Code Samples les laisse
+   en blanc, casse normale) */
+.bp-tool .bp-step__title {
+    margin: 6px 0 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #a78bfa;
+}
+
+.bp-tool .bp-step__head { margin-bottom: 22px; }
+
+.bp-tool .bp-step__lead { margin-top: 6px; }
+
+/* --- barre latérale : pastille distinguant deux outils de même titre ------- */
+
+/* CGR et FCGR partagent titre et description : seul le badge les sépare */
+.bp-aside__badge {
+    display: inline-block;
+    padding: 1px 7px;
+    margin-left: 6px;
+    border: 1px solid var(--bp-violet-line);
+    border-radius: 6px;
+    background: var(--bp-violet-soft);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #cbb9ff;
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+
+/* deux colonnes génériques (texte + schéma, résultat + panneau…) */
+.bp-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 26px 34px;
+    align-items: start;
+}
+
+.bp-split--wide { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
+
+/* --- formulaire de paramètres --------------------------------------------- */
+
+/* Symfony rend chaque champ en <div><label>…</label><input></div>
+   (form_div_layout, aucun thème de formulaire n'est déclaré) */
+
+.bp-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 26px 34px;
+    align-items: start;
+}
+
+.bp-form__col > div { margin-bottom: 18px; }
+.bp-form__col > div:last-child { margin-bottom: 0; }
+
+/* deux champs courts côte à côte (nombre d'itérations / taille de l'image) */
+.bp-form__pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px;
+}
+
+.bp-form__pair > div { margin-bottom: 0; }
+
+/* formulaire sur une seule colonne (outils à peu de champs, ou à champs larges) */
+.bp-form--single { grid-template-columns: minmax(0, 1fr); }
+
+/* bloc occupant toute la largeur au milieu d'un formulaire à deux colonnes */
+.bp-form__full { grid-column: 1 / -1; }
+
+.bp-form label {
+    display: block;
+    margin: 0 0 7px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--bp-muted);
+}
+
+/* libellé long à gauche, widget court à droite (seuils, longueurs, pH…) */
+.bp-form__inline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 140px;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.bp-form__inline > div { margin-bottom: 0; }
+.bp-form__inline label { margin: 0; }
+
+/* groupe encadré introduit par un bouton radio (procédure, mode de calcul…) */
+.bp-form__group {
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.18);
+}
+
+.bp-form__group > div { margin-bottom: 14px; }
+.bp-form__group > div:last-child { margin-bottom: 0; }
+
+.bp-form__group-head {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bp-panel-line);
+}
+
+.bp-form__group-head label {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ede9ff;
+}
+
+/* grille de champs très courts : fréquences des 20 acides aminés, bases A/C/G/T */
+.bp-form__cells {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    gap: 12px;
+}
+
+.bp-form__cells > div { margin-bottom: 0; }
+
+.bp-form__cell {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 7px;
+}
+
+.bp-form__cell label {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #cfe0ff;
+}
+
+.bp-form__cell input { padding: 8px 9px; font-size: 0.88rem; }
+
+.bp-form__unit { font-size: 0.85rem; color: var(--bp-muted-soft); }
+
+/* barre de boutons utilitaires posée au-dessus d'un champ (Tidy up, Reverse…) */
+.bp-form__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 12px;
+}
+
+.bp-form__toolbar button {
+    padding: 8px 15px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ded6ff;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.bp-form__toolbar button:hover {
+    background: var(--bp-violet-soft);
+    border-color: var(--bp-violet-line);
+    color: #fff;
+}
+
+/* séparateur entre deux familles d'options */
+.bp-form hr {
+    height: 0;
+    margin: 18px 0;
+    border: 0;
+    border-top: 1px solid var(--bp-panel-line);
+}
+
+.bp-form input[type="text"],
+.bp-form input[type="number"],
+.bp-form input[type="search"],
+.bp-form input[type="email"],
+.bp-form select,
+.bp-form textarea {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 10px;
+    background: rgba(6, 3, 26, 0.62);
+    color: #ece9ff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.bp-form textarea {
+    min-height: 132px;
+    font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    resize: vertical;
+    word-break: break-all;
+}
+
+.bp-form input::placeholder,
+.bp-form textarea::placeholder { color: #6f66a0; }
+
+.bp-form input[type="text"]:focus,
+.bp-form input[type="number"]:focus,
+.bp-form input[type="search"]:focus,
+.bp-form input[type="email"]:focus,
+.bp-form select:focus,
+.bp-form textarea:focus {
+    outline: none;
+    border-color: var(--bp-violet);
+    box-shadow: 0 0 0 3px var(--bp-violet-soft);
+}
+
+/* la flèche native d'un select est illisible sur fond sombre */
+.bp-form select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a79fd4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+    background-size: 17px 17px;
+}
+
+.bp-form select option { background: #150c33; color: #ece9ff; }
+
+/* champ fichier : seul le bouton est habillé, la zone reste native */
+.bp-form input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px dashed var(--bp-panel-line);
+    border-radius: 10px;
+    background: rgba(6, 3, 26, 0.45);
+    color: var(--bp-muted);
+    font-family: inherit;
+    font-size: 0.88rem;
+}
+
+.bp-form input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 7px 14px;
+    border: 1px solid var(--bp-violet-line);
+    border-radius: 8px;
+    background: var(--bp-violet-soft);
+    color: #ded6ff;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.bp-form input[type="file"]::file-selector-button:hover {
+    background: rgba(139, 92, 246, 0.24);
+    color: #fff;
+}
+
+/* cases à cocher et boutons radio : <div><input><label></div>, donc le label
+   ne doit plus être en bloc */
+.bp-form input[type="checkbox"],
+.bp-form input[type="radio"] {
+    width: 17px;
+    height: 17px;
+    margin-right: 9px;
+    vertical-align: -3px;
+    accent-color: var(--bp-violet);
+}
+
+.bp-form input[type="checkbox"] + label,
+.bp-form input[type="radio"] + label {
+    display: inline;
+    margin: 0;
+    font-size: 0.93rem;
+    color: #d6cff3;
+    cursor: pointer;
+}
+
+.bp-form .bp-form__help {
+    margin: 7px 0 0;
+    font-size: 0.83rem;
+    line-height: 1.45;
+    color: var(--bp-muted-soft);
+}
+
+/* messages de validation Symfony */
+.bp-form ul {
+    margin: 7px 0 0;
+    padding-left: 18px;
+    font-size: 0.86rem;
+    color: #fca5a5;
+}
+
+/* bouton d'envoi : même traitement que .bp-btn, en plus compact */
+.bp-form button[type="submit"],
+.bp-form input[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 180px;
+    padding: 13px 28px;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(145deg, var(--bp-accent), var(--bp-accent-dark));
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 14px 30px -12px var(--bp-accent);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.bp-form button[type="submit"]:hover,
+.bp-form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+/* --- panneaux latéraux (informations, export) ----------------------------- */
+
+.bp-panel {
+    padding: 18px 20px 20px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.24);
+}
+
+.bp-panel + .bp-panel { margin-top: 18px; }
+
+.bp-panel__title {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #cfe0ff;
+}
+
+/* liste clé / valeur alignée sur deux colonnes */
+.bp-facts {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 9px 16px;
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+.bp-facts dt { margin: 0; font-weight: 500; color: var(--bp-muted); }
+
+.bp-facts dd {
+    margin: 0;
+    color: #ece9ff;
+    word-break: break-word;
+}
+
+.bp-facts dd::before { content: ": "; color: var(--bp-muted-soft); }
+
+.bp-download {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ded6ff;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.bp-download + .bp-download { margin-top: 10px; }
+
+.bp-download svg { flex: 0 0 auto; width: 18px; height: 18px; }
+
+.bp-download:hover,
+.bp-download:focus-visible {
+    background: var(--bp-violet-soft);
+    border-color: var(--bp-violet-line);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* --- rendu du résultat ---------------------------------------------------- */
+
+/* cadre sombre autour d'une image produite par l'outil (CGR, skews, cartes…) */
+.bp-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    border: 1px solid rgba(139, 92, 246, 0.18);
+    border-radius: 14px;
+    background: #0b0524;
+}
+
+.bp-figure img { max-width: 100%; height: auto; }
+
+/* intertitre à l'intérieur d'un résultat */
+.bp-result h5 {
+    margin: 22px 0 10px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #cfe0ff;
+}
+
+.bp-result > :first-child,
+.bp-result h5:first-child { margin-top: 0; }
+
+/* séquences colorées par les filtres Twig maison : elles arrivent en <span>
+   colorés inline, il leur faut une chasse fixe pour rester lisibles */
+.bp-seq {
+    display: block;
+    padding: 16px 18px;
+    border: 1px solid rgba(139, 92, 246, 0.18);
+    border-radius: 12px;
+    background: #0b0524;
+    font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.86rem;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+}
+
+/* champs en lecture seule affichés dans un résultat (séquences alignées) */
+.bp-result input[type="text"] {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1px solid var(--bp-panel-line);
+    border-radius: 10px;
+    background: rgba(6, 3, 26, 0.62);
+    color: #ece9ff;
+    font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.85rem;
+}
+
+/* lettres mises en avant dans un exemple (codes génétiques, méthionines) */
+.bp-result code {
+    padding: 1px 5px;
+    border-radius: 5px;
+    background: var(--bp-violet-soft);
+    color: #d8ccff;
+    font-size: 0.94em;
+}
+
+.bp-result .bp-seq code { padding: 0 2px; }
+
+/* zone remplie en Ajax (fournisseurs d'enzymes de restriction) */
+.bp-panel--live:empty { display: none; }
+
+.bp-panel--live h5 {
+    margin: 16px 0 4px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ede9ff;
+}
+
+.bp-panel--live ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.9rem; }
+.bp-panel--live a  { color: #a78bfa; }
+
+/* --- responsive ----------------------------------------------------------- */
+
+@media (max-width: 1280px) {
+    /* la barre latérale réduit la place utile : on repasse le contenu sur une colonne */
+    .bp-split,
+    .bp-split--wide,
+    .bp-form { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 780px) {
+    .bp-tool__title { font-size: 2.1rem; }
+    .bp-tool__sub { font-size: 1.2rem; }
+    .bp-form__pair { grid-template-columns: minmax(0, 1fr); }
+    .bp-form button[type="submit"],
+    .bp-form input[type="submit"] { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bp-form input,
+    .bp-form select,
+    .bp-form textarea,
+    .bp-form button[type="submit"],
+    .bp-download { transition: none; }
+}

@@ -1,66 +1,53 @@
-{% extends 'base.html.twig' %}
-{% block title %}Alignment of two DNA, RNA or protein sequences{% endblock %}
-{% block body %}
-    <h2>DNA Sequence manipulation</h2>
-    <p></p>
-    {% if result != "" %}
-        <div class="card border-info mb-3" style="font-size:0.9em" id="results">
-            <div class="card-header">Results of your request</div>
-            <div class="card-body">
-                {{ result | chunk_split(70) }}
-            </div>
-        </div>
+{% extends 'layout/minitool.html.twig' %}
 
-    {% endif %}
-    <p></p>
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-    <div class="card bg-light mb-3">
-        <div class="card-body">
+{% set page_icon     = 'atgc' %}
+{% set page_title    = 'DNA Sequence manipulation' %}
+{% set has_result    = result != "" %}
+
+{% block intro %}
+    <p>Manipulate a DNA sequence and read its properties.</p>
+{% endblock %}
+
+{% block form %}
+    {{ form_start(form, {'attr': {'class': 'bp-form'}}) }}
+        <div class="bp-form__col">
             {{ form_errors(form) }}
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.seq) }}
-                </div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-md-4">{{ form_widget(form.action) }}</div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-md-4">{{ form_label(form.start) }}</div>
-                <div class="col-md-1">{{ form_widget(form.start) }}</div>
-                <div class="col-md-2">{{ form_label(form.end) }}</div>
-                <div class="col-md-1">{{ form_widget(form.end) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.GC) }}</div>
-                <div class="col-md-3">{{ form_label(form.GC) }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">{{ form_widget(form.ACGT) }}</div>
-                <div class="col-md-3">{{ form_label(form.ACGT) }}</div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-md-12">{{ form_row(form.submit) }}</div>
-            </div>
+            {{ form_row(form.seq) }}
         </div>
-    </div>
-    {{ form_end(form) }}
 
-
-    <div class="card">
-        <h5 class="card-header">DNA sequence manipulation</h5>
-        <span class="card-body">
-            <div class="card-text">
-                <b>NOTES</b>:
-                <br>Non-coding characters will be removed by default, and X is replaced by N.
-                <br><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&db=pubmed&list_uids=7957164&dopt=abstract">NC-UIBMB</a>
-                codes are used as a reference.
+        <div class="bp-form__col">
+            {{ form_row(form.action) }}
+            <div class="bp-form__pair">
+                {{ form_row(form.start) }}
+                {{ form_row(form.end) }}
             </div>
-            <p></p>
-            <footer class="blockquote-footer">Text taken from <cite title="Source Title">biophp.org</cite></footer>
-        </span>
-    </div>
+            {{ form_row(form.GC) }}
+            {{ form_row(form.ACGT) }}
+            {{ form_row(form.submit) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block result_lead %}Results of your request{% endblock %}
+
+{% block result %}
+    <pre>{{ result | chunk_split(70) }}</pre>
+{% endblock %}
+
+{% block description_lead %}DNA sequence manipulation{% endblock %}
+
+{% block description %}
+    <p><b>NOTES</b>:</p>
+    <p>
+        Non-coding characters will be removed by default, and X is replaced by N.<br>
+        <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=retrieve&amp;db=pubmed&amp;list_uids=7957164&amp;dopt=abstract"
+           target="_blank" rel="noopener">NC-UIBMB</a> codes are used as a reference.
+    </p>
+{% endblock %}
+
+{% block note %}
+    <p class="bp-note">
+        <svg aria-hidden="true"><use href="#bp-i-info"></use></svg>
+        <span>Text taken from <cite title="Source Title">biophp.org</cite>.</span>
+    </p>
 {% endblock %}
