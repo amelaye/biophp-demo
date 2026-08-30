@@ -104,6 +104,3 @@ after('deploy:symlink', 'deploy:cache_warmup');
 
 // Si le déploiement échoue, on déverrouille automatiquement.
 after('deploy:failed', 'deploy:unlock');
-
-// Migration de la base avant de basculer le symlink sur la nouvelle release.
-before('deploy:symlink', 'database:migrate');
