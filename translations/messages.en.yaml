@@ -396,6 +396,9 @@ doc:
         substring_between_two_residues_in_a_sequence: 'Substring between two residues in a sequence'
     common:
         accession: 'Accession'
+        mirrors_found: 'Mirrors found'
+        parsed_record: 'Parsed record'
+        parsed_sequences: 'Parsed sequences'
         date: 'Date'
         fragment: 'Fragment'
         mol_type: 'Mol type'

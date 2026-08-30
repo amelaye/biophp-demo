@@ -6,77 +6,84 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.submatrix'|trans }}</p>
-            {{ macros.render_value(submatrix.getRules()) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.submatrix'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(submatrix.getRules()) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.sequence_1'|trans }}</p>
-            {{ macros.render_value(sequence1) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.sequence_1'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(sequence1) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.sequence_2'|trans }}</p>
-            {{ macros.render_value(sequence2) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.sequence_2'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(sequence2) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.computes_the_hamming_distance_between_two_sequences'|trans }}</p>
-            {{ macros.render_value(distance) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.computes_the_hamming_distance_between_two_sequences'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(distance) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>
-                {{ 'doc.sequencematch.compares_two_letters'|trans }}<br>
-                {{ 'doc.sequencematch.not_matching_a_t'|trans }}
-            </p>
-            {{ macros.render_value(compare1) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.compares_two_letters'|trans }}<br>
+                {{ 'doc.sequencematch.not_matching_a_t'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(compare1) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.matching_a_a'|trans }}</p>
-            {{ macros.render_value(compare2) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.matching_a_a'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(compare2) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.computes_the_levenshtein_distance_between_two_sequences'|trans }}</p>
-            {{ macros.render_value(levdist) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.computes_the_levenshtein_distance_between_two_sequences'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(levdist) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.extended_version_of_levdist_which_accepts_strings'|trans }}</p>
-            {{ macros.render_value(xlevdist) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.extended_version_of_levdist_which_accepts_strings'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(xlevdist) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.sequencematch.matching_results'|trans }}</p>
-            {{ macros.render_value(match) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.sequencematch.matching_results'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(match) }}
+            </div>
+        </details>
     </div>
 {% endblock %}

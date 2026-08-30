@@ -6,107 +6,120 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.dna_complement'|trans }}</p>
-            {{ macros.render_value(complement) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.dna_complement'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(complement) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.returns_the_expansion_of_a_nucleic_acid'|trans }}</p>
-            {{ macros.render_value(expandNa) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.returns_the_expansion_of_a_nucleic_acid'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(expandNa) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.shows_halfstring_for_pattern_gattag'|trans }}</p>
-            {{ macros.render_value(halfStr) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.shows_halfstring_for_pattern_gattag'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(halfStr) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.computes_the_molecular_weight_of_a_particular'|trans }}</p>
-            {{ macros.render_value(molWt) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.computes_the_molecular_weight_of_a_particular'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(molWt) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.creates_a_new_sequence_object_with_a'|trans }}</p>
-            {{ macros.render_value(coupe) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.creates_a_new_sequence_object_with_a'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(coupe) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.array_where_each_key_is_a_substring'|trans }}</p>
-            {{ macros.render_value(patpos) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.array_where_each_key_is_a_substring'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(patpos) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.similar_to_patpos_except_that_this_allows'|trans }}</p>
-            {{ macros.render_value(patposo) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.similar_to_patpos_except_that_this_allows'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(patposo) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.returns_the_frequency_of_a_given_symbol'|trans }}</p>
-            {{ macros.render_value(symfreq) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.returns_the_frequency_of_a_given_symbol'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(symfreq) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.returns_the_3rd_codon_in_a_sequence'|trans }}</p>
-            {{ macros.render_value(codon) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.returns_the_3rd_codon_in_a_sequence'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(codon) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.translates_a_particular_dna_sequence_into_its'|trans }}</p>
-            {{ macros.render_value(translate) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.translates_a_particular_dna_sequence_into_its'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(translate) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.translates_an_amino_acid_sequence_gavlifywkrh_into'|trans }}</p>
-            {{ macros.render_value(charge) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.translates_an_amino_acid_sequence_gavlifywkrh_into'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(charge) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.returns_a_string_of_symbols_from_an'|trans }}</p>
-            {{ macros.render_value(chemicalGroup) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.returns_a_string_of_symbols_from_an'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(chemicalGroup) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.playwithsequencies.returns_a_two_dimensional_array_containing_palindromic'|trans }}</p>
-            {{ macros.render_value(testPalindrome1) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.returns_a_two_dimensional_array_containing_palindromic'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(testPalindrome1) }}
+            </div>
+        </details>
     </div>
 {% endblock %}
 
@@ -122,53 +135,59 @@
         <div class="bp-result">
             <br>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.dna_complement_computed_by_the_dnasequence_value'|trans }}</p>
-                    {{ macros.render_value(voComplement) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.dna_complement_computed_by_the_dnasequence_value'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voComplement) }}
             </div>
+        </details>
+    </div>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.reverse_complement_the_strand_facing_this_one'|trans }}</p>
-                    {{ macros.render_value(voReverseComplement) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.reverse_complement_the_strand_facing_this_one'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voReverseComplement) }}
             </div>
+        </details>
+    </div>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.gc_content'|trans }}</p>
-                    {{ macros.render_value(voGcContent) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.gc_content'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voGcContent) }}
             </div>
+        </details>
+    </div>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.transcribed_to_rna_thymine_becomes_uracil'|trans }}</p>
-                    {{ macros.render_value(voToRna) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.transcribed_to_rna_thymine_becomes_uracil'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voToRna) }}
             </div>
+        </details>
+    </div>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.substring_of_the_sequence_still_a_validated'|trans }}</p>
-                    {{ macros.render_value(voSubSequence) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.substring_of_the_sequence_still_a_validated'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voSubSequence) }}
             </div>
+        </details>
+    </div>
 
-            <div class="card border-success mb-3" style="font-size:0.9em">
-                <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-                <div class="card-body">
-                    <p>{{ 'doc.playwithsequencies.two_value_objects_built_from_the_same'|trans }}</p>
-                    {{ macros.render_value(voEquals) }}
-                </div>
+    <div class="card border-success mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.playwithsequencies.two_value_objects_built_from_the_same'|trans }}</summary>
+            <div class="card-body">
+                            {{ macros.render_value(voEquals) }}
             </div>
+        </details>
+    </div>
         </div>
     </section>
 {% endblock %}

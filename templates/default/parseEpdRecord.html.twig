@@ -6,17 +6,19 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
-                <tr><th>{{ 'doc.parseEpdRecord.data_class'|trans }}</th><td>{{ dataClass }}</td></tr>
-                <tr><th>{{ 'doc.parseEpdRecord.taxonomic_division'|trans }}</th><td>{{ taxDiv }}</td></tr>
-                <tr><th>{{ 'doc.common.accessions'|trans }}</th><td>{{ macros.render_value(accessions) }}</td></tr>
-                <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
-                <tr><th>{{ 'doc.common.description'|trans }}</th><td>{{ description }}</td></tr>
-                <tr><th>{{ 'doc.parseEpdRecord.comments'|trans }}</th><td>{{ comments }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
+                        <tr><th>{{ 'doc.parseEpdRecord.data_class'|trans }}</th><td>{{ dataClass }}</td></tr>
+                        <tr><th>{{ 'doc.parseEpdRecord.taxonomic_division'|trans }}</th><td>{{ taxDiv }}</td></tr>
+                        <tr><th>{{ 'doc.common.accessions'|trans }}</th><td>{{ macros.render_value(accessions) }}</td></tr>
+                        <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
+                        <tr><th>{{ 'doc.common.description'|trans }}</th><td>{{ description }}</td></tr>
+                        <tr><th>{{ 'doc.parseEpdRecord.comments'|trans }}</th><td>{{ comments }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 {% endblock %}

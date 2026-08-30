@@ -451,12 +451,14 @@ table.bp-code pre {
     word-break: break-all;
 }
 
-/* les cartes Bootstrap présentes dans les résultats existants */
+/* --- cartes de résultat --------------------------------------------------- */
+
 .bp-result .card {
     border: 1px solid var(--bp-panel-line);
     border-radius: 12px;
     background: rgba(0, 0, 0, 0.22);
     color: inherit;
+    overflow: hidden;
 }
 
 .bp-result .card-header {
@@ -464,6 +466,56 @@ table.bp-code pre {
     background: rgba(139, 92, 246, 0.1);
     color: #ede9ff;
     font-weight: 600;
+}
+
+/* --- accordéon ------------------------------------------------------------ */
+
+/* Un <details> natif à l'intérieur de la carte : ni JavaScript ni ARIA à
+   maintenir, le clavier et les lecteurs d'écran le gèrent seuls. L'en-tête de
+   carte devient le résumé cliquable et porte la phrase qui décrivait le
+   résultat, à la place du « Results of your request » répété. */
+.bp-result .bp-acc > summary.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.97rem;
+    line-height: 1.45;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background 0.16s ease;
+}
+
+/* le marqueur natif (triangle) est remplacé par le chevron ci-dessous */
+.bp-result .bp-acc > summary::-webkit-details-marker { display: none; }
+.bp-result .bp-acc > summary::marker { content: ""; }
+
+.bp-result .bp-acc > summary:hover { background: rgba(139, 92, 246, 0.2); }
+
+.bp-result .bp-acc > summary:focus-visible {
+    outline: 2px solid var(--bp-violet);
+    outline-offset: -2px;
+}
+
+/* la flèche, à gauche du titre, pivote à l'ouverture */
+.bp-result .bp-acc > summary::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 5 16 12 9 19'/%3E%3C/svg%3E") center / 15px no-repeat;
+    transition: transform 0.18s ease;
+}
+
+.bp-result .bp-acc[open] > summary::before { transform: rotate(90deg); }
+
+/* replié, l'en-tête ne doit plus porter de séparateur */
+.bp-result .bp-acc:not([open]) > summary.card-header { border-bottom-color: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+    .bp-result .bp-acc > summary,
+    .bp-result .bp-acc > summary::before { transition: none; }
 }
 
 .bp-result .table,
@@ -495,6 +547,8 @@ table.bp-code pre {
 .bp-result .border-success { border-color: rgba(52, 211, 153, 0.38) !important; }
 .bp-result .card.border-info .card-header    { background: rgba(37, 99, 235, 0.14); }
 .bp-result .card.border-success .card-header { background: rgba(16, 185, 129, 0.14); }
+.bp-result .card.border-info .card-header:hover    { background: rgba(37, 99, 235, 0.26); }
+.bp-result .card.border-success .card-header:hover { background: rgba(16, 185, 129, 0.26); }
 
 .bp-result .table-bordered,
 .bp-result .biotable,

@@ -10,9 +10,11 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            {{ macros.render_value(mirrors) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.mirrors_found'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(mirrors) }}
+            </div>
+        </details>
     </div>
 {% endblock %}

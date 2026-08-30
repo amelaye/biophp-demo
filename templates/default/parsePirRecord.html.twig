@@ -6,21 +6,23 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
-                <tr><th>{{ 'doc.common.entry_type'|trans }}</th><td>{{ entryType }}</td></tr>
-                <tr><th>{{ 'doc.common.title'|trans }}</th><td>{{ recordTitle }}</td></tr>
-                <tr><th>{{ 'doc.common.accessions'|trans }}</th><td>{{ macros.render_value(accessions) }}</td></tr>
-                <tr><th>{{ 'doc.common.organism'|trans }}</th><td>{{ organism }}</td></tr>
-                <tr><th>{{ 'doc.parsePirRecord.species'|trans }}</th><td>{{ species }}</td></tr>
-                <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
-                <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ length }}</td></tr>
-                <tr><th>{{ 'doc.parsePirRecord.mol_weight'|trans }}</th><td>{{ molwt }}</td></tr>
-                <tr><th>{{ 'doc.parsePirRecord.checksum'|trans }}</th><td>{{ checksum }}</td></tr>
-                <tr><th>{{ 'doc.common.keywords'|trans }}</th><td>{{ macros.render_value(keywords) }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.common.entry_name'|trans }}</th><td>{{ entryName }}</td></tr>
+                        <tr><th>{{ 'doc.common.entry_type'|trans }}</th><td>{{ entryType }}</td></tr>
+                        <tr><th>{{ 'doc.common.title'|trans }}</th><td>{{ recordTitle }}</td></tr>
+                        <tr><th>{{ 'doc.common.accessions'|trans }}</th><td>{{ macros.render_value(accessions) }}</td></tr>
+                        <tr><th>{{ 'doc.common.organism'|trans }}</th><td>{{ organism }}</td></tr>
+                        <tr><th>{{ 'doc.parsePirRecord.species'|trans }}</th><td>{{ species }}</td></tr>
+                        <tr><th>{{ 'doc.common.create_date'|trans }}</th><td>{{ createDate }}</td></tr>
+                        <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ length }}</td></tr>
+                        <tr><th>{{ 'doc.parsePirRecord.mol_weight'|trans }}</th><td>{{ molwt }}</td></tr>
+                        <tr><th>{{ 'doc.parsePirRecord.checksum'|trans }}</th><td>{{ checksum }}</td></tr>
+                        <tr><th>{{ 'doc.common.keywords'|trans }}</th><td>{{ macros.render_value(keywords) }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 {% endblock %}

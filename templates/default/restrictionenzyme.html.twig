@@ -6,74 +6,80 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.gets_the_enzyme_aati_properties'|trans }}</p>
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.restrictionenzyme.name'|trans }}</th><td>{{ enzymeParsed.getName() }}</td></tr>
-                <tr><th>{{ 'doc.restrictionenzyme.pattern'|trans }}</th><td>{{ enzymeParsed.getPattern() }}</td></tr>
-                <tr><th>{{ 'doc.restrictionenzyme.cut_position'|trans }}</th><td>{{ enzymeParsed.getCutpos() }}</td></tr>
-                <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ enzymeParsed.getLength() }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.gets_the_enzyme_aati_properties'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.restrictionenzyme.name'|trans }}</th><td>{{ enzymeParsed.getName() }}</td></tr>
+                        <tr><th>{{ 'doc.restrictionenzyme.pattern'|trans }}</th><td>{{ enzymeParsed.getPattern() }}</td></tr>
+                        <tr><th>{{ 'doc.restrictionenzyme.cut_position'|trans }}</th><td>{{ enzymeParsed.getCutpos() }}</td></tr>
+                        <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ enzymeParsed.getLength() }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using'|trans }}</p>
-            {{ macros.render_value(cutseq) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(cutseq) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using_2'|trans }}</p>
-            {{ macros.render_value(cutseq2) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.cuts_a_dna_sequence_into_fragments_using_2'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(cutseq2) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>
-                {{ 'doc.restrictionenzyme.searching_endonucleases'|trans }} <br>
-                {{ 'doc.restrictionenzyme.fetch_pattern_only'|trans }}
-            </p>
-            {{ macros.render_value(list) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.searching_endonucleases'|trans }} <br>
+                {{ 'doc.restrictionenzyme.fetch_pattern_only'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(list) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.fetch_pattern_aggcct_cutpos_3'|trans }}</p>
-            {{ macros.render_value(list2) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.fetch_pattern_aggcct_cutpos_3'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(list2) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.fetch_cutpos_3_only'|trans }}</p>
-            {{ macros.render_value(list3) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.fetch_cutpos_3_only'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(list3) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.fetch_length_6_only'|trans }}</p>
-            {{ macros.render_value(list4) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.fetch_length_6_only'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(list4) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.restrictionenzyme.fetch_length_6_and_cutpos_3_no'|trans }}</p>
-            {{ macros.render_value(list5) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.restrictionenzyme.fetch_length_6_and_cutpos_3_no'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(list5) }}
+            </div>
+        </details>
     </div>
 {% endblock %}

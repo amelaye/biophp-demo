@@ -6,16 +6,18 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.parseProdomRecord.entry_number'|trans }}</th><td>{{ entryNo }}</td></tr>
-                <tr><th>{{ 'doc.common.accession'|trans }}</th><td>{{ accession }}</td></tr>
-                <tr><th>{{ 'doc.parseProdomRecord.release'|trans }}</th><td>{{ release }}</td></tr>
-                <tr><th>{{ 'doc.parseProdomRecord.domain_count'|trans }}</th><td>{{ domainCount }}</td></tr>
-                <tr><th>{{ 'doc.parseProdomRecord.frequent_names'|trans }}</th><td>{{ macros.render_value(freqNames) }}</td></tr>
-                <tr><th>{{ 'doc.common.keywords'|trans }}</th><td>{{ macros.render_value(keywords) }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.parseProdomRecord.entry_number'|trans }}</th><td>{{ entryNo }}</td></tr>
+                        <tr><th>{{ 'doc.common.accession'|trans }}</th><td>{{ accession }}</td></tr>
+                        <tr><th>{{ 'doc.parseProdomRecord.release'|trans }}</th><td>{{ release }}</td></tr>
+                        <tr><th>{{ 'doc.parseProdomRecord.domain_count'|trans }}</th><td>{{ domainCount }}</td></tr>
+                        <tr><th>{{ 'doc.parseProdomRecord.frequent_names'|trans }}</th><td>{{ macros.render_value(freqNames) }}</td></tr>
+                        <tr><th>{{ 'doc.common.keywords'|trans }}</th><td>{{ macros.render_value(keywords) }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 {% endblock %}

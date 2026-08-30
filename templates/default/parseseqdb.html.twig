@@ -6,17 +6,20 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            {{ macros.sequence_details(sequence) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.sequence_details(sequence) }}
+            </div>
+        </details>
     </div>
 
     <div class="card border-success mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <p>{{ 'doc.parseseqdb.new_in_biophp_1_1_gc_content'|trans }}</p>
-            {{ macros.render_value(gcContent) }}
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.parseseqdb.new_in_biophp_1_1_gc_content'|trans }}</summary>
+            <div class="card-body">
+                    {{ macros.render_value(gcContent) }}
+            </div>
+        </details>
     </div>
 {% endblock %}

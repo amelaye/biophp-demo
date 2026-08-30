@@ -389,6 +389,9 @@ tool:
 doc:
     common:
         accession: 'Accession'
+        mirrors_found: 'Miroirs trouvés'
+        parsed_record: 'Fiche analysée'
+        parsed_sequences: 'Séquences analysées'
         date: 'Date'
         fragment: 'Fragment'
         mol_type: 'Type mol.'

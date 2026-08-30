@@ -6,15 +6,17 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.parseUnigeneRecord.cluster_id'|trans }}</th><td>{{ clusterId }}</td></tr>
-                <tr><th>{{ 'doc.common.title'|trans }}</th><td>{{ recordTitle }}</td></tr>
-                <tr><th>{{ 'doc.parseUnigeneRecord.expression_sites'|trans }}</th><td>{{ macros.render_value(expression) }}</td></tr>
-                <tr><th>{{ 'doc.parseUnigeneRecord.protein_similarities'|trans }}</th><td>{{ macros.render_value(protSims) }}</td></tr>
-                <tr><th>{{ 'doc.parseUnigeneRecord.sequence_count'|trans }}</th><td>{{ seqCount }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.parseUnigeneRecord.cluster_id'|trans }}</th><td>{{ clusterId }}</td></tr>
+                        <tr><th>{{ 'doc.common.title'|trans }}</th><td>{{ recordTitle }}</td></tr>
+                        <tr><th>{{ 'doc.parseUnigeneRecord.expression_sites'|trans }}</th><td>{{ macros.render_value(expression) }}</td></tr>
+                        <tr><th>{{ 'doc.parseUnigeneRecord.protein_similarities'|trans }}</th><td>{{ macros.render_value(protSims) }}</td></tr>
+                        <tr><th>{{ 'doc.parseUnigeneRecord.sequence_count'|trans }}</th><td>{{ seqCount }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 {% endblock %}

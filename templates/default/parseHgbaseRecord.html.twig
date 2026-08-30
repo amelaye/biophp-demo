@@ -6,18 +6,20 @@
 
 {% block result %}
     <div class="card border-info mb-3" style="font-size:0.9em">
-        <div class="card-header">{{ 'step.results_of_request'|trans }}</div>
-        <div class="card-body">
-            <table class="table table-sm">
-                <tr><th>{{ 'doc.parseHgbaseRecord.haplotype_id'|trans }}</th><td>{{ haplotypeId }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.allele'|trans }}</th><td>{{ allele }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.population'|trans }}</th><td>{{ popName }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.individuals_in_population'|trans }}</th><td>{{ popIndiv }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.frequency'|trans }}</th><td>{{ freqPerc }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.frequency_individuals'|trans }}</th><td>{{ freqIndiv }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.citation'|trans }}</th><td>{{ citation }}</td></tr>
-                <tr><th>{{ 'doc.parseHgbaseRecord.submitter'|trans }}</th><td>{{ submitterName }}</td></tr>
-            </table>
-        </div>
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.common.parsed_record'|trans }}</summary>
+            <div class="card-body">
+                    <table class="table table-sm">
+                        <tr><th>{{ 'doc.parseHgbaseRecord.haplotype_id'|trans }}</th><td>{{ haplotypeId }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.allele'|trans }}</th><td>{{ allele }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.population'|trans }}</th><td>{{ popName }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.individuals_in_population'|trans }}</th><td>{{ popIndiv }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.frequency'|trans }}</th><td>{{ freqPerc }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.frequency_individuals'|trans }}</th><td>{{ freqIndiv }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.citation'|trans }}</th><td>{{ citation }}</td></tr>
+                        <tr><th>{{ 'doc.parseHgbaseRecord.submitter'|trans }}</th><td>{{ submitterName }}</td></tr>
+                    </table>
+            </div>
+        </details>
     </div>
 {% endblock %}
