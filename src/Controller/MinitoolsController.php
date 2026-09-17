@@ -402,17 +402,17 @@ class MinitoolsController extends AbstractController
                 $seq = substr($formData["seq"], $start,$end - $start);
             }
 
-            switch($formData["action"][0]) {
+            switch($formData["action"]) {
                 case "reverse":
                     $result = strrev($seq); // reverse the sequence
                     break;
                 case "complement":
                     // get the complementary sequence
-                    $result = $sequenceManipulationAndDataManager->complement($seq);
+                    $result = $sequenceManipulationAndDataManager->compDNA($seq);
                     break;
                 case "reverse_and_complement":
                     $seq = strrev($formData["seq"]); // reverse the sequence
-                    $result = $sequenceManipulationAndDataManager->complement($seq); // get the complementary sequence
+                    $result = $sequenceManipulationAndDataManager->compDNA($seq); // get the complementary sequence
                     break;
                 case "display_both_strands":
                     // get a string with results
@@ -529,6 +529,7 @@ class MinitoolsController extends AbstractController
             $quantity = $formData["quantity"];
             $value = $formData["value"];
             $molecularWeight = $formData["molecularWeight"];
+            $radius = $formData["radius"];
 
             $result = match ($formula) {
                 "mw_dsdna" => $formulasManager->mwOfDsDNA($sequence),
@@ -552,6 +553,8 @@ class MinitoolsController extends AbstractController
                 "mbar_to_torr" => $formulasManager->mbarToTorr($value),
                 "pmol_to_microg_protein" => $formulasManager->pmolToMicrogProtein($quantity, $molecularWeight),
                 "kda_to_bp" => $formulasManager->kDaToBasePairs($molecularWeight),
+                "rpm_to_rcf" => $formulasManager->rpmToRcf($value, $radius),
+                "rcf_to_rpm" => $formulasManager->rcfToRpm($value, $radius),
                 default => null,
             };
         }
