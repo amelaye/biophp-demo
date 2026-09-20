@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c8c063016439ec23c48759f6c2e6924",
+    "content-hash": "f8e3d4b7a3696a102cdaa5bde84e07fa",
     "packages": [
         {
             "name": "amelaye/biophp",
