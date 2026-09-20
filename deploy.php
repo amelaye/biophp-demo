@@ -100,6 +100,19 @@ host('biophp-demo-prod')
 // le déploiement avec "Release name already exists" — et faisait disparaître
 // deploy:unlock du flux.
 
+// Recrée la base à chaque déploiement : le schéma est celui du mapping Doctrine de
+// biophp, qui change entre versions sans migration (ex. 1.5 : organism en JSON,
+// index et clés étrangères renommés). Les données sont reconstruites à la demande
+// par recording() sur les routes GenBank/SwissProt.
+// --full-database : vide tout le schéma, y compris les anciennes clés étrangères
+// que le mapping courant ne connaît plus (sinon le drop peut échouer).
+task('deploy:recreate_database', function () {
+    run('cd {{release_path}} && {{bin/php}} bin/console doctrine:schema:drop --full-database --force --no-interaction --env=prod');
+    run('cd {{release_path}} && {{bin/php}} bin/console doctrine:schema:create --no-interaction --env=prod');
+});
+
+before('deploy:symlink', 'deploy:recreate_database');
+
 // Réchauffe le cache prod en tant que www-data (bonnes permissions)
 task('deploy:cache_warmup', function () {
     run('cd {{release_path}} && {{bin/php}} bin/console cache:warmup --env=prod');

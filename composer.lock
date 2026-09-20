@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amelaye/biophp",
-            "version": "1.4.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amelaye/biophp.git",
-                "reference": "c702d6cfdb95e969fce7bf137f1934be8f2ef99b"
+                "reference": "fc3ecb52b39f61f6d089f6520f02bf64942cf6ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amelaye/biophp/zipball/c702d6cfdb95e969fce7bf137f1934be8f2ef99b",
-                "reference": "c702d6cfdb95e969fce7bf137f1934be8f2ef99b",
+                "url": "https://api.github.com/repos/amelaye/biophp/zipball/fc3ecb52b39f61f6d089f6520f02bf64942cf6ee",
+                "reference": "fc3ecb52b39f61f6d089f6520f02bf64942cf6ee",
                 "shasum": ""
             },
             "require": {
@@ -79,9 +79,9 @@
             ],
             "support": {
                 "issues": "https://github.com/amelaye/biophp/issues",
-                "source": "https://github.com/amelaye/biophp/tree/1.4.0"
+                "source": "https://github.com/amelaye/biophp/tree/1.5.1"
             },
-            "time": "2026-09-18T18:01:17+00:00"
+            "time": "2026-09-20T07:59:49+00:00"
         },
         {
             "name": "amelaye/biotools",
