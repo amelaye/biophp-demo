@@ -61,8 +61,14 @@ class MinitoolsController extends AbstractController
                 $this->getParameter('brochures_directory')
             );
 
-            $oFastaUploaderManager->checkNucleotidSequence($var,$a,$g,$t,$c, strlen($var));
-            $length = strlen($var);
+            // checkNucleotidSequence() validates every character as a base: a real
+            // FASTA file's ">header" line and newlines must be stripped first, or
+            // any genuine .fasta upload is rejected as "not a Nucleotide sequence".
+            $sequence = preg_replace('/^>.*$/m', '', $var);
+            $sequence = preg_replace('/\s+/', '', $sequence);
+
+            $oFastaUploaderManager->checkNucleotidSequence($sequence,$a,$g,$t,$c, strlen($sequence));
+            $length = strlen($sequence);
         }
 
         return $this->render(

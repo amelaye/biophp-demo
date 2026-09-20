@@ -71,6 +71,10 @@ add('writable_dirs', [
     'var/cache',
     'var/log',
     'var/sessions',
+    // Cible de amelaye_biotools.nucleotids_graphs.path_graphs et de
+    // brochures_directory (services.yaml) : dendrogramme, CGR/FCGR et
+    // FASTA uploadés y sont écrits à chaque requête.
+    'public/created_files',
 ]);
 
 // ---------------------------------------------------------------------------

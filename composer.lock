@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amelaye/biophp",
-            "version": "1.3.2",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amelaye/biophp.git",
-                "reference": "954468aeb9f6e5d346fa2a21d53e8921b2e198af"
+                "reference": "c702d6cfdb95e969fce7bf137f1934be8f2ef99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amelaye/biophp/zipball/954468aeb9f6e5d346fa2a21d53e8921b2e198af",
-                "reference": "954468aeb9f6e5d346fa2a21d53e8921b2e198af",
+                "url": "https://api.github.com/repos/amelaye/biophp/zipball/c702d6cfdb95e969fce7bf137f1934be8f2ef99b",
+                "reference": "c702d6cfdb95e969fce7bf137f1934be8f2ef99b",
                 "shasum": ""
             },
             "require": {
@@ -46,6 +46,7 @@
             "require-dev": {
                 "doctrine/doctrine-bundle": "^2.19",
                 "doctrine/rst-parser": "^0.5.7",
+                "phpdocumentor/shim": "^3.10",
                 "symfony/cache-contracts": "^3.0",
                 "symfony/doctrine-bridge": "^7.4",
                 "twig/twig": "^3.17"
@@ -78,9 +79,9 @@
             ],
             "support": {
                 "issues": "https://github.com/amelaye/biophp/issues",
-                "source": "https://github.com/amelaye/biophp/tree/1.3.2"
+                "source": "https://github.com/amelaye/biophp/tree/1.4.0"
             },
-            "time": "2026-09-15T17:33:54+00:00"
+            "time": "2026-09-18T18:01:17+00:00"
         },
         {
             "name": "amelaye/biotools",
