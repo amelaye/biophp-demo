@@ -121,7 +121,13 @@
     gap: 18px;
 }
 
-.bp-form__pair > div { margin-bottom: 0; }
+/* champs calés en bas : ils restent alignés quand l'un des libellés passe sur deux lignes */
+.bp-form__pair > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
 
 /* formulaire sur une seule colonne (outils à peu de champs, ou à champs larges) */
 .bp-form--single { grid-template-columns: minmax(0, 1fr); }
@@ -285,6 +291,9 @@
 .bp-form select {
     -webkit-appearance: none;
     appearance: none;
+    /* .custom-select de Bootstrap fixe une hauteur prévue pour son propre padding,
+       plus petit : le texte en sortait décentré */
+    height: auto;
     padding-right: 40px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a79fd4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;

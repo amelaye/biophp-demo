@@ -219,6 +219,39 @@
     color: #f0ecff;
 }
 
+/* --- carte à défilement -------------------------------------------------- */
+
+/* Sur deux colonnes, la carte ne compte pas dans la hauteur de la rangée
+   (contain: size) : elle prend celle de sa voisine, et son corps défile. */
+@media (min-width: 992px) {
+    .bp-card--scroll {
+        contain: size;
+    }
+
+    .bp-card--scroll .bp-card__body {
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin-right: -14px;
+        padding-right: 14px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--bp-accent-line) transparent;
+    }
+
+    .bp-card--scroll .bp-card__body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .bp-card--scroll .bp-card__body::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background: var(--bp-accent-line);
+    }
+
+    .bp-card--scroll .bp-card__body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+
 /* --- responsive ---------------------------------------------------------- */
 
 @media (max-width: 991px) {
