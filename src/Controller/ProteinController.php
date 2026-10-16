@@ -66,7 +66,8 @@ class ProteinController extends AbstractController
                 $molweight = $proteinPropertiesManager->proteinMolecularWeight($aminoacid_content);
             }
             if ((bool)$formData["abscoef"]) {
-                $abscoef = $proteinPropertiesManager->molarAbsorptionCoefficientOfProt($aminoacid_content, $molweight);
+                // molar coefficient (M-1.cm-1); it no longer takes the molecular weight
+                $abscoef = $proteinPropertiesManager->molarAbsorptionCoefficientOfProt($aminoacid_content);
             }
             if ((bool)$formData["charge"]) {  // calculate isoelectric point of protein
                 $charge = $proteinPropertiesManager->proteinIsoelectricPoint($aminoacid_content);

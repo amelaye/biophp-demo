@@ -31,6 +31,11 @@
 {% block result_lead %}{{ 'step.results_of_request'|trans }}{% endblock %}
 
 {% block result %}
+    {% if message %}
+        <p class="bp-note"><svg aria-hidden="true"><use href="#bp-i-info"></use></svg><span>{{ message }}</span></p>
+    {% elseif alignment.score is defined and alignment.score is not null %}
+        <p>{{ 'tool.seq_alignment.score'|trans({'%score%': alignment.score, '%start_a%': alignment.startA, '%end_a%': alignment.endA, '%start_b%': alignment.startB, '%end_b%': alignment.endB}) }}</p>
+    {% endif %}
     <div class="bp-seq">{{ compare | dispose_sequences(align_seqa, align_seqb) }}</div>
 
     <h5>{{ sequence1 }}</h5>

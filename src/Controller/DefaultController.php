@@ -11,7 +11,7 @@ use Amelaye\BioPHP\Domain\Sequence\Interfaces\SequenceInterface;
 use Amelaye\BioPHP\Domain\Sequence\Interfaces\SequenceMatchInterface;
 use Amelaye\BioPHP\Domain\Sequence\Service\SequenceAlignmentManager;
 use Amelaye\BioPHP\Domain\Sequence\ValueObject\AminoAcidSequence;
-use Amelaye\BioPHP\Domain\Sequence\ValueObject\MolecularSequenceFactory;
+use Amelaye\BioPHP\Domain\Sequence\Factory\MolecularSequenceFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\CodeHighlighter;
@@ -66,7 +66,7 @@ class DefaultController extends AbstractController
     {
         $databaseManager->recording("humandb", "GENBANK", "human.seq", "demo.seq");
         // fetch() returns the parser that read the record, not the Sequence itself
-        $oSequence = $databaseManager->fetch("NM_031438", "data/")->getSequence();
+        $oSequence = $databaseManager->fetch("NM_031438")->getSequence();
 
         // New in biophp 1.1: wrap the parsed record into a validated DNA/RNA value object
         $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
@@ -77,7 +77,7 @@ class DefaultController extends AbstractController
 {
     $databaseManager->recording("humandb", "GENBANK", "human.seq", "demo.seq");
     // fetch() returns the parser that read the record, not the Sequence itself
-    $oSequence = $databaseManager->fetch("NM_031438", "data/")->getSequence();
+    $oSequence = $databaseManager->fetch("NM_031438")->getSequence();
 
     // New in biophp 1.1: wrap the parsed record into a validated DNA/RNA value object
     $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
@@ -102,7 +102,7 @@ class DefaultController extends AbstractController
     {
         $databaseManager->recording("humandbSwiss", "SWISSPROT", "basicswiss.txt");
         // fetch() returns the parser that read the record, not the Sequence itself
-        $oSequence = $databaseManager->fetch("1375", "data/")->getSequence();
+        $oSequence = $databaseManager->fetch("P01375")->getSequence();
 
         // New in biophp 1.1: wrap the parsed record into a validated amino acid value object
         $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);
@@ -113,7 +113,7 @@ class DefaultController extends AbstractController
 {
     $databaseManager->recording("humandbSwiss", "SWISSPROT", "basicswiss.txt");
     // fetch() returns the parser that read the record, not the Sequence itself
-    $oSequence = $databaseManager->fetch("1375", "data/")->getSequence();
+    $oSequence = $databaseManager->fetch("P01375")->getSequence();
 
     // New in biophp 1.1: wrap the parsed record into a validated amino acid value object
     $oMolecularSequence = MolecularSequenceFactory::fromEntity($oSequence);

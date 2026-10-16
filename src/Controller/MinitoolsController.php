@@ -486,7 +486,8 @@ class MinitoolsController extends AbstractController
                         $sequence,
                         $formData["window"],
                         $formData["oligo_len"],
-                        $formData["strands"]
+                        $formData["strands"],
+                        $formData["distance"] ?? SkewsManager::DISTANCE_PEARSON
                     );
                 }
             }

@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -76,28 +77,35 @@ class SequencesController extends AbstractController
         $length = 0;
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $formData = $form->getData();
-            $length = $formData["len"];
-            $seqs = $oDistanceAmongSequencesManager->formatSequences($formData["seq"]);
+            try {
+                $formData = $form->getData();
+                $length = $formData["len"];
+                $seqs = $oDistanceAmongSequencesManager->formatSequences($formData["seq"]);
 
-            // at this moment two arrays are available: $seqs (with sequences) and $seq_names (with name of sequences)
-            if ($formData["method"] == "euclidean") { // EUCLIDEAN DISTANCE
-                $oligo_array = $oDistanceAmongSequencesManager->computeOligonucleotidsFrequenciesEuclidean($seqs,
-                    $length);
-                $data = $oDistanceAmongSequencesManager->computeDistancesAmongFrequenciesEuclidean($seqs,
-                    $oligo_array,$length);
-            } else {
-                $oligo_array = $oDistanceAmongSequencesManager->computeOligonucleotidsFrequencies($seqs);
+                // at this moment two arrays are available: $seqs (with sequences) and $seq_names (with name of sequences)
+                if ($formData["method"] == "euclidean") { // EUCLIDEAN DISTANCE
+                    $oligo_array = $oDistanceAmongSequencesManager->computeOligonucleotidsFrequenciesEuclidean($seqs,
+                        $length);
+                    $data = $oDistanceAmongSequencesManager->computeDistancesAmongFrequenciesEuclidean($seqs,
+                        $oligo_array,$length);
+                } else {
+                    $oligo_array = $oDistanceAmongSequencesManager->computeOligonucleotidsFrequencies($seqs);
 
-                $data = $oDistanceAmongSequencesManager->computeDistancesAmongFrequencies($seqs, $oligo_array);
+                    $data = $oDistanceAmongSequencesManager->computeDistancesAmongFrequencies($seqs, $oligo_array);
+                }
+
+                $nucleotidsGraphs = $this->getParameter('amelaye_biotools.nucleotids_graphs');
+                $dendogramTargetPath = rtrim($nucleotidsGraphs['path_graphs'], '/')
+                    . '/' . pathinfo($nucleotidsGraphs['dendogram_file'], PATHINFO_FILENAME)
+                    . '_' . bin2hex(random_bytes(4)) . '.svg';
+                $oDistanceAmongSequencesManager->upgmaClustering($data, $formData["method"], $length, $dendogramTargetPath);
+                $dendogramFile = basename($dendogramTargetPath);
+            } catch (\DomainException $e) {
+                // an undefined distance (sequence without any word of the chosen length, constant series...)
+                $oligo_array = $data = [];
+                $dendogramFile = "";
+                $form->addError(new FormError($e->getMessage()));
             }
-
-            $nucleotidsGraphs = $this->getParameter('amelaye_biotools.nucleotids_graphs');
-            $dendogramTargetPath = rtrim($nucleotidsGraphs['path_graphs'], '/')
-                . '/' . pathinfo($nucleotidsGraphs['dendogram_file'], PATHINFO_FILENAME)
-                . '_' . bin2hex(random_bytes(4)) . '.svg';
-            $oDistanceAmongSequencesManager->upgmaClustering($data, $formData["method"], $length, $dendogramTargetPath);
-            $dendogramFile = basename($dendogramTargetPath);
         }
 
         return $this->render(
@@ -173,6 +181,8 @@ class SequencesController extends AbstractController
     {
         $form = $this->createForm(SequenceAlignmentType::class);
         $sCompare = $sAlignSeqA = $sAlignSeqB = "";
+        $sMessage = null;
+        $aAlignment = [];
         $id1 = $id2 = "";
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -180,25 +190,33 @@ class SequencesController extends AbstractController
             $id1 = $formData["id1"];
             $id2 = $formData["id2"];
 
-            // CHECK WHETHER THEY ARE DNA OR PROTEIN, AND ALIGN SEQUENCES
-            if ((substr_count($formData["sequence"],"A")
-                    + substr_count($formData["sequence"],"C")
-                    + substr_count($formData["sequence"],"G")
-                    + substr_count($formData["sequence"],"T")
-                ) > (strlen($formData["sequence"]) / 2)) {
-                // if A+C+G+T is at least half of the sequence, it is a DNA
+            // DNA OR PROTEIN: the type chosen in the form decides; "auto" reads both sequences as nucleic
+            // when they only hold A, C, G, T and N (U and X have already been turned into T and N by the form)
+            $sType = $formData["moltype"] ?? 'auto';
+            $bIsDna = $sType === 'nucleic'
+                || ($sType === 'auto'
+                    && preg_match('/^[ACGTN]*$/', $formData["sequence"]) === 1
+                    && preg_match('/^[ACGTN]*$/', $formData["sequence2"]) === 1);
+
+            if ($bIsDna) {
                 $aAlignment = $sequenceAlignmentManager->alignDNA($formData["sequence"], $formData["sequence2"]);
             } else {
-                // else is protein
                 $aAlignment = $sequenceAlignmentManager->alignProteins($formData["sequence"], $formData["sequence2"]);
             }
 
             // EXTRACT DATA FROM ALIGNMENT
-            $sAlignSeqA = $aAlignment["seqa"];
-            $sAlignSeqB = $aAlignment["seqb"];
+            // seqa / seqb show the unaligned flanks in lower case; score and 1-based positions
+            // (startA, endA, startB, endB) are null, with a "message", when nothing aligns
+            $sAlignSeqA = $aAlignment["seqa"] ?? "";
+            $sAlignSeqB = $aAlignment["seqb"] ?? "";
+            $sMessage   = $aAlignment["message"] ?? null;
 
             // COMPARE ALIGNMENTS
-            $sCompare = $sequenceAlignmentManager->compareAlignment($sAlignSeqA, $sAlignSeqB);
+            $sCompare = $sequenceAlignmentManager->compareAlignment(
+                $sAlignSeqA,
+                $sAlignSeqB,
+                $bIsDna ? "DNA" : "PROTEIN"
+            );
         }
 
         return $this->render(
@@ -210,6 +228,8 @@ class SequencesController extends AbstractController
                 'align_seqb'    => $sAlignSeqB,
                 'sequence1'     => $id1,
                 'sequence2'     => $id2,
+                'alignment'     => $aAlignment,
+                'message'       => $sMessage,
             ]
         );
     }

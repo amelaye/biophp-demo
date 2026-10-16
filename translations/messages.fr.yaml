@@ -356,6 +356,7 @@ tool:
         intro: 'Aligner deux séquences d''ADN, d''ARN ou de protéines par une méthode de type Smith-Waterman. Collez les deux séquences dans le formulaire et soumettez les données ; les séquences avec brèches figurent en bas du résultat.'
         page_subtitle: 'Alignement de deux séquences d''ADN, d''ARN ou de protéines'
         page_title: 'Alignement de séquences'
+        score: 'Score : %score% (région alignée : %start_a%-%end_a% dans la première séquence, %start_b%-%end_b% dans la seconde ; extrémités non alignées en minuscules)'
     sequences_manipulation_and_data:
         title: 'Manipulation de séquences d''ADN'
         desc: 'Manipuler une séquence d''ADN et lire ses propriétés.'

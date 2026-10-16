@@ -350,6 +350,7 @@ tool:
         intro: 'Align two DNA, RNA or protein sequences with a Smith-Waterman type method. Paste both sequences in the form and submit the data; sequences with gaps are shown at the bottom of the result.'
         page_subtitle: 'Alignment of two DNA, RNA or protein sequences'
         page_title: 'Sequence alignment'
+        score: 'Score: %score% (aligned region: %start_a%-%end_a% in the first sequence, %start_b%-%end_b% in the second; unaligned ends in lower case)'
     sequences_manipulation_and_data:
         title: 'DNA sequence manipulation'
         desc: 'Manipulate a DNA sequence and read its properties.'
