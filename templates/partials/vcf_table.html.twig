@@ -1,0 +1,48 @@
+{#
+    Tableau de variants VCF : rows vient de VariantsController::describe(),
+    chaque ligne étant { variant: VcfVariant, alleles: { ALT: type } }.
+    Usage : {% import 'partials/vcf_table.html.twig' as variants_ui %}{{ variants_ui.table(rows) }}
+#}
+{% macro table(rows) %}
+    <div class="bp-tablewrap">
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr>
+                <th>CHROM</th>
+                <th>POS</th>
+                <th>ID</th>
+                <th>REF</th>
+                <th>ALT</th>
+                <th>QUAL</th>
+                <th>FILTER</th>
+                <th>INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            {% set variant = row.variant %}
+            <tr>
+                <td>{{ variant.chrom }}</td>
+                <td>{{ variant.position }}</td>
+                <td>{{ variant.id ?? '.' }}</td>
+                <td><code>{{ variant.reference }}</code></td>
+                <td>
+                    {% for allele, type in row.alleles %}
+                        <code>{{ allele }}</code> <small>({{ ('doc.variants.' ~ type)|trans }})</small>{% if not loop.last %}<br>{% endif %}
+                    {% else %}
+                        <small>{{ 'doc.variants.no_alternate'|trans }}</small>
+                    {% endfor %}
+                </td>
+                <td>{{ variant.quality ?? '.' }}</td>
+                <td>{{ variant.isPass() ? '✓ PASS' : variant.filter ?? '.' }}</td>
+                <td>
+                    {% for key, value in variant.info %}
+                        <code>{{ key }}{% if value is not same as(true) %}={{ value }}{% endif %}</code>{% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endmacro %}

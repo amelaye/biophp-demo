@@ -77,6 +77,9 @@ page:
 group:
     sequencing: Sequencing
     database_parsers: Database parsers
+    cloning: 'Cloning (new in BioPHP 2.0)'
+    phylogenetics: 'Phylogenetics (new in BioPHP 2.0)'
+    variants: 'Variants (new in BioPHP 2.0)'
 
 
 # Titres et descriptions des entrées de navigation (bp_samples / bp_tools,
@@ -140,6 +143,36 @@ sample:
     read_sequence_epd:
         title: 'EPD'
         desc: 'Eukaryotic Promoter Database record.'
+    cloning_plasmid:
+        title: 'Plasmid from GenBank'
+        desc: 'pUC19 as a circular Plasmid: features, translation, overlaps, origin.'
+    cloning_restriction_digest:
+        title: 'Restriction digest'
+        desc: 'Circular digest of pUC19, fragments, sticky ends and their compatibility.'
+    cloning_gibson_assembly:
+        title: 'Gibson assembly'
+        desc: 'Homology arms for an insert, and the junction check.'
+    cloning_export:
+        title: 'GenBank, GFF3 and BED export'
+        desc: 'Write the annotated plasmid in three formats.'
+    phylogenetics_upgma:
+        title: 'UPGMA tree'
+        desc: 'A rooted tree of five bacteria from their 5S rRNA distances.'
+    phylogenetics_neighbor_joining:
+        title: 'Neighbor-Joining versus UPGMA'
+        desc: 'When the molecular clock does not hold, only neighbor-joining finds the right tree.'
+    phylogenetics_newick:
+        title: 'Newick format'
+        desc: 'Read a tree of the great apes, write it back, and catch malformed trees.'
+    variants_read_vcf:
+        title: 'Read a VCF file'
+        desc: 'The example of the VCF 4.3 specification: SNVs, indels, multi-allelic sites.'
+    variants_write_vcf:
+        title: 'Write a VCF file'
+        desc: 'BRAF V600E and structural variants, written then read back unchanged.'
+    variants_database:
+        title: 'Variants in a database'
+        desc: 'Store variants with Doctrine, then query them.'
 
 tool:
     chaos_game_representation_fcgr:
@@ -378,6 +411,116 @@ tool:
 # les libelles de fiche partages par plusieurs parseurs.
 
 doc:
+    variants:
+        snv: 'SNV'
+        mnv: 'MNV'
+        insertion: 'insertion'
+        deletion: 'deletion'
+        complex: 'complex'
+        symbolic: 'structural variant, symbolic allele'
+        breakend: 'breakend'
+        no_alternate: 'none: reference call'
+    variantsReadVcf:
+        page_title: 'Read a VCF file'
+        intro: 'VCF lists the variants found on a reference genome. This file is the example of the VCF 4.3 specification. The 8 fixed columns are read; the genotypes of the samples (FORMAT and the following columns) are ignored. The type of each alternate allele is worked out by comparing it with the reference.'
+        variants: '%count% variants read, %passing% passing every filter'
+        faulty: 'Malformed lines'
+        faulty_read: 'Variants read: %count%. The line whose position is not a number, and the one missing its INFO column, are reported and skipped:'
+    variantsWriteVcf:
+        page_title: 'Write a VCF file'
+        intro: 'BRAF V600E, the most frequent mutation of melanoma, and three structural variants taken from the VCF 4.3 specification: a 205 bp deletion written as a symbolic allele, and the two breakends of a translocation between chromosomes 2 and 17. The semicolon of the NOTE is percent-encoded, as the specification requires.'
+        written: 'VCF written'
+        read_back: 'Read back'
+        identical: 'Every variant read back is identical to the one written.'
+        different: 'The variants read back differ from those written.'
+    variantsDatabase:
+        page_title: 'Variants in a database'
+        intro: 'The variants of the VCF 4.3 example are stored in the vcf_variant table with Doctrine. The domain objects stay independent of Doctrine: a mapper turns them into entities and back.'
+        query: '%stored% variants stored; %count% passed every filter with a quality of 30 or more'
+        row_id: 'Row'
+        back_to_domain: 'Back to VcfVariant objects'
+    phylogenetics:
+        distance_matrix: 'Distance matrix'
+        tree: 'Tree (branch lengths after each name)'
+    phylogeneticsUpgma:
+        page_title: 'UPGMA tree of five bacteria'
+        intro: 'Distances between the 5S ribosomal RNAs of five bacteria, the classic example of the UPGMA method. UPGMA joins the two closest groups at each step and averages their distances, weighted by the size of the groups.'
+        root_to_leaf: 'Distance from the root to each leaf'
+        ultrametric: 'Every leaf lies at the same distance from the root: UPGMA builds an ultrametric tree, as if every lineage evolved at the same rate (molecular clock).'
+    phylogeneticsNeighborJoining:
+        page_title: 'Neighbor-Joining versus UPGMA'
+        intro: 'These distances fit a tree exactly, but its lineages evolve at different rates: b, for instance, has a longer branch than a. Both trees are built from the same matrix, then the distances are read back on each tree, by adding up the branches between two leaves.'
+        pair: 'Pair'
+        matrix: 'Matrix'
+        on_the_tree: 'On the tree'
+        nj_verdict: 'Neighbor-joining gives every distance back: on distances that fit a tree, it recovers its topology and its branch lengths. The tree is unrooted, its last node joins three branches.'
+        upgma_verdict: 'UPGMA forces every leaf to the same distance from the root: the distances do not come back, because the molecular clock it assumes does not hold here.'
+    phylogeneticsNewick:
+        page_title: 'Newick format'
+        intro: 'Newick writes a tree with nested parentheses. The reader accepts quoted names, comments in square brackets and NHX annotations; the tree is written back in the same format.'
+        read: 'The great apes'
+        input: 'Newick read'
+        leaves: '%count% leaves'
+        written_back: 'Written back'
+        errors: 'Malformed trees are refused'
+    cloning:
+        plasmid: 'Plasmid'
+        features: 'Features'
+        name: 'Name'
+        type: 'Type'
+        strand: 'Strand'
+        note: 'Note'
+        gc_percent: 'G+C content'
+        end_blunt: 'blunt'
+        end_five_prime: "5' overhang"
+        end_three_prime: "3' overhang"
+        end_unknown: 'unknown'
+        compatible: 'Compatible: the ends can be ligated'
+        incompatible: 'Incompatible'
+        indeterminate: 'Indeterminate'
+    cloningPlasmid:
+        page_title: 'Plasmid from GenBank: pUC19'
+        intro: 'The GenBank record L09137 (pUC19, circular) becomes a Plasmid. The record only annotates its source: the polylinker, lacZ-alpha and the beta-lactamase are added as features, at the positions its COMMENT gives.'
+        bla_translation: 'Beta-lactamase, translated with the bacterial genetic code (NCBI table 11)'
+        bla_length: '%count% amino acids, read on the complementary strand'
+        overlaps: 'Feature overlaps'
+        at_ecori: 'Features covering the EcoRI site (396)'
+        overlapping_pairs: 'Overlapping features'
+        rotation: 'Origin moved to position 2000'
+        crosses_origin: 'Crosses the origin'
+        same_sequence: 'Same sequence as before'
+    cloningRestrictionDigest:
+        page_title: 'Restriction digest of a circular plasmid'
+        intro: 'Enzymes come from the REBASE catalog of bioapi. On a circular molecule, n cuts give n fragments; each fragment keeps the end left by its enzyme.'
+        digest_by: 'Digest by %enzymes%'
+        cuts: 'Cuts'
+        enzyme: 'Enzyme'
+        site: 'Site (1-based)'
+        cut_positions: 'Cut after base (top / bottom strand)'
+        end: 'End'
+        fragments: 'Fragments'
+        left_end: 'Left end'
+        right_end: 'Right end'
+        compatibility: 'Can these ends be ligated?'
+    cloningGibsonAssembly:
+        page_title: 'Gibson assembly'
+        intro: 'The start of EGFP is cloned after the EcoRI site of pUC19. The homology needed by the assembly is split between the two PCR primers, as tails added at their 5'' ends.'
+        fragments: 'Fragments to join'
+        vector: 'Vector (pUC19, 40 bp before EcoRI)'
+        insert: 'Insert (EGFP, 60 bp)'
+        junction_before: 'Junction before PCR'
+        arms: 'Primer tails for %length% bp of homology'
+        vector_reverse_tail: 'Tail of the vector reverse primer'
+        insert_forward_tail: 'Tail of the insert forward primer'
+        after_pcr: 'After PCR with the tailed primers'
+        vector_pcr: 'Vector PCR product (%length% bp)'
+        insert_pcr: 'Insert PCR product (%length% bp)'
+        junction_after: 'Junction after PCR'
+        overlap_found: '%length% bp of overlap:'
+        no_overlap: 'No overlap: these ends cannot be assembled'
+    cloningExport:
+        page_title: 'GenBank, GFF3 and BED export'
+        intro: 'The annotated pUC19 written in three formats. The readers of BioPHP read these files back as they were written.'
     clustalseqalignment:
         13th_sequence: '13th sequence'
         adding_a_new_sequence_object: 'Adding a new sequence object'

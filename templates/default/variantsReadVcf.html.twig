@@ -1,0 +1,28 @@
+{% extends 'layout/sample.html.twig' %}
+{% import 'partials/vcf_table.html.twig' as variants_ui %}
+
+{% set page_icon  = 'file' %}
+{% set page_title = 'doc.variantsReadVcf.page_title'|trans %}
+
+{% block intro %}<p>{{ 'doc.variantsReadVcf.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.variantsReadVcf.variants'|trans({'%count%': variants|length, '%passing%': passing}) }}</summary>
+            <div class="card-body">{{ variants_ui.table(variants) }}</div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.variantsReadVcf.faulty'|trans }}</summary>
+            <div class="card-body">
+                <p>{{ 'doc.variantsReadVcf.faulty_read'|trans({'%count%': faulty.variants|length}) }}</p>
+                {% for warning in faulty.warnings %}
+                    <p class="mb-0"><code>{{ warning }}</code></p>
+                {% endfor %}
+            </div>
+        </details>
+    </div>
+{% endblock %}

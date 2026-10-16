@@ -1,0 +1,54 @@
+{% extends 'layout/sample.html.twig' %}
+
+{% set page_icon  = 'align' %}
+{% set page_title = 'doc.cloningGibsonAssembly.page_title'|trans %}
+
+{% macro junction(result) %}
+    {%- if result.hasOverlap -%}
+        {{ 'doc.cloningGibsonAssembly.overlap_found'|trans({'%length%': result.overlapLength}) }} <code>{{ result.overlapSequence }}</code>
+    {%- else -%}
+        {{ 'doc.cloningGibsonAssembly.no_overlap'|trans }}
+    {%- endif -%}
+{% endmacro %}
+
+{% block intro %}<p>{{ 'doc.cloningGibsonAssembly.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningGibsonAssembly.fragments'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.vector'|trans }}</th><td><code style="word-break: break-all;">{{ vector.value }}</code></td></tr>
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.insert'|trans }}</th><td><code style="word-break: break-all;">{{ insert.value }}</code></td></tr>
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.junction_before'|trans }}</th><td>{{ _self.junction(before) }}</td></tr>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningGibsonAssembly.arms'|trans({'%length%': arms.overlapLength}) }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.vector_reverse_tail'|trans }}</th><td><code>5'-{{ arms.upstreamReversePrimerTail }}-3'</code></td></tr>
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.insert_forward_tail'|trans }}</th><td><code>5'-{{ arms.downstreamForwardPrimerTail }}-3'</code></td></tr>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningGibsonAssembly.after_pcr'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.vector_pcr'|trans({'%length%': vectorPcr.length}) }}</th><td><code style="word-break: break-all;">{{ vectorPcr.value }}</code></td></tr>
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.insert_pcr'|trans({'%length%': insertPcr.length}) }}</th><td><code style="word-break: break-all;">{{ insertPcr.value }}</code></td></tr>
+                    <tr><th>{{ 'doc.cloningGibsonAssembly.junction_after'|trans }}</th><td>{{ _self.junction(after) }}</td></tr>
+                </table>
+            </div>
+        </details>
+    </div>
+{% endblock %}

@@ -78,6 +78,9 @@ page:
 group:
     sequencing: Séquençage
     database_parsers: Parseurs de bases de données
+    cloning: 'Clonage (nouveau dans BioPHP 2.0)'
+    phylogenetics: 'Phylogénie (nouveau dans BioPHP 2.0)'
+    variants: 'Variants (nouveau dans BioPHP 2.0)'
 
 
 # Titres et descriptions des entrées de navigation (bp_samples / bp_tools,
@@ -146,6 +149,36 @@ sample:
     read_sequence_epd:
         title: 'EPD'
         desc: 'Fiche Eukaryotic Promoter Database.'
+    cloning_plasmid:
+        title: 'Plasmide depuis GenBank'
+        desc: 'pUC19 en Plasmid circulaire : annotations, traduction, chevauchements, origine.'
+    cloning_restriction_digest:
+        title: 'Digestion de restriction'
+        desc: 'Digestion circulaire de pUC19, fragments, extrémités cohésives et leur compatibilité.'
+    cloning_gibson_assembly:
+        title: 'Assemblage Gibson'
+        desc: 'Bras d''homologie pour un insert, et vérification de la jonction.'
+    cloning_export:
+        title: 'Export GenBank, GFF3 et BED'
+        desc: 'Écrire le plasmide annoté dans trois formats.'
+    phylogenetics_upgma:
+        title: 'Arbre UPGMA'
+        desc: 'Un arbre enraciné de cinq bactéries d''après les distances de leurs ARNr 5S.'
+    phylogenetics_neighbor_joining:
+        title: 'Neighbor-Joining contre UPGMA'
+        desc: 'Quand l''horloge moléculaire ne tient pas, seul le neighbor-joining retrouve le bon arbre.'
+    phylogenetics_newick:
+        title: 'Format Newick'
+        desc: 'Lire un arbre des grands singes, le réécrire, et refuser les arbres mal formés.'
+    variants_read_vcf:
+        title: 'Lire un fichier VCF'
+        desc: 'L''exemple de la spécification VCF 4.3 : SNV, indels, sites multi-alléliques.'
+    variants_write_vcf:
+        title: 'Écrire un fichier VCF'
+        desc: 'BRAF V600E et des variants structuraux, écrits puis relus à l''identique.'
+    variants_database:
+        title: 'Variants en base de données'
+        desc: 'Enregistrer des variants avec Doctrine, puis les interroger.'
 
 tool:
     chaos_game_representation_fcgr:
@@ -388,6 +421,116 @@ tool:
 # renvoient GENBANK, PIR, ProDom…
 
 doc:
+    variants:
+        snv: 'SNV'
+        mnv: 'MNV'
+        insertion: 'insertion'
+        deletion: 'délétion'
+        complex: 'complexe'
+        symbolic: 'variant structural, allèle symbolique'
+        breakend: 'point de cassure'
+        no_alternate: 'aucun : appel de référence'
+    variantsReadVcf:
+        page_title: 'Lire un fichier VCF'
+        intro: 'Le VCF liste les variants trouvés sur un génome de référence. Ce fichier est l''exemple de la spécification VCF 4.3. Les 8 colonnes fixes sont lues ; les génotypes des échantillons (FORMAT et les colonnes suivantes) sont ignorés. Le type de chaque allèle alternatif est déduit en le comparant à la référence.'
+        variants: '%count% variants lus, dont %passing% passent tous les filtres'
+        faulty: 'Des lignes mal formées'
+        faulty_read: 'Variants lus : %count%. La ligne dont la position n''est pas un nombre, et celle à laquelle manque la colonne INFO, sont signalées et ignorées :'
+    variantsWriteVcf:
+        page_title: 'Écrire un fichier VCF'
+        intro: 'BRAF V600E, la mutation la plus fréquente du mélanome, et trois variants structuraux tirés de la spécification VCF 4.3 : une délétion de 205 pb écrite en allèle symbolique, et les deux points de cassure d''une translocation entre les chromosomes 2 et 17. Le point-virgule de la NOTE est encodé en pourcentage, comme l''exige la spécification.'
+        written: 'VCF écrit'
+        read_back: 'Relu'
+        identical: 'Chaque variant relu est identique à celui qui a été écrit.'
+        different: 'Les variants relus diffèrent de ceux qui ont été écrits.'
+    variantsDatabase:
+        page_title: 'Variants en base de données'
+        intro: 'Les variants de l''exemple VCF 4.3 sont enregistrés dans la table vcf_variant avec Doctrine. Les objets du domaine restent indépendants de Doctrine : un mapper les convertit en entités, et inversement.'
+        query: '%stored% variants enregistrés ; %count% passent tous les filtres avec une qualité d''au moins 30'
+        row_id: 'Ligne'
+        back_to_domain: 'De retour en objets VcfVariant'
+    phylogenetics:
+        distance_matrix: 'Matrice de distances'
+        tree: 'Arbre (longueur de branche après chaque nom)'
+    phylogeneticsUpgma:
+        page_title: 'Arbre UPGMA de cinq bactéries'
+        intro: 'Distances entre les ARN ribosomiques 5S de cinq bactéries, l''exemple classique de la méthode UPGMA. UPGMA réunit à chaque étape les deux groupes les plus proches, et fait la moyenne de leurs distances pondérée par la taille des groupes.'
+        root_to_leaf: 'Distance de la racine à chaque feuille'
+        ultrametric: 'Toutes les feuilles sont à la même distance de la racine : UPGMA construit un arbre ultramétrique, comme si toutes les lignées évoluaient à la même vitesse (horloge moléculaire).'
+    phylogeneticsNeighborJoining:
+        page_title: 'Neighbor-Joining contre UPGMA'
+        intro: 'Ces distances correspondent exactement à un arbre, mais ses lignées évoluent à des vitesses différentes : b, par exemple, a une branche plus longue que a. Les deux arbres sont construits sur la même matrice, puis les distances sont relues sur chaque arbre, en additionnant les branches entre deux feuilles.'
+        pair: 'Paire'
+        matrix: 'Matrice'
+        on_the_tree: 'Sur l''arbre'
+        nj_verdict: 'Le neighbor-joining redonne toutes les distances : sur des distances qui correspondent à un arbre, il retrouve sa topologie et ses longueurs de branches. L''arbre n''est pas enraciné, son dernier nœud réunit trois branches.'
+        upgma_verdict: 'UPGMA place toutes les feuilles à la même distance de la racine : les distances ne reviennent pas, car l''horloge moléculaire qu''il suppose ne tient pas ici.'
+    phylogeneticsNewick:
+        page_title: 'Format Newick'
+        intro: 'Newick écrit un arbre avec des parenthèses imbriquées. Le lecteur accepte les noms entre apostrophes, les commentaires entre crochets et les annotations NHX ; l''arbre est réécrit dans le même format.'
+        read: 'Les grands singes'
+        input: 'Newick lu'
+        leaves: '%count% feuilles'
+        written_back: 'Réécrit'
+        errors: 'Les arbres mal formés sont refusés'
+    cloning:
+        plasmid: 'Plasmide'
+        features: 'Annotations'
+        name: 'Nom'
+        type: 'Type'
+        strand: 'Brin'
+        note: 'Note'
+        gc_percent: 'Taux de G+C'
+        end_blunt: 'franche'
+        end_five_prime: 'sortante en 5'''
+        end_three_prime: 'sortante en 3'''
+        end_unknown: 'inconnue'
+        compatible: 'Compatibles : les extrémités peuvent être liguées'
+        incompatible: 'Incompatibles'
+        indeterminate: 'Indéterminé'
+    cloningPlasmid:
+        page_title: 'Plasmide depuis GenBank : pUC19'
+        intro: 'La fiche GenBank L09137 (pUC19, circulaire) devient un Plasmid. La fiche n''annote que sa source : le polylinker, lacZ-alpha et la bêta-lactamase sont ajoutés en annotations, aux positions données par son COMMENT.'
+        bla_translation: 'Bêta-lactamase, traduite avec le code génétique bactérien (table NCBI 11)'
+        bla_length: '%count% acides aminés, lus sur le brin complémentaire'
+        overlaps: 'Chevauchements d''annotations'
+        at_ecori: 'Annotations couvrant le site EcoRI (396)'
+        overlapping_pairs: 'Annotations qui se chevauchent'
+        rotation: 'Origine déplacée en position 2000'
+        crosses_origin: 'Traverse l''origine'
+        same_sequence: 'Même séquence qu''avant'
+    cloningRestrictionDigest:
+        page_title: 'Digestion de restriction d''un plasmide circulaire'
+        intro: 'Les enzymes viennent du catalogue REBASE de bioapi. Sur une molécule circulaire, n coupures donnent n fragments ; chaque fragment garde l''extrémité laissée par son enzyme.'
+        digest_by: 'Digestion par %enzymes%'
+        cuts: 'Coupures'
+        enzyme: 'Enzyme'
+        site: 'Site (base 1)'
+        cut_positions: 'Coupure après la base (brin supérieur / inférieur)'
+        end: 'Extrémité'
+        fragments: 'Fragments'
+        left_end: 'Extrémité gauche'
+        right_end: 'Extrémité droite'
+        compatibility: 'Ces extrémités peuvent-elles être liguées ?'
+    cloningGibsonAssembly:
+        page_title: 'Assemblage Gibson'
+        intro: 'Le début de l''EGFP est cloné après le site EcoRI de pUC19. L''homologie nécessaire à l''assemblage est partagée entre les deux amorces de PCR, sous forme de queues ajoutées à leur extrémité 5''.'
+        fragments: 'Fragments à assembler'
+        vector: 'Vecteur (pUC19, 40 pb avant EcoRI)'
+        insert: 'Insert (EGFP, 60 pb)'
+        junction_before: 'Jonction avant PCR'
+        arms: 'Queues d''amorces pour %length% pb d''homologie'
+        vector_reverse_tail: 'Queue de l''amorce reverse du vecteur'
+        insert_forward_tail: 'Queue de l''amorce forward de l''insert'
+        after_pcr: 'Après PCR avec les amorces à queue'
+        vector_pcr: 'Produit de PCR du vecteur (%length% pb)'
+        insert_pcr: 'Produit de PCR de l''insert (%length% pb)'
+        junction_after: 'Jonction après PCR'
+        overlap_found: '%length% pb de chevauchement :'
+        no_overlap: 'Aucun chevauchement : ces extrémités ne peuvent pas être assemblées'
+    cloningExport:
+        page_title: 'Export GenBank, GFF3 et BED'
+        intro: 'pUC19 annoté, écrit dans trois formats. Les lecteurs de BioPHP relisent ces fichiers tels qu''ils ont été écrits.'
     common:
         accession: 'Accession'
         mirrors_found: 'Miroirs trouvés'

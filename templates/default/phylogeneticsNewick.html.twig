@@ -1,0 +1,36 @@
+{% extends 'layout/sample.html.twig' %}
+{% import 'partials/phylo_tree.html.twig' as phylo %}
+
+{% set page_icon  = 'file' %}
+{% set page_title = 'doc.phylogeneticsNewick.page_title'|trans %}
+
+{% block intro %}<p>{{ 'doc.phylogeneticsNewick.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.phylogeneticsNewick.read'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>{{ 'doc.phylogeneticsNewick.input'|trans }}</th><td><code style="word-break: break-all;">{{ input }}</code></td></tr>
+                    <tr><th>{{ 'doc.phylogeneticsNewick.leaves'|trans({'%count%': leaves|length}) }}</th><td>{{ leaves|join(', ') }}</td></tr>
+                    <tr><th>{{ 'doc.phylogeneticsNewick.written_back'|trans }}</th><td><code style="word-break: break-all;">{{ newick }}</code></td></tr>
+                </table>
+                <pre class="mb-0">{{ phylo.draw(tree) }}</pre>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.phylogeneticsNewick.errors'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    {% for broken, message in errors %}
+                        <tr><th><code>{{ broken }}</code></th><td>{{ message }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </details>
+    </div>
+{% endblock %}

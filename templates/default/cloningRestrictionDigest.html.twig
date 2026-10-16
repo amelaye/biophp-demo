@@ -1,0 +1,84 @@
+{% extends 'layout/sample.html.twig' %}
+
+{% set page_icon  = 'scissors' %}
+{% set page_title = 'doc.cloningRestrictionDigest.page_title'|trans %}
+
+{% macro end(restrictionEnd) %}
+    {%- if restrictionEnd.isBlunt() -%}
+        {{ 'doc.cloning.end_blunt'|trans }}
+    {%- else -%}
+        {{ ('doc.cloning.end_' ~ restrictionEnd.type|lower)|trans }} <code>{{ restrictionEnd.overhangSequence }}</code>
+    {%- endif -%}
+{% endmacro %}
+
+{% block intro %}<p>{{ 'doc.cloningRestrictionDigest.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    {% for label, digest in digests %}
+        <div class="card border-info mb-3" style="font-size:0.9em">
+            <details class="bp-acc" open>
+                <summary class="card-header">{{ 'doc.cloningRestrictionDigest.digest_by'|trans({'%enzymes%': label}) }}</summary>
+                <div class="card-body">
+                    <h5>{{ 'doc.cloningRestrictionDigest.cuts'|trans }}</h5>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ 'doc.cloningRestrictionDigest.enzyme'|trans }}</th>
+                                <th>{{ 'doc.cloningRestrictionDigest.site'|trans }}</th>
+                                <th>{{ 'doc.cloningRestrictionDigest.cut_positions'|trans }}</th>
+                                <th>{{ 'doc.cloningRestrictionDigest.end'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for cut in digest.cuts %}
+                            <tr>
+                                <td>{{ cut.enzymeName }}</td>
+                                <td>{{ cut.recognitionPosition + 1 }}</td>
+                                <td>{{ cut.upperCutPosition }} / {{ cut.lowerCutPosition }}</td>
+                                <td>{{ _self.end(cut.end) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <h5>{{ 'doc.cloningRestrictionDigest.fragments'|trans }}</h5>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ 'doc.common.length'|trans }}</th>
+                                <th>{{ 'doc.cloningRestrictionDigest.left_end'|trans }}</th>
+                                <th>{{ 'doc.cloningRestrictionDigest.right_end'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for fragment in digest.fragments %}
+                            <tr>
+                                <td>{{ fragment.length }} bp</td>
+                                <td>{{ _self.end(fragment.leftEnd) }}</td>
+                                <td>{{ _self.end(fragment.rightEnd) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {% for warning in digest.warnings %}
+                        <p class="text-muted mb-0">{{ warning }}</p>
+                    {% endfor %}
+                </div>
+            </details>
+        </div>
+    {% endfor %}
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningRestrictionDigest.compatibility'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    {% for pair, verdict in compatibility %}
+                        <tr><th>{{ pair }}</th><td>{{ ('doc.cloning.' ~ verdict|lower)|trans }}</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </details>
+    </div>
+{% endblock %}

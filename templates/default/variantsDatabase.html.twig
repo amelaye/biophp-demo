@@ -1,0 +1,46 @@
+{% extends 'layout/sample.html.twig' %}
+{% import 'partials/vcf_table.html.twig' as variants_ui %}
+
+{% set page_icon  = 'database' %}
+{% set page_title = 'doc.variantsDatabase.page_title'|trans %}
+
+{% block intro %}<p>{{ 'doc.variantsDatabase.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.variantsDatabase.query'|trans({'%stored%': stored, '%count%': records|length}) }}</summary>
+            <div class="card-body">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{ 'doc.variantsDatabase.row_id'|trans }}</th>
+                            <th>CHROM</th>
+                            <th>POS</th>
+                            <th>ID</th>
+                            <th>QUAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td>{{ record.id }}</td>
+                            <td>{{ record.chrom }}</td>
+                            <td>{{ record.position }}</td>
+                            <td>{{ record.variantId ?? '.' }}</td>
+                            <td>{{ record.quality }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.variantsDatabase.back_to_domain'|trans }}</summary>
+            <div class="card-body">{{ variants_ui.table(variants) }}</div>
+        </details>
+    </div>
+{% endblock %}

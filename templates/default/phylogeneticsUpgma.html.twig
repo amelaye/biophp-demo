@@ -1,0 +1,48 @@
+{% extends 'layout/sample.html.twig' %}
+{% import 'partials/phylo_tree.html.twig' as phylo %}
+
+{% set page_icon  = 'chart' %}
+{% set page_title = 'doc.phylogeneticsUpgma.page_title'|trans %}
+
+{% block intro %}<p>{{ 'doc.phylogeneticsUpgma.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.phylogenetics.distance_matrix'|trans }}</summary>
+            <div class="card-body bp-tablewrap">{{ phylo.matrix(matrix) }}</div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.phylogenetics.tree'|trans }}</summary>
+            <div class="card-body">
+                <pre class="mb-0">{{ phylo.draw(tree) }}</pre>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.phylogeneticsUpgma.root_to_leaf'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    {% for leaf, depth in rootToLeaf %}
+                        <tr><th>{{ leaf }}</th><td>{{ depth }}</td></tr>
+                    {% endfor %}
+                </table>
+                <p class="mb-0">{{ 'doc.phylogeneticsUpgma.ultrametric'|trans }}</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">Newick</summary>
+            <div class="card-body">
+                <pre class="mb-0" style="white-space: pre-wrap; word-break: break-all;">{{ newick }}</pre>
+            </div>
+        </details>
+    </div>
+{% endblock %}

@@ -38,6 +38,22 @@ twig:
                     -   { route: 'read_sequence_prodom',    icon: 'file',     title: 'sample.read_sequence_prodom.title',    desc: 'sample.read_sequence_prodom.desc' }
                     -   { route: 'read_sequence_aaindex',   icon: 'file',     title: 'sample.read_sequence_aaindex.title',   desc: 'sample.read_sequence_aaindex.desc' }
                     -   { route: 'read_sequence_epd',       icon: 'file',     title: 'sample.read_sequence_epd.title',       desc: 'sample.read_sequence_epd.desc' }
+            -   group: 'group.cloning'
+                items:
+                    -   { route: 'cloning_plasmid',            icon: 'dna',      title: 'sample.cloning_plasmid.title',            desc: 'sample.cloning_plasmid.desc' }
+                    -   { route: 'cloning_restriction_digest', icon: 'scissors', title: 'sample.cloning_restriction_digest.title', desc: 'sample.cloning_restriction_digest.desc' }
+                    -   { route: 'cloning_gibson_assembly',    icon: 'align',    title: 'sample.cloning_gibson_assembly.title',    desc: 'sample.cloning_gibson_assembly.desc' }
+                    -   { route: 'cloning_export',             icon: 'file',     title: 'sample.cloning_export.title',             desc: 'sample.cloning_export.desc' }
+            -   group: 'group.phylogenetics'
+                items:
+                    -   { route: 'phylogenetics_upgma',            icon: 'chart', title: 'sample.phylogenetics_upgma.title',            desc: 'sample.phylogenetics_upgma.desc' }
+                    -   { route: 'phylogenetics_neighbor_joining', icon: 'chart', title: 'sample.phylogenetics_neighbor_joining.title', desc: 'sample.phylogenetics_neighbor_joining.desc' }
+                    -   { route: 'phylogenetics_newick',           icon: 'file',  title: 'sample.phylogenetics_newick.title',           desc: 'sample.phylogenetics_newick.desc' }
+            -   group: 'group.variants'
+                items:
+                    -   { route: 'variants_read_vcf',  icon: 'file',     title: 'sample.variants_read_vcf.title',  desc: 'sample.variants_read_vcf.desc' }
+                    -   { route: 'variants_write_vcf', icon: 'file',     title: 'sample.variants_write_vcf.title', desc: 'sample.variants_write_vcf.desc' }
+                    -   { route: 'variants_database',  icon: 'database', title: 'sample.variants_database.title',  desc: 'sample.variants_database.desc' }
 
         bp_tools:
             -   { route: 'chaos_game_representation', params: { schema: 'FCGR' }, icon: 'grid', title: 'tool.chaos_game_representation_fcgr.title', desc: 'tool.chaos_game_representation_fcgr.desc', badge: 'FCGR' }

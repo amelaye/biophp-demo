@@ -1,0 +1,110 @@
+{% extends 'layout/sample.html.twig' %}
+
+{% set page_icon  = 'dna' %}
+{% set page_title = 'doc.cloningPlasmid.page_title'|trans %}
+
+{% block intro %}<p>{{ 'doc.cloningPlasmid.intro'|trans }}</p>{% endblock %}
+
+{% block result %}
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloning.plasmid'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><th>{{ 'doc.cloning.name'|trans }}</th><td>{{ plasmid.name }}</td></tr>
+                    <tr><th>{{ 'doc.common.description'|trans }}</th><td>{{ plasmid.description }}</td></tr>
+                    <tr><th>{{ 'doc.common.length'|trans }}</th><td>{{ plasmid.length }} bp</td></tr>
+                    <tr><th>{{ 'doc.cloning.gc_percent'|trans }}</th><td>{{ plasmid.sequence.gcPercent|round(2) }} %</td></tr>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloning.features'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{ 'doc.cloning.name'|trans }}</th>
+                            <th>{{ 'doc.cloning.type'|trans }}</th>
+                            <th>{{ 'doc.common.start_end'|trans }}</th>
+                            <th>{{ 'doc.cloning.strand'|trans }}</th>
+                            <th>{{ 'doc.common.length'|trans }}</th>
+                            <th>{{ 'doc.cloning.note'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for feature in plasmid.features %}
+                        <tr>
+                            <td>{% if feature.color %}<span style="color: {{ feature.color }}">&#9632;</span> {% endif %}{{ feature.name }}</td>
+                            <td>{{ feature.type }}</td>
+                            <td>{{ feature.start }} / {{ feature.end }}</td>
+                            <td>{{ feature.strand }}</td>
+                            <td>{{ feature.getLength(plasmid.length) }} bp</td>
+                            <td>{{ feature.note }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningPlasmid.bla_translation'|trans }}</summary>
+            <div class="card-body">
+                <p>{{ 'doc.cloningPlasmid.bla_length'|trans({'%count%': blaProtein|trim('*', 'right')|length}) }}</p>
+                <pre class="mb-0" style="white-space: pre-wrap; word-break: break-all;">{{ blaProtein }}</pre>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningPlasmid.overlaps'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>{{ 'doc.cloningPlasmid.at_ecori'|trans }}</th>
+                        <td>{% for feature in atEcoRI %}{{ feature.name }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'doc.cloningPlasmid.overlapping_pairs'|trans }}</th>
+                        <td>{% for pair in overlaps %}{{ pair.first.name }} &harr; {{ pair.second.name }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+    </div>
+
+    <div class="card border-info mb-3" style="font-size:0.9em">
+        <details class="bp-acc" open>
+            <summary class="card-header">{{ 'doc.cloningPlasmid.rotation'|trans }}</summary>
+            <div class="card-body">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{ 'doc.cloning.name'|trans }}</th>
+                            <th>{{ 'doc.common.start_end'|trans }}</th>
+                            <th>{{ 'doc.cloningPlasmid.crosses_origin'|trans }}</th>
+                            <th>{{ 'doc.cloningPlasmid.same_sequence'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for feature in rotated.features %}
+                        <tr>
+                            <td>{{ feature.name }}</td>
+                            <td>{{ feature.start }} / {{ feature.end }}</td>
+                            <td>{{ feature.crossesOrigin ? 'value.yes'|trans : 'value.no'|trans }}</td>
+                            <td>{{ rotated.extractFeatureSequence(feature).equals(plasmid.extractFeatureSequence(plasmid.features[loop.index0])) ? 'value.yes'|trans : 'value.no'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+{% endblock %}

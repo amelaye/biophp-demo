@@ -1,0 +1,37 @@
+{#
+    Dessin texte d'un arbre phylogénétique (Amelaye\BioPHP\Domain\Phylogenetics\ValueObject\PhylogeneticNode),
+    à afficher dans un <pre>. Chaque nœud porte la longueur de la branche qui le relie à son parent.
+    Usage : {% import 'partials/phylo_tree.html.twig' as phylo %}<pre>{{ phylo.draw(tree) }}</pre>
+#}
+{% macro draw(node, prefix = '', last = true, root = true) -%}
+    {%- set label = node.name is not null ? node.name : (node.isLeaf() ? '' : '┐') -%}
+    {%- set length = node.branchLength is not null ? ' : ' ~ (node.branchLength|round(3)) : '' -%}
+    {%- if root -%}
+        {{ label }}{{ length }}{{ "\n" }}
+    {%- else -%}
+        {{ prefix }}{{ last ? '└── ' : '├── ' }}{{ label }}{{ length }}{{ "\n" }}
+    {%- endif -%}
+    {%- set childPrefix = root ? '' : prefix ~ (last ? '    ' : '│   ') -%}
+    {%- for child in node.children -%}
+        {{ _self.draw(child, childPrefix, loop.last, false) }}
+    {%- endfor -%}
+{%- endmacro %}
+
+{% macro matrix(matrix) %}
+    <table class="table table-sm table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                {% for label in matrix.labels %}<th>{{ label }}</th>{% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for row, label in matrix.labels %}
+            <tr>
+                <th>{{ label }}</th>
+                {% for column in 0..(matrix.size - 1) %}<td>{{ matrix.getDistance(row, column) }}</td>{% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
